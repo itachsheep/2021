@@ -1,0 +1,6 @@
+example/build/*
+example/!build/templates
+example/bin/*
+example/!bin/media/
+example/*.lib
+example/my_build/
