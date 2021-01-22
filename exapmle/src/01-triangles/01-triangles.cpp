@@ -24,6 +24,7 @@ const GLuint  NumVertices = 6;
 void
 init( void )
 {
+    //初始化
     glGenVertexArrays( NumVAOs, VAOs );
     glBindVertexArray( VAOs[Triangles] );
 
@@ -85,10 +86,11 @@ main( int argc, char** argv )
 #endif
 {
     glfwInit();
-
+    //创建窗口
     GLFWwindow* window = glfwCreateWindow(800, 600, "Triangles", NULL, NULL);
 
     glfwMakeContextCurrent(window);
+    //来自gl3w三方库
     gl3wInit();
 
     init();
