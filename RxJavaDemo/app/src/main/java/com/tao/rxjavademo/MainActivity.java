@@ -11,22 +11,24 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LogUtils.d(TAG,"onCreate ");
+        LogUtils.d(TAG, "onCreate ");
         setContentView(R.layout.activity_main);
     }
 
     @SuppressLint("CheckResult")
     public void on_bt_start(View view) {
-        LogUtils.d(TAG,"on_bt_start ");
+        LogUtils.d(TAG, "on_bt_start ");
         Observable<Integer> integerObservable = Observable.create(new ObservableOnSubscribe<Integer>() {
             @Override
             public void subscribe(ObservableEmitter<Integer> e) throws Exception {
@@ -73,35 +75,29 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("CheckResult")
     public void on_bt_qiehuan(View view) {
 
-        Observable<Integer> integerObservable = Observable.create(new ObservableOnSubscribe<Integer>() {
+        Observable.create(new ObservableOnSubscribe<Integer>() {
             @Override
             public void subscribe(ObservableEmitter<Integer> e) throws Exception {
                 LogUtils.d(TAG, "subscribe ");
                 e.onNext(9999);
             }
+        })
+        .subscribeOn(Schedulers.newThread())
+        .observeOn(AndroidSchedulers.mainThread())
+        .doOnNext(new Consumer<Integer>() {
+            @Override
+            public void accept(Integer integer) throws Exception {
+                LogUtils.d(TAG, "accept1 :" + integer);
+            }
+        })
+        .observeOn(Schedulers.io())
+        .subscribe(new Consumer<Integer>() {
+            @Override
+            public void accept(Integer integer) throws Exception {
+                LogUtils.d(TAG, "accept2 : " + integer);
+            }
         });
 
-        integerObservable.subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext(new Consumer<Integer>() {
-                    @Override
-                    public void accept(Integer integer) throws Exception {
-                        LogUtils.d(TAG,"accept1 :" + integer);
-                    }
-                })
-                .doOnNext(new Consumer<Integer>() {
-                    @Override
-                    public void accept(Integer integer) throws Exception {
-                        LogUtils.d(TAG,"accept3 :" + integer);
-                    }
-                })
-                .observeOn(Schedulers.io())
-                .subscribe(new Consumer<Integer>() {
-                    @Override
-                    public void accept(Integer integer) throws Exception {
-                        LogUtils.d(TAG,"accept2 : " + integer);
-                    }
-                });
 
     }
 }
