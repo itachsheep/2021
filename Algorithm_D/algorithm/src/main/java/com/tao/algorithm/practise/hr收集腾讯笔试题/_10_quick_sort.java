@@ -28,6 +28,11 @@ public class _10_quick_sort {
         Util.printArrays(arr3);
     }
 
+    /**
+     *  1，以数组最后一位作为基准，通过遍历交换位置，将数组分为两部分，
+     *  小于基准的在左边，大于基准的在右边
+     *  2，重复上面的步骤，将两个小数组继续采取上面步骤。
+     */
     public static void quickSort(int[] arr, int left, int right) {
         if (left >= right) {
             return;
