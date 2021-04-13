@@ -11,11 +11,11 @@ class Example
         println str1
         println str2 */
 
-        def list = [2,'eat',true]
+        /* def list = [2,'eat',true]
         list[4] = 'tt';
         for(a in list) 
         {
             println " $a "
-        }
+        } */
     }
 }
