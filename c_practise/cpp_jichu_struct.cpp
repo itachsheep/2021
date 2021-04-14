@@ -11,6 +11,8 @@ struct Books
 
 int main()
 {
+
+    //结构体
     Books book1;
     struct Books *ptr;
 
@@ -26,5 +28,13 @@ int main()
     cout << " book title size: " << sizeof(book1.title) << endl;
 
     cout << " *ptr title: " << ptr->title << endl;
+
+    //typedef
+    typedef int* pint32;
+    pint32 x;
+    int a = 100;
+    x = &a;
+    cout << "x = " << (*x) << endl;
+
     return 0;
 }
