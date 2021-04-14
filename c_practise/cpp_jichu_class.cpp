@@ -9,6 +9,15 @@ class Box
     private:
         string name;
     public:
+        Box()
+        {
+
+        }
+        Box(string titl)
+        {
+            title = titl;
+        }
+
         double length;
         double width;
 
@@ -27,9 +36,17 @@ class Box
 
 };
 
-class SmallBox:Box 
-{
+class SmallBox:public Box 
+{ 
     public:
+        SmallBox()
+        {
+            
+        }
+        SmallBox(string tit)
+        {
+            title = tit;
+        }
         void setTitle(string titl);
         string getTitle();
 };
@@ -83,7 +100,9 @@ int main()
     cout << "box1 = " << box1.get() << endl;
 
     SmallBox smallbox;
+    SmallBox smallbox2("title 2");
     smallbox.setTitle("title 1");
     cout << "smallbox = " << smallbox.getTitle() << endl;
+    cout << "smallbox2 = " << smallbox2.getTitle() << endl;
 
 }
