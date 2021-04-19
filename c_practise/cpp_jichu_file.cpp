@@ -26,4 +26,23 @@ int main()
     outfile.close();
 
 
+    //读文件
+    ifstream infile;
+    infile.open("test.txt",ios::in);
+    cout << "Read file test.txt : " << endl;
+    
+    infile.getline(data,100);
+    cout << data << endl;
+    
+    infile.getline(data,100);
+    cout << data << endl;
+    
+    infile.getline(data,100);
+    cout << data << endl;
+
+    infile.getline(data,100);
+    cout << data << endl;
+    infile.close();
+
+    return 0;
 }
