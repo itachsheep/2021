@@ -3,6 +3,9 @@ package com.tao.opensourcecode;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
 
 import java.io.IOException;
 
@@ -55,5 +58,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void glide_test() {
+        String url = "";
+        ImageView imageView;
+        Glide.with(this)
+                .load(url)
+                .into(imageView);
     }
 }
