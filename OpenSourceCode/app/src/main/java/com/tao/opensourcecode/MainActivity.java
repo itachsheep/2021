@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
         ImageView imageView;
         Glide.with(this)
                 .load(url)
+                .placeholder(R.drawable.ic_launcher_background)
+                .error(R.drawable.ic_launcher_background)
                 .into(imageView);
     }
 }
