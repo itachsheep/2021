@@ -8,6 +8,7 @@ set(jnilibs ${CMAKE_SOURCE_DIR}/../jniLibs)
 set(libname life-tip)
 include_directories(
         include
+        util
 )
 link_directories(
     ${jnilibs}/${CMAKE_ANDROID_ARCH_ABI}
@@ -58,18 +59,18 @@ set(third-party-libs
         swresample
         swscale
         avutil
-#        fdk-aac
-#        x264
+        fdk-aac
+        x264
         )
 
 set(native-libs
         android
-#        EGL
+        EGL
 #        GLESv3
 #        OpenSLES
         log
-#        m
-#        z
+        m
+        z
         )
 target_link_libraries( # Specifies the target library.
                        ${libname}
