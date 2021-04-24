@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-
+    android:background="@color/purple_200"
+    android:padding="8dp"
     android:gravity="center"
     android:orientation="horizontal">
 
@@ -11,12 +12,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/ic_launcher_round"/>-->
-    <Button
+    <TextView
         android:layout_marginStart="8dp"
         android:id="@+id/tvContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="10dp"
+        android:textSize="15dp"
         android:text="都说了几分多少"
         android:textAllCaps="false" />
 </LinearLayout>

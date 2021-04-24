@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
     TextView tvVersion;
     private static  final String [] EXAMPLE_LIST = {
             "FFmpeg + ANativeWindow player",
@@ -43,16 +45,20 @@ public class MainActivity extends AppCompatActivity {
 
     public void ffm_begin(View view) {
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this,
-                LinearLayoutManager.VERTICAL,false));
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        manager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(manager);
         MyAdapter myAdapter = new MyAdapter(Arrays.asList(EXAMPLE_LIST));
         recyclerView.setAdapter(myAdapter);
         myAdapter.addOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int pos = (int) view.getTag();
+                LogUtils.d(TAG,"ffm_begin pos: " + pos);
+
                 switch (pos) {
                     case 0:
+                        startActivity(new Intent(MainActivity.this,ANativeWindowActivity.class));
                         break;
                     case 1:
                         break;
@@ -65,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     class MyViewHolder extends  RecyclerView.ViewHolder {
-        Button tvContent;
+        TextView tvContent;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             tvContent = itemView.findViewById(R.id.tvContent);
@@ -93,9 +99,10 @@ public class MainActivity extends AppCompatActivity {
         @NonNull
         @Override
         public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            MyViewHolder myViewHolder = new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler,
-                    parent, false));
-            myViewHolder.itemView.setOnClickListener(this);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler,
+                    parent,false);
+            MyViewHolder myViewHolder = new MyViewHolder(view);
+            view.setOnClickListener(this);
             return myViewHolder;
         }
 
@@ -112,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
+            LogUtils.d(TAG,"onClick: " + mOnClickListener);
             if (mOnClickListener != null) {
 //                mOnClickListener.onItemClick(v, (Integer) v.getTag());
                 mOnClickListener.onClick(view);
