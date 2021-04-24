@@ -17,6 +17,7 @@ link_directories(
 
 file(GLOB src-files
     ${CMAKE_SOURCE_DIR}/*.cpp
+#    life.cpp
 )
 project("mjnindk")
 

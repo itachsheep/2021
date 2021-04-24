@@ -17,12 +17,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     TextView tvVersion;
-    // Used to load the 'native-lib' library on application startup.
-    static {
-        System.loadLibrary("life-tip");
-    }
-
-
     private static  final String [] EXAMPLE_LIST = {
             "FFmpeg + ANativeWindow player",
             "FFmpeg + OpenGL ES player",
@@ -40,11 +34,11 @@ public class MainActivity extends AppCompatActivity {
 
         // Example of a call to a native method
         tvVersion = findViewById(R.id.ffm_version);
-        tvVersion.setText(stringFromJNI());
+        tvVersion.setText(FFMediaPlayer.stringFromJNI());
     }
 
     public void get_ffm_version(View view) {
-        tvVersion.setText(getFFmpegVersion());
+        tvVersion.setText(FFMediaPlayer.getFFmpegVersion());
     }
 
     public void ffm_begin(View view) {
@@ -124,12 +118,4 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-
-    /**
-     * A native method that is implemented by the 'native-lib' native library,
-     * which is packaged with this application.
-     */
-    public native String stringFromJNI();
-    public native String getFFmpegVersion();
 }

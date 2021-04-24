@@ -12,17 +12,16 @@ extern "C" {
 #include <libswscale/version.h>
 }
 
-
-extern "C" JNIEXPORT jstring JNICALL
-Java_com_tao_mjnindk_MainActivity_stringFromJNI(
-        JNIEnv* env,
-        jobject /* this */) {
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_tao_mjnindk_FFMediaPlayer_stringFromJNI(JNIEnv *env, jclass clazz) {
     std::string hello = "Hello from C++";
     return env->NewStringUTF(hello.c_str());
 }
 
+
 extern "C" JNIEXPORT jstring JNICALL
-Java_com_tao_mjnindk_MainActivity_getFFmpegVersion(JNIEnv *env, jobject thiz) {
+Java_com_tao_mjnindk_FFMediaPlayer_getFFmpegVersion(JNIEnv *env, jclass clazz) {
     char strBuffer[1024 * 4] = {};
     strcat(strBuffer,"libavcodec: ");
     strcat(strBuffer,AV_STRINGIFY(LIBAVCODEC_VERSION));
@@ -44,5 +43,4 @@ Java_com_tao_mjnindk_MainActivity_getFFmpegVersion(JNIEnv *env, jobject thiz) {
     LOGCATD("%s: strBuffer = %s",__FUNCTION__ ,strBuffer);
     return env->NewStringUTF(strBuffer);
 }
-
 
