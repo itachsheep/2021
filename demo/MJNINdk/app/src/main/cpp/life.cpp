@@ -44,3 +44,8 @@ Java_com_tao_mjnindk_FFMediaPlayer_getFFmpegVersion(JNIEnv *env, jclass clazz) {
     return env->NewStringUTF(strBuffer);
 }
 
+extern "C" JNIEXPORT jlong JNICALL
+Java_com_tao_mjnindk_FFMediaPlayer_native_1Init(JNIEnv *env, jobject thiz, jstring url,
+                                                jint render_type, jobject surface) {
+    // TODO: implement native_Init()
+}
