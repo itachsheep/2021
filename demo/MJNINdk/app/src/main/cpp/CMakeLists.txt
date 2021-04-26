@@ -7,8 +7,10 @@ cmake_minimum_required(VERSION 3.10.2)
 set(jnilibs ${CMAKE_SOURCE_DIR}/../jniLibs)
 set(libname life-tip)
 include_directories(
-        include
-        util
+        ${CMAKE_SOURCE_DIR}/include
+        ${CMAKE_SOURCE_DIR}/util
+        ${CMAKE_SOURCE_DIR}/player
+        ${CMAKE_SOURCE_DIR}/player/decoder
 )
 link_directories(
     ${jnilibs}/${CMAKE_ANDROID_ARCH_ABI}
@@ -17,6 +19,8 @@ link_directories(
 
 file(GLOB src-files
     ${CMAKE_SOURCE_DIR}/*.cpp
+    ${CMAKE_SOURCE_DIR}/player/*.cpp
+    ${CMAKE_SOURCE_DIR}/player/decoder/*.cpp
 #    life.cpp
 )
 project("mjnindk")
