@@ -11,6 +11,8 @@ include_directories(
         ${CMAKE_SOURCE_DIR}/util
         ${CMAKE_SOURCE_DIR}/player
         ${CMAKE_SOURCE_DIR}/player/decoder
+        ${CMAKE_SOURCE_DIR}/player/render
+        ${CMAKE_SOURCE_DIR}/player/render/video
 )
 link_directories(
     ${jnilibs}/${CMAKE_ANDROID_ARCH_ABI}
@@ -21,6 +23,9 @@ file(GLOB src-files
     ${CMAKE_SOURCE_DIR}/*.cpp
     ${CMAKE_SOURCE_DIR}/player/*.cpp
     ${CMAKE_SOURCE_DIR}/player/decoder/*.cpp
+    ${CMAKE_SOURCE_DIR}/player/render/*.cpp
+    ${CMAKE_SOURCE_DIR}/player/render/video/*.cpp
+#    player/decoder/VideoDecoder.cpp
 #    life.cpp
 )
 project("mjnindk")
