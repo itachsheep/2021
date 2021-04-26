@@ -36,6 +36,34 @@ void DecoderBase::DoAVDecoding(DecoderBase *decoder)
 int DecoderBase::InitFFDecoder()
 {
     int result = -1;
+    do
+    {
+        //1,创建封装格式上下文
+        m_AVFormatContext = avformat_alloc_context();
+
+        //2.打开文件
+        if(avformat_open_input(&m_AVFormatContext,m_Url,NULL,NULL) != 0)
+        {
+            LOGCATE("DecoderBase::InitFFDecoder avformat_open_input fail.");
+            break;
+        }
+
+        //3,获取音视频流
+        if(avformat_find_stream_info(m_AVFormatContext,NULL) < 0)
+        {
+            LOGCATE("DecoderBase::InitFFDecoder avformat_find_stream_info fail.");
+            break;
+        }
+
+        //4.获取音视频流索引
+        for (int i = 0; i < m_AVFormatContext->nb_streams; ++i) {
+            if(m_AVFormatContext->streams[i]->codecpar->codec_type == m_MediaType){
+                m_StreamIndex = i;
+                break;
+            }
+        }
+
+    } while (false);
 }
 
 void DecoderBase::Pause() {
