@@ -15,7 +15,7 @@ extern "C" {
 
 #include <thread>
 #include "Decoder.h"
-
+#define DELAY_THRESHOLD 100 //100ms
 #define MAX_PATH   2048
 using namespace std;
 
@@ -24,6 +24,14 @@ enum DecoderState {
     STATE_DECODING,
     STATE_PAUSE,
     STATE_STOP
+};
+
+enum DecoderMsg {
+    MSG_DECODER_INIT_ERROR,
+    MSG_DECODER_READY,
+    MSG_DECODER_DONE,
+    MSG_REQUEST_RENDER,
+    MSG_DECODING_TIME
 };
 
 class DecoderBase : public Decoder {
@@ -92,9 +100,9 @@ private:
     //解码器
     AVCodec *m_AVCodec = nullptr;
     //编码的数据包
-    AVPacket *m_Packet = nullptr;
+    AVPacket* m_Packet = nullptr;
     //解码的帧
-    AVFrame *m_Frame = nullptr;
+    AVFrame* m_Frame = nullptr;
     //数据流的类型
     AVMediaType m_MediaType = AVMEDIA_TYPE_UNKNOWN;
 
