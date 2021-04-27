@@ -1,8 +1,7 @@
 #include <jni.h>
 #include <string>
 #include "util/LogUtil.h"
-#include <FFMediaPlayer.h>
-
+#include "FFMediaPlayer.h"
 extern "C" {
 #include <libavcodec/version.h>
 #include <libavcodec/avcodec.h>
@@ -12,6 +11,33 @@ extern "C" {
 #include <libswresample/version.h>
 #include <libswscale/version.h>
 }
+
+
+extern "C" JNIEXPORT jlong JNICALL
+Java_com_tao_mjnindk_FFMediaPlayer_native_1Init(JNIEnv *env, jobject obj, jstring jurl,
+                                                jint render_type, jobject surface) {
+    const char* url = env->GetStringUTFChars(jurl,nullptr);
+    FFMediaPlayer* player = new FFMediaPlayer();
+    player->Init(env,obj, const_cast<char *>(url),render_type,surface);
+    env->ReleaseStringUTFChars(jurl,url);
+
+    /**
+     * reinterpret_cast运算符是用来处理无关类型之间的转换；
+     * 它会产生一个新的值，这个值会有与原始参数（expressoin）有完全相同的比特位。
+     *
+     *IBM的C++指南里倒是明确告诉了我们reinterpret_cast可以，或者说应该在什么地方用来作为转换运算符：
+
+        从指针类型到一个足够大的整数类型
+        从整数类型或者枚举类型到指针类型
+        从一个指向函数的指针到另一个不同类型的指向函数的指针
+        从一个指向对象的指针到另一个不同类型的指向对象的指针
+        ...
+     * 所以总结来说：reinterpret_cast用在任意指针（或引用）类型之间的转换；
+     * 以及指针与足够大的整数类型之间的转换；从整数类型（包括枚举类型）到指针类型，无视大小。
+     */
+    return reinterpret_cast<jlong>(player);
+}
+
 
 extern "C"
 JNIEXPORT jstring JNICALL
@@ -45,27 +71,69 @@ Java_com_tao_mjnindk_FFMediaPlayer_getFFmpegVersion(JNIEnv *env, jclass clazz) {
     return env->NewStringUTF(strBuffer);
 }
 
-extern "C" JNIEXPORT jlong JNICALL
-Java_com_tao_mjnindk_FFMediaPlayer_native_1Init(JNIEnv *env, jobject obj, jstring jurl,
-                                                jint render_type, jobject surface) {
-    const char* url = env->GetStringUTFChars(jurl,nullptr);
-    FFMediaPlayer* player = new FFMediaPlayer();
-    player->Init(env,obj, const_cast<char *>(url),render_type,surface);
-    env->ReleaseStringUTFChars(jurl,url);
 
-    /**
-     * reinterpret_cast运算符是用来处理无关类型之间的转换；
-     * 它会产生一个新的值，这个值会有与原始参数（expressoin）有完全相同的比特位。
-     *
-     *IBM的C++指南里倒是明确告诉了我们reinterpret_cast可以，或者说应该在什么地方用来作为转换运算符：
 
-        从指针类型到一个足够大的整数类型
-        从整数类型或者枚举类型到指针类型
-        从一个指向函数的指针到另一个不同类型的指向函数的指针
-        从一个指向对象的指针到另一个不同类型的指向对象的指针
-        ...
-     * 所以总结来说：reinterpret_cast用在任意指针（或引用）类型之间的转换；
-     * 以及指针与足够大的整数类型之间的转换；从整数类型（包括枚举类型）到指针类型，无视大小。
-     */
-    return reinterpret_cast<jlong>(player);
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_tao_mjnindk_FFMediaPlayer_native_1Play(JNIEnv *env, jobject thiz, jlong player_handle) {
+    if(player_handle != 0)
+    {
+        FFMediaPlayer *ffMediaPlayer = reinterpret_cast<FFMediaPlayer *>(player_handle);
+        ffMediaPlayer->Play();
+    }
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_tao_mjnindk_FFMediaPlayer_native_1SeekToPosition(JNIEnv *env, jobject thiz,
+                                                          jlong player_handle, jfloat position) {
+    if(player_handle != 0)
+    {
+        FFMediaPlayer *ffMediaPlayer = reinterpret_cast<FFMediaPlayer *>(player_handle);
+        ffMediaPlayer->SeekToPosition(position);
+    }
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_tao_mjnindk_FFMediaPlayer_native_1Pause(JNIEnv *env, jobject thiz, jlong player_handle) {
+    if(player_handle != 0)
+    {
+        FFMediaPlayer *ffMediaPlayer = reinterpret_cast<FFMediaPlayer *>(player_handle);
+        ffMediaPlayer->Pause();
+    }
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_tao_mjnindk_FFMediaPlayer_native_1Stop(JNIEnv *env, jobject thiz, jlong player_handle) {
+    if(player_handle != 0)
+    {
+        FFMediaPlayer *ffMediaPlayer = reinterpret_cast<FFMediaPlayer *>(player_handle);
+        ffMediaPlayer->Stop();
+    }
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_tao_mjnindk_FFMediaPlayer_native_1UnInit(JNIEnv *env, jobject thiz, jlong player_handle) {
+    if(player_handle != 0)
+    {
+        FFMediaPlayer *ffMediaPlayer = reinterpret_cast<FFMediaPlayer *>(player_handle);
+        ffMediaPlayer->UnInit();
+    }
+
+}
+
+extern "C"
+JNIEXPORT jlong JNICALL
+Java_com_tao_mjnindk_FFMediaPlayer_native_1GetMediaParams(JNIEnv *env, jobject thiz,
+                                                          jlong player_handle, jint param_type) {
+    long value = 0;
+    if(player_handle != 0)
+    {
+        FFMediaPlayer *ffMediaPlayer = reinterpret_cast<FFMediaPlayer *>(player_handle);
+        value = ffMediaPlayer->GetMediaParams(param_type);
+    }
+    return value;
 }

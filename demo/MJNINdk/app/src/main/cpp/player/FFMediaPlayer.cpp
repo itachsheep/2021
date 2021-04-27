@@ -12,6 +12,7 @@ void FFMediaPlayer::Init(JNIEnv *jniEnv, jobject obj, char *url, int renderType,
 
     if(renderType == VIDEO_RENDER_ANWINDOW) {
         m_VideoRender = new NativeRender(jniEnv,surface);
+        m_VideoDecoder->SetVideoRender(m_VideoRender);
     }
 
     m_VideoDecoder->SetMessageCallback(this,PostMessage);
@@ -145,3 +146,6 @@ long FFMediaPlayer::GetMediaParams(int paramType) {
     }
     return value;
 }
+
+
+

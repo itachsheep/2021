@@ -10,10 +10,13 @@ package com.tao.mjnindk;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,9 +24,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import java.security.Permission;
-
 import static com.tao.mjnindk.Constants.VIDEO_RENDER_ANWINDOW;
+import static com.tao.mjnindk.FFMediaPlayer.*;
 
 public class ANativeWindowActivity extends AppCompatActivity implements SurfaceHolder.Callback, FFMediaPlayer.EventCallback {
     private static final String TAG = "ANativeWindowActivity";
@@ -33,9 +35,10 @@ public class ANativeWindowActivity extends AppCompatActivity implements SurfaceH
     private static final int REQUEST_OK = 10001;
 
     private static final String VIDEO_PATH = "/abyteflow/bili_xiguan.mp4";
-    FFMediaPlayer ffMediaPlayer = null;
-    SurfaceView surfaceView;
-
+    FFMediaPlayer mMediaPlayer = null;
+    MySurfaceView mSurfaceView;
+    private SeekBar mSeekBar = null;
+    private boolean mIsTouch = false;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +46,31 @@ public class ANativeWindowActivity extends AppCompatActivity implements SurfaceH
         if(!checkPermission(request_permission)) {
             ActivityCompat.requestPermissions(this,request_permission,REQUEST_OK);
         }
-        surfaceView = findViewById(R.id.my_surfaceView);
-        surfaceView.getHolder().addCallback(this);
+        mSurfaceView = findViewById(R.id.my_surfaceView);
+        mSurfaceView.getHolder().addCallback(this);
+
+        mSeekBar = findViewById(R.id.seekBar);
+        mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                mIsTouch = true;
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                Log.d(TAG, "onStopTrackingTouch() called with: progress = [" + seekBar.getProgress() + "]");
+                if(mMediaPlayer != null) {
+                    mMediaPlayer.seekToPosition(mSeekBar.getProgress());
+                    mIsTouch = false;
+                }
+
+            }
+        });
     }
 
     @Override
@@ -70,37 +96,75 @@ public class ANativeWindowActivity extends AppCompatActivity implements SurfaceH
     @Override
     protected void onResume() {
         super.onResume();
-        //todo
+        if(mMediaPlayer != null)
+            mMediaPlayer.play();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        //todo;
+        if(mMediaPlayer != null)
+            mMediaPlayer.pause();
     }
 
     @Override
     public void surfaceCreated(@NonNull SurfaceHolder surfaceHolder) {
-        ffMediaPlayer = new FFMediaPlayer();
-        ffMediaPlayer.addEventCallback(this);
+        mMediaPlayer = new FFMediaPlayer();
+        mMediaPlayer.addEventCallback(this);
         String videoPath = Environment.getExternalStorageDirectory().getAbsolutePath()
                 + VIDEO_PATH;
         LogUtils.d(TAG,"surfaceCreated videoPath:" + videoPath);
-        ffMediaPlayer.init(videoPath,VIDEO_RENDER_ANWINDOW,surfaceHolder.getSurface());
+        mMediaPlayer.init(videoPath,VIDEO_RENDER_ANWINDOW,surfaceHolder.getSurface());
     }
 
     @Override
-    public void surfaceChanged(@NonNull SurfaceHolder surfaceHolder, int i, int i1, int i2) {
-
+    public void surfaceChanged(@NonNull SurfaceHolder surfaceHolder, int format, int w, int h) {
+        LogUtils.d(TAG, "surfaceChanged() called with: surfaceHolder = [" + surfaceHolder + "], format = [" + format + "], w = [" + w + "], h = [" + h + "]");
+        mMediaPlayer.play();
     }
 
     @Override
     public void surfaceDestroyed(@NonNull SurfaceHolder surfaceHolder) {
-
+        LogUtils.d(TAG, "surfaceDestroyed() called with: surfaceHolder = [" + surfaceHolder + "]");
+        mMediaPlayer.unInit();
     }
 
     @Override
     public void onPlayerEvent(int msgType, float msgValue) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                switch (msgType) {
+                    case MSG_DECODER_INIT_ERROR:
+                        break;
+                    case MSG_DECODER_READY:
+                        onDecoderReady();
+                        break;
+                    case MSG_DECODER_DONE:
+                        break;
+                    case MSG_REQUEST_RENDER:
+                        break;
+                    case MSG_DECODING_TIME:
+                        if(!mIsTouch)
+                            mSeekBar.setProgress((int) msgValue);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+    }
 
+    private void onDecoderReady() {
+        int videoWidth = (int) mMediaPlayer.getMediaParams(MEDIA_PARAM_VIDEO_WIDTH);
+        int videoHeight = (int) mMediaPlayer.getMediaParams(MEDIA_PARAM_VIDEO_HEIGHT);
+        if(videoHeight * videoWidth != 0)
+            mSurfaceView.setAspectRatio(videoWidth, videoHeight);
+
+        int duration = (int) mMediaPlayer.getMediaParams(MEDIA_PARAM_VIDEO_DURATION);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            mSeekBar.setMin(0);
+        }
+        mSeekBar.setMax(duration);
     }
 }

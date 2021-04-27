@@ -5,6 +5,17 @@
 #ifndef MJNINDK_IMAGEDEF_H
 #define MJNINDK_IMAGEDEF_H
 
+
+#define IMAGE_FORMAT_RGBA           0x01
+#define IMAGE_FORMAT_NV21           0x02
+#define IMAGE_FORMAT_NV12           0x03
+#define IMAGE_FORMAT_I420           0x04
+
+#define IMAGE_FORMAT_RGBA_EXT       "RGB32"
+#define IMAGE_FORMAT_NV21_EXT       "NV21"
+#define IMAGE_FORMAT_NV12_EXT       "NV12"
+#define IMAGE_FORMAT_I420_EXT       "I420"
+
 #include <malloc.h>
 #include <string.h>
 #include <unistd.h>

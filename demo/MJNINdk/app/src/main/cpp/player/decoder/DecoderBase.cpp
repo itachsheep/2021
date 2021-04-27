@@ -98,7 +98,7 @@ int DecoderBase::InitFFDecoder()
         }
 
         //8,打开解码器
-        int result = avcodec_open2(m_AVCodecContext,m_AVCodec,NULL);
+        result = avcodec_open2(m_AVCodecContext,m_AVCodec,NULL);
         if(result < 0) {
             LOGCATE("DecoderBase::InitFFDecoder avcodec_open2 fail. result=%d", result);
             break;

@@ -1,6 +1,10 @@
 //
 // Created by wei tao on 2021/4/23.
 //
+#ifndef MJNINDK_LOGUTIL_H
+#define MJNINDK_LOGUTIL_H
+
+#include <sys/time.h>
 #include<android/log.h>
 
 #define TAG "LifeTip."
@@ -15,3 +19,4 @@ static long long GetSysCurrentTime()
     return curTime;
 }
 
+#endif
