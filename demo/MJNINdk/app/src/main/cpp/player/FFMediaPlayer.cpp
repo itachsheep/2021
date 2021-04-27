@@ -3,18 +3,22 @@
 //
 #include "FFMediaPlayer.h"
 #include "NativeRender.h"
+#include "OpenSLRender.h"
+
 void FFMediaPlayer::Init(JNIEnv *jniEnv, jobject obj, char *url, int renderType, jobject surface)
 {
     jniEnv->GetJavaVM(&m_JavaVM);
     m_JavaObj = jniEnv->NewGlobalRef(obj);
 
     m_VideoDecoder = new VideoDecoder(url);
-
+    m_AudioDecoder = new AudioDecoder(url);
     if(renderType == VIDEO_RENDER_ANWINDOW) {
         m_VideoRender = new NativeRender(jniEnv,surface);
         m_VideoDecoder->SetVideoRender(m_VideoRender);
     }
-
+    m_AudioRender = new OpenSLRender();
+    m_AudioDecoder->SetAudioRender(m_AudioRender);
+    m_AudioDecoder->SetMessageCallback(this, PostMessage);
     m_VideoDecoder->SetMessageCallback(this,PostMessage);
 }
 
@@ -53,6 +57,17 @@ void FFMediaPlayer::UnInit()
         delete m_VideoRender;
         m_VideoRender = nullptr;
     }
+
+    if(m_AudioDecoder) {
+        delete m_AudioDecoder;
+        m_AudioDecoder = nullptr;
+    }
+
+    if(m_AudioRender) {
+        delete m_AudioRender;
+        m_AudioRender = nullptr;
+    }
+
     /*VideoGLRender::ReleaseInstance();*/
     bool isAttach = false;
     GetJNIEnv(&isAttach)->DeleteGlobalRef(m_JavaObj);
@@ -66,8 +81,8 @@ void FFMediaPlayer::Play() {
     if(m_VideoDecoder)
         m_VideoDecoder->Start();
 
-    /*if(m_AudioDecoder)
-        m_AudioDecoder->Start();*/
+    if(m_AudioDecoder)
+        m_AudioDecoder->Start();
 }
 
 void FFMediaPlayer::Pause() {
@@ -77,8 +92,8 @@ void FFMediaPlayer::Pause() {
         m_VideoDecoder->Pause();
     }
 
-    /*if(m_AudioDecoder)
-        m_AudioDecoder->Pause();*/
+    if(m_AudioDecoder)
+        m_AudioDecoder->Pause();
 
 }
 
@@ -89,8 +104,8 @@ void FFMediaPlayer::Stop() {
         m_VideoDecoder->Stop();
     }
 
-    /*if(m_AudioDecoder)
-        m_AudioDecoder->Stop();*/
+    if(m_AudioDecoder)
+        m_AudioDecoder->Stop();
 }
 
 void FFMediaPlayer::SeekToPosition(float position) {
@@ -98,8 +113,8 @@ void FFMediaPlayer::SeekToPosition(float position) {
     if(m_VideoDecoder)
         m_VideoDecoder->SeekToPosition(position);
 
-    /*if(m_AudioDecoder)
-        m_AudioDecoder->SeekToPosition(position);*/
+    if(m_AudioDecoder)
+        m_AudioDecoder->SeekToPosition(position);
 }
 
 JNIEnv *FFMediaPlayer::GetJNIEnv(bool *isAttach) {

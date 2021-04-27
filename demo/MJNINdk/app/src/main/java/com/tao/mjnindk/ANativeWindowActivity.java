@@ -131,6 +131,7 @@ public class ANativeWindowActivity extends AppCompatActivity implements SurfaceH
 
     @Override
     public void onPlayerEvent(int msgType, float msgValue) {
+        LogUtils.d(TAG, "onPlayerEvent() called with: msgType = [" + msgType + "], msgValue = [" + msgValue + "]");
         runOnUiThread(new Runnable() {
             @Override
             public void run() {

@@ -8,7 +8,8 @@
 #include <jni.h>
 #include "VideoRender.h"
 #include "VideoDecoder.h"
-
+#include "AudioDecoder.h"
+#include "AudioRender.h"
 #define JAVA_PLAYER_EVENT_CALLBACK_API_NAME "playerEventCallback"
 
 #define MEDIA_PARAM_VIDEO_WIDTH         0x0001
@@ -40,6 +41,9 @@ private:
 
     VideoDecoder* m_VideoDecoder = nullptr;
     VideoRender *m_VideoRender = nullptr;
+
+    AudioDecoder *m_AudioDecoder = nullptr;
+    AudioRender *m_AudioRender = nullptr;
 };
 
 #endif //MJNINDK_FFMEDIAPLAYER_H

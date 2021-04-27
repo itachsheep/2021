@@ -13,6 +13,7 @@ include_directories(
         ${CMAKE_SOURCE_DIR}/player/decoder
         ${CMAKE_SOURCE_DIR}/player/render
         ${CMAKE_SOURCE_DIR}/player/render/video
+        ${CMAKE_SOURCE_DIR}/player/render/audio
 )
 link_directories(
     ${jnilibs}/${CMAKE_ANDROID_ARCH_ABI}
@@ -25,7 +26,9 @@ file(GLOB src-files
     ${CMAKE_SOURCE_DIR}/player/decoder/*.cpp
     ${CMAKE_SOURCE_DIR}/player/render/*.cpp
     ${CMAKE_SOURCE_DIR}/player/render/video/*.cpp
-#    player/decoder/VideoDecoder.cpp
+    ${CMAKE_SOURCE_DIR}/player/render/audio/*.cpp
+#    player/audio/OpenSLRender.cpp
+#    player/decoder/AudioDecoder.cpp
 #    life.cpp
 )
 project("mjnindk")
@@ -76,8 +79,8 @@ set(third-party-libs
 set(native-libs
         android
         EGL
-#        GLESv3
-#        OpenSLES
+        GLESv3
+        OpenSLES
         log
         m
         z
