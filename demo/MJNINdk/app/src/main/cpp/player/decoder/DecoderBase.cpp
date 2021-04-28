@@ -270,8 +270,11 @@ long DecoderBase::AVSync()
     //基于系统时钟计算从开始播放流逝的时间
     long elapsedTime = curSysTime - m_StartTimeStamp;
 
+//    LOGCATD("DecoderBase::AVSync m_MsgContext = %p, m_MsgCallback = %p, m_MediaType = %d"
+//            , m_MsgContext,m_MsgCallback,m_MediaType);
     if(m_MsgContext && m_MsgCallback && m_MediaType == AVMEDIA_TYPE_AUDIO)
     {
+        LOGCATD("DecoderBase::AVSync m_MsgCallback --> ");
         m_MsgCallback(m_MsgContext, MSG_DECODING_TIME, m_CurTimeStamp * 1.0f / 1000);
     }
 

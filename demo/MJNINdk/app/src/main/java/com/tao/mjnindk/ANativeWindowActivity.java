@@ -146,8 +146,8 @@ public class ANativeWindowActivity extends AppCompatActivity implements SurfaceH
                     case MSG_REQUEST_RENDER:
                         break;
                     case MSG_DECODING_TIME:
-                        if(!mIsTouch)
-                            mSeekBar.setProgress((int) msgValue);
+                        //if(!mIsTouch)
+                        mSeekBar.setProgress((int) msgValue);
                         break;
                     default:
                         break;
