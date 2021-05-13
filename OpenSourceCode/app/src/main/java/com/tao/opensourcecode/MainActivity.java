@@ -3,6 +3,7 @@ package com.tao.opensourcecode;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.SparseArray;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -89,4 +90,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+    public void test_java_jichu() {
+        SparseArray<Object> sparseArray = new SparseArray<>();
+        sparseArray.put(1,new Object());
+        Object object;
+    }
 }

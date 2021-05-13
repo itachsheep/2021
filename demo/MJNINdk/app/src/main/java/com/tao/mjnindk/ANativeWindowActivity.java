@@ -68,7 +68,6 @@ public class ANativeWindowActivity extends AppCompatActivity implements SurfaceH
                     mMediaPlayer.seekToPosition(mSeekBar.getProgress());
                     mIsTouch = false;
                 }
-
             }
         });
     }
