@@ -1,21 +1,29 @@
+/**
+ * @ClassName: Test
+ * @Description:
+ * @author taowei
+ * @version V1.0
+ * @Date
+ */
+
 package com.tao.mjnindk;
 
-import org.junit.Test;
+public class Test {
+    private volatile static Test sTest;
 
-import static org.junit.Assert.*;
+    private Test() {
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
-public class ExampleUnitTest {
-    @Test
-    public void addition_isCorrect() {
-//        assertEquals(4, 2 + 2);
+    }
 
-        System.out.println(bigIntegerMulti("1111","222"));
-
+    public static Test getInstance() {
+        if(sTest == null) {
+            synchronized (Test.class) {
+                if(sTest == null) {
+                    sTest = new Test();
+                }
+            }
+        }
+        return sTest;
     }
 
     public String bigIntegerMulti(String num1, String num2) {
