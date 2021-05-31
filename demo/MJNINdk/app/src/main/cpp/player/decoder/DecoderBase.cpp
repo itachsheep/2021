@@ -21,7 +21,7 @@ void DecoderBase::StartDecodingThread()
 
 void DecoderBase::DoAVDecoding(DecoderBase *decoder)
 {
-    LOGCATD("DecoderBase::DoAVDecoding");
+    LOGCATD("DecoderBase::DoAVDecoding #### %p ",decoder);
     do
     {
         if(decoder->InitFFDecoder() != 0)
