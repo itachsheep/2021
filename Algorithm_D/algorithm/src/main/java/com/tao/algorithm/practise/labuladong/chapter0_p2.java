@@ -36,4 +36,8 @@ public class chapter0_p2 {
      * 4、重复第 2 和第 3 步，直到 right 到达字符串 S 的尽头。
      *
      */
+
+    //todo: 7,股票买卖问题
+
+    
 }
