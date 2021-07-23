@@ -6,7 +6,7 @@
  * @Date
  */
 
-package com.tao.algorithm.practise.labuladong;
+package com.tao.algorithm.practise.labuladong.chapter0;
 
 class chapter0_打家劫舍 {
     public static void main(String[] args) {

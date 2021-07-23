@@ -6,7 +6,7 @@
  * @Date
  */
 
-package com.tao.algorithm.practise.labuladong;
+package com.tao.algorithm.practise.labuladong.chapter0;
 
 public class chapter0 {
 
