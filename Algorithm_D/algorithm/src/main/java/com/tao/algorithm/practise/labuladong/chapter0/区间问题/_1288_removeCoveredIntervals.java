@@ -8,6 +8,9 @@
 
 package com.tao.algorithm.practise.labuladong.chapter0.区间问题;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 class _1288_removeCoveredIntervals {
 
     /**
@@ -31,6 +34,23 @@ class _1288_removeCoveredIntervals {
      * @return
      */
     public int removeCoveredIntervals(int[][] intervals) {
+        Arrays.sort(intervals, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] t0, int[] t1) {
+                return t0[0] == t1[0] ? t1[1] - t0[1] : t0[0] - t1[0];
+            }
+        });
 
+        int count = 0;
+        int left = 0 , right = 0;
+        for (int[] curr:intervals) {
+            right = curr[1];
+            if(left < right) {
+                //当前区间的左边界 大于 上个区间的 右边界，肯定是不会完全覆盖的
+                ++count;
+                left = right;
+            }
+        }
+        return count;
     }
 }
