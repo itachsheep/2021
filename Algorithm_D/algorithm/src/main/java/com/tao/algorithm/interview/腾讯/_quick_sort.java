@@ -14,11 +14,31 @@ class _quick_sort {
     public static void main(String[] args) {
         int[] arr = new int[]{9,8,3,23,45,1,245,76,68,0,5};
         Util.printArrays(arr);
-        quickSort(arr,0,arr.length - 1);
+//        quickSort(arr,0,arr.length - 1);
+        quickSort2(arr,0,arr.length - 1);
         Util.printArrays(arr);
     }
 
-    
+    public static void quickSort2(int[] arr,int left,int right) {
+        if(left >= right) {
+            return;
+        }
+
+        int pivot = arr[right];
+        int start = left , end = right;
+        while (start < end) {
+            while (start < end && arr[start] <= pivot){
+                start++;
+            }
+            while (start < end && arr[end] >= pivot){
+                end--;
+            }
+            swap(arr,start,end);
+        }
+        swap(arr,start,right);
+        quickSort2(arr,left,start - 1);
+        quickSort2(arr,start + 1, right);
+    }
 
     public static void quickSort(int[] arr,int left,int right) {
         if(left >= right) {
