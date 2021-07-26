@@ -4,7 +4,9 @@
 #include <jni.h>
 #include <string>
 
+#include "LogUtils.h"
+
 extern "C" JNIEXPORT void JNICALL
 Java_com_tao_mp3encoder_Mp3Encoder_encode(JNIEnv *env, jobject thiz) {
-// TODO: implement encode()
+
 }

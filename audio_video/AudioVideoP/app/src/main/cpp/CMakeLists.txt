@@ -8,23 +8,39 @@ cmake_minimum_required(VERSION 3.10.2)
 # Declares and names the project.
 project("audiovideop")
 
+set(lib1-mp3encoder mp3_encoder)
+set(lib2-main-test main-test)
+
 include_directories(
-        ${CMAKE_SOURCE_DIR}/mp3_encoder/include
+        ${CMAKE_SOURCE_DIR}/3rdparty/include
+        ${CMAKE_SOURCE_DIR}/utils
+        ${CMAKE_SOURCE_DIR}/mp3_encoder
+#        ${CMAKE_SOURCE_DIR}/mp3_encoder
 )
+
+## 增加外部依赖链接库
+set(jnilibs ${CMAKE_SOURCE_DIR}/../jniLibs)
+link_directories(
+    ${jniLibs}/${CMAKE_ANDROID_ARCH_ABI}
+)
+
+set(3rdparty-mp3encoder-libs
+        mp3lame)
+
 
 file(GLOB src_mp3_encoder
         ${CMAKE_SOURCE_DIR}/mp3_encoder/*.cpp
-        mp3_encoder/AudioEncoder.cpp)
+        mp3_encoder/Mp3Encoder.cpp)
 
 file(GLOB src_test
         ${CMAKE_SOURCE_DIR}/test/*.cpp)
 
-add_library(mp3_encoder
+add_library(${lib1-mp3encoder}
             SHARED
             ${src_mp3_encoder})
 
 add_library( # Sets the name of the library.
-             main-test
+             ${lib2-main-test}
 
              # Sets the library as a shared library.
              SHARED
@@ -35,13 +51,15 @@ add_library( # Sets the name of the library.
 
 
 find_library( # Sets the name of the path variable.
-              log-lib
-              log )
+            log-lib
+            android
+            log)
 
 target_link_libraries( # Specifies the target library.
-                        main-test
-                       ${log-lib} )
+        ${lib2-main-test}
+        ${log-lib} )
 
 target_link_libraries( # Specifies the target library.
-        mp3_encoder
+        ${lib1-mp3encoder}
+        ${3rdparty-mp3encoder-libs}
         ${log-lib} )
