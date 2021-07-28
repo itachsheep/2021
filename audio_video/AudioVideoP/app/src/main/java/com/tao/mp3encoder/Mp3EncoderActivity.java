@@ -8,12 +8,17 @@
 
 package com.tao.mp3encoder;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.tao.audiovideop.R;
 import com.tao.utils.LogUtils;
@@ -24,6 +29,12 @@ public class Mp3EncoderActivity extends AppCompatActivity {
         System.loadLibrary("mp3_encoder");
     }
 
+
+    private static String[] request_permission = {
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+    };
+    private static final int REQUEST_OK = 10001;
+
     private static final String VIDEO_PATH = "/111/vocal.pcm";
     private static final String MP3_PATH = "/111/vocal.mp3";
 
@@ -32,6 +43,9 @@ public class Mp3EncoderActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mp3encoder);
+        if(!checkPermission(request_permission)) {
+            ActivityCompat.requestPermissions(this,request_permission,REQUEST_OK);
+        }
     }
 
     public void bt_mp3encoder(View view) {
@@ -51,4 +65,27 @@ public class Mp3EncoderActivity extends AppCompatActivity {
         }
 
     }
+
+
+
+    public boolean checkPermission(String[] permissions) {
+        for (String permission:permissions) {
+            if(ActivityCompat.checkSelfPermission(this,permission)
+                    != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            }
+        }
+        LogUtils.d(TAG,"checkPermission ok");
+        return true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        LogUtils.d(TAG,"onRequestPermissionsResult: " + requestCode);
+        if(requestCode != REQUEST_OK) {
+            Toast.makeText(this,"权限申请失败",Toast.LENGTH_LONG).show();
+        }
+    }
+
 }

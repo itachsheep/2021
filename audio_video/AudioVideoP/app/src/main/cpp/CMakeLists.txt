@@ -10,6 +10,7 @@ project("audiovideop")
 
 set(lib1-mp3encoder mp3_encoder)
 set(lib2-main-test main-test)
+set(jnilibs ${CMAKE_SOURCE_DIR}/../jniLibs)
 
 include_directories(
         ${CMAKE_SOURCE_DIR}/3rdparty/include
@@ -19,12 +20,12 @@ include_directories(
 )
 
 ## 增加外部依赖链接库
-set(jnilibs ${CMAKE_SOURCE_DIR}/../jniLibs)
 link_directories(
-    ${jniLibs}/${CMAKE_ANDROID_ARCH_ABI}
+#    ${jnilibs}/${CMAKE_ANDROID_ARCH_ABI}
+    ${jnilibs}/armeabi-v7a
 )
 
-set(3rdparty-mp3encoder-libs
+set(3rdparty_mp3lame
         mp3lame)
 
 
@@ -50,16 +51,19 @@ add_library( # Sets the name of the library.
 
 
 
-find_library( # Sets the name of the path variable.
-            log-lib
-            android
-            log)
+set(log-lib
+    android
+    log)
 
 target_link_libraries( # Specifies the target library.
         ${lib2-main-test}
-        ${log-lib} )
+        android
+        log
+        )
 
 target_link_libraries( # Specifies the target library.
         ${lib1-mp3encoder}
-        ${3rdparty-mp3encoder-libs}
-        ${log-lib} )
+        ${3rdparty_mp3lame}
+        android
+        log
+        )
