@@ -46,6 +46,35 @@ class _1567_max_len_multi_positive {
      *      pos[i]  和 neg[i] 跟上面相反
      */
     public static int getMaxLen(int[] nums) {
+        if(nums == null || nums.length == 0) {
+            return 0;
+        }
+        int length = nums.length;
+        int[] pos = new int[length];
+        int[] neg = new int[length];
 
+        if(nums[0] > 0) {
+            pos[0] = 1;
+        } else if(nums[0] < 0) {
+            neg[0] = 1;
+        }
+        int max = pos[0];
+
+        for (int i = 1; i < length; i++) {
+            int ele = nums[i];
+
+            if(ele > 0) {
+                pos[i] = pos[i - 1] + 1;
+                neg[i] = (neg[i - 1] > 0 ? neg[i - 1] + 1:  0);
+            } else if(ele < 0) {
+                pos[i] = (neg[i - 1] > 0? neg[i - 1] + 1 : 0);
+                neg[i] = pos[i - 1] + 1;
+            } else {
+                pos[i] = 0;
+                neg[i] = 0;
+            }
+        }
+
+        return max;
     }
 }
