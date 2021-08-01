@@ -21,11 +21,13 @@ int Mp3Encoder::Init(const char *pcmFilePath, const char *mp3FilePath,
         if (mp3File) {
             LOGCATD("Init lame");
             lameClient = lame_init();
+            LOGCATD("Init lame22");
             lame_set_in_samplerate(lameClient, sampleRate);
             lame_set_out_samplerate(lameClient, sampleRate);
             lame_set_num_channels(lameClient, channels);
             lame_set_brate(lameClient, bitRate);
             lame_init_params(lameClient);
+            LOGCATD("Init lame55");
         }
     }
 }
