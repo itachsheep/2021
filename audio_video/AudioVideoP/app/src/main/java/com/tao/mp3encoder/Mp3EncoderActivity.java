@@ -57,6 +57,7 @@ public class Mp3EncoderActivity extends AppCompatActivity {
         int sampleRate = 44100;
         String mp3Path = Environment.getExternalStorageDirectory().getAbsolutePath()
                 + MP3_PATH;
+        LogUtils.d(TAG,"bt_mp3encoder pcmPath: " + pcmPath);
         int ret = mp3Encoder.init(pcmPath, mp3Path, audioChannels, bitRate, sampleRate);
         LogUtils.d(TAG,"bt_mp3encoder ret: " + ret);
         if(ret >= 0) {

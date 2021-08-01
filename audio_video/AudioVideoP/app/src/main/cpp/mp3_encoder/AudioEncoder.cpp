@@ -32,7 +32,9 @@ Java_com_tao_mp3encoder_Mp3Encoder_init(JNIEnv *env, jobject thiz, jstring pcm_p
     const char* pcmPath = env->GetStringUTFChars(pcm_path,NULL);
     const char* mp3Path = env->GetStringUTFChars(mp3_path,NULL);
     encoder = new Mp3Encoder();
-    encoder->Init(pcmPath,mp3Path,sample_rate,channels,bit_rate);
+    int ret = encoder->Init(pcmPath,mp3Path,sample_rate,channels,bit_rate);
     env->ReleaseStringUTFChars(pcm_path,pcmPath);
     env->ReleaseStringUTFChars(mp3_path,mp3Path);
+    LOGCATD("Mp3Encoder_init ret = %d ",ret);
+    return (jint)ret;
 }
