@@ -8,6 +8,9 @@
 
 package com.tao.algorithm.practise.labuladong.chapter0.nsum问题;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -33,7 +36,44 @@ class _15_3sum {
 
     }
 
-    public List<List<Integer>> threeSum(int[] nums) {
+    /**
+     * a + b + c = 0,
+     * a + b = -c, 转为twoSum问题
+     */
+    public static List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> list = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            twoSum(nums,list, i + 1, -nums[i]);
+        }
+        return list;
+    }
+
+    public static void twoSum(int[] nums,List<List<Integer>> list,
+                              int start, int target) {
+        int lo = start, hi = nums.length - 1;
+
+        while (lo < hi) {
+            if(nums[lo] + nums[hi] > target) {
+                hi--;
+            } else if(nums[lo] + nums[hi] < target) {
+                lo++;
+            } else {
+                if(lo > 0 && nums[lo] == nums[lo -1]) {
+                    continue;
+                }
+                if(hi > 0 && hi < nums.length - 1 && nums[hi] == nums[hi + 1]) {
+                    continue;
+                }
+                List<Integer> temp = new ArrayList<>();
+                temp.add(nums[lo]);
+                temp.add(nums[target]);
+                temp.add(nums[hi]);
+                list.add(temp);
+            }
+
+        }
 
     }
+
 }
