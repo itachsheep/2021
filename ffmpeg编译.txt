@@ -10,10 +10,14 @@
 
 
 
+https://juejin.cn/post/6844903843172450318 编译：
+
 /Users/weitao/d/project/github/cross_compile_project/ffmpeg_2.8.5_android
 编译lame 成功
 编译ffmepg成功
 编译ffmpge-pc 失败
+
+
 
 /Users/weitao/d/project/github/cross_compile_project/ffmpeg_2.8.5_android
 ffmeg源码
