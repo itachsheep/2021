@@ -1,9 +1,14 @@
-package com.tao.audiovideop;
+package com.tao;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
+
+import com.tao.audiovideop.R;
+import com.tao.mp3encoder.Mp3EncoderActivity;
 
 public class AudioVideoMainActivity extends AppCompatActivity {
 
@@ -27,4 +32,8 @@ public class AudioVideoMainActivity extends AppCompatActivity {
      * which is packaged with this application.
      */
     public native String stringFromJNI();
+
+    public void bt_enter_mp3encoder(View view) {
+        startActivity(new Intent(this, Mp3EncoderActivity.class));
+    }
 }
