@@ -10,12 +10,14 @@ project("audiovideop")
 
 set(lib1-mp3encoder mp3_encoder)
 set(lib2-main-test main-test)
+set(lib3-ffmpeg-decoder ffmpeg_decoder)
 set(jnilibs ${CMAKE_SOURCE_DIR}/../jniLibs)
 
 include_directories(
         ${CMAKE_SOURCE_DIR}/3rdparty/include
         ${CMAKE_SOURCE_DIR}/utils
         ${CMAKE_SOURCE_DIR}/mp3_encoder
+        ${CMAKE_SOURCE_DIR}/ffmpeg_decoder
 #        ${CMAKE_SOURCE_DIR}/mp3_encoder
 )
 
@@ -30,11 +32,14 @@ set(3rdparty_mp3lame
 
 
 file(GLOB src_mp3_encoder
-        ${CMAKE_SOURCE_DIR}/mp3_encoder/*.cpp
-        mp3_encoder/Mp3Encoder.cpp)
+        ${CMAKE_SOURCE_DIR}/mp3_encoder/*.cpp)
 
 file(GLOB src_test
         ${CMAKE_SOURCE_DIR}/test/*.cpp)
+
+file(GLOB src_ffmpeg_decoder
+        ${CMAKE_SOURCE_DIR}/ffmpeg_decoder/*.cpp
+        ffmpeg_decoder/FFmpegDeocder.cpp)
 
 add_library(${lib1-mp3encoder}
             SHARED
@@ -49,6 +54,10 @@ add_library( # Sets the name of the library.
              # Provides a relative path to your source file(s).
             ${src_test})
 
+add_library(${lib3-ffmpeg-decoder}
+        SHARED
+        ${src_ffmpeg_decoder})
+
 
 
 set(log-lib
@@ -58,12 +67,15 @@ set(log-lib
 target_link_libraries( # Specifies the target library.
         ${lib2-main-test}
         android
-        log
-        )
+        log)
 
 target_link_libraries( # Specifies the target library.
         ${lib1-mp3encoder}
         ${3rdparty_mp3lame}
         android
-        log
-        )
+        log)
+
+target_link_libraries(
+        ${lib3-ffmpeg-decoder}
+        android
+        log)

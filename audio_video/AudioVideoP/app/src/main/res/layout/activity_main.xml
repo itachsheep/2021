@@ -14,6 +14,13 @@
         android:text="Hello World!" />
 
     <Button
+        android:onClick="bt_enter_ffmpeg_decoder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="进入mp3 ffmpeg解码"/>
+
+    <Button
         android:onClick="bt_enter_mp3encoder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
