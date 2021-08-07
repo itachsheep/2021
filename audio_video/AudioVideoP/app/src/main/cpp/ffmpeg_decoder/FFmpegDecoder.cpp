@@ -4,11 +4,16 @@
 
 #include <jni.h>
 #include <string>
+#include "AudioDecoder.h"
 
 extern "C" JNIEXPORT jint JNICALL
 Java_com_tao_ffmpegDecoder_FFmpegDecoder_init(JNIEnv *env, jobject thiz, jstring mp3_file_path,
                                               jstring pcm_file_path) {
-    // TODO: implement init()
+    MYLOCATD("init called");
+
+    AudioPacket audioPacket;
+    audioPacket.testPrint();
+    return -1;
 }
 
 extern "C" JNIEXPORT void JNICALL

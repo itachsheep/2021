@@ -18,9 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.tao.mp3encoder.Mp3EncoderActivity">
-
-        </activity>
+        <activity android:name="com.tao.mp3encoder.Mp3EncoderActivity"/>
+        <activity android:name="com.tao.ffmpegDecoder.FFmpegDecoderActivity"/>
     </application>
 
 </manifest>
