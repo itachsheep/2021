@@ -30,6 +30,18 @@ link_directories(
 set(3rdparty_mp3lame
         mp3lame)
 
+set(3rdparty_ffmpeg_decoder
+        avcodec
+        avfilter
+        avformat
+        avutil
+        fdk-aac
+        postproc
+        swresample
+        swscale
+        vo-aacenc
+        x264)
+
 
 file(GLOB src_mp3_encoder
         ${CMAKE_SOURCE_DIR}/mp3_encoder/*.cpp)
@@ -39,7 +51,7 @@ file(GLOB src_test
 
 file(GLOB src_ffmpeg_decoder
         ${CMAKE_SOURCE_DIR}/ffmpeg_decoder/*.cpp
-        ffmpeg_decoder/FFmpegDeocder.cpp)
+        ffmpeg_decoder/FFmpegDecoder.cpp)
 
 add_library(${lib1-mp3encoder}
             SHARED
@@ -77,5 +89,6 @@ target_link_libraries( # Specifies the target library.
 
 target_link_libraries(
         ${lib3-ffmpeg-decoder}
+        ${3rdparty_ffmpeg_decoder}
         android
         log)
