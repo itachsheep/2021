@@ -8,8 +8,20 @@
 #define TAG __FILE_NAME__
 
 void printChar(char *filePath) {
-    char *tt = filePath;
-    LOGCATD("%s tt = %s",TAG,tt);
+
+    //字符串拷贝：
+    //方式一
+    /*int len = strlen(filePath) + 1;
+    char *tt = new char[len];
+    memset(tt,0,len);
+    memcpy(tt,filePath,sizeof(char) * len);
+    LOGCATD("%s ------ tt = %s, len = %d",TAG,tt,len);*/
+
+    //方式二
+    char *ss;
+    strcpy(ss,filePath);
+    LOGCATD("%s ss = %s",TAG,ss);
+
 }
 
 extern "C" JNIEXPORT void JNICALL

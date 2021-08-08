@@ -16,10 +16,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         LogUtils.d(TAG,"onCreate");
+        new CTest().testChar();
     }
 
     public void bt_test(View view) {
         LogUtils.d(TAG,"bt_test");
-        new CTest().testChar();
+
     }
 }
