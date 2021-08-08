@@ -15,7 +15,7 @@
 #define MYLOCATD(...) __android_log_print(ANDROID_LOG_DEBUG,TAG,__VA_ARGS__)
 #define MYLOCATE(...) __android_log_print(ANDROID_LOG_ERROR,TAG,__VA_ARGS__)
 
-static void LOGCATD(char* tag, char* msg) {
+static void LOGCATD(char* tag, const char* msg, ...) {
     MYLOCATD("%s: %s", tag, msg);
 }
 
