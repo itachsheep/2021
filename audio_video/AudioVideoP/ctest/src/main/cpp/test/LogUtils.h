@@ -17,12 +17,12 @@ using namespace std;
 
 
 //static void LOGCATD(char* tag, const char* msg) {
-//    MYLOCATD("%s: %s", tag, msg);
+//    LOGCATD("%s: %s", tag, msg);
 //}
 //
 //static void LOGCATD(char* tag, const string msg) {
 //    char *p = (char*)msg.data();
-//    MYLOCATD("%s: %s", tag, p);
+//    LOGCATD("%s: %s", tag, p);
 //}
 
 #endif //AUDIOVIDEOP_LOGUTILS_H

@@ -9,7 +9,7 @@
 extern "C" JNIEXPORT jint JNICALL
 Java_com_tao_ffmpegDecoder_FFmpegDecoder_init(JNIEnv *env, jobject thiz, jstring mp3_file_path,
                                               jstring pcm_file_path) {
-    MYLOCATD("init called");
+    LOGCATD("init called");
 
     AudioPacket audioPacket;
     audioPacket.testPrint();

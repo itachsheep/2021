@@ -51,6 +51,7 @@ file(GLOB src_test
 
 file(GLOB src_ffmpeg_decoder
         ${CMAKE_SOURCE_DIR}/ffmpeg_decoder/*.cpp
+        ffmpeg_decoder/DecoderController.cpp
         )
 
 add_library(${lib1-mp3encoder}

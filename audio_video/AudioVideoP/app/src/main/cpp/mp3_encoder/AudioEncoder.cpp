@@ -11,7 +11,7 @@ Mp3Encoder* encoder = NULL;
 
 extern "C" JNIEXPORT void JNICALL
 Java_com_tao_mp3encoder_Mp3Encoder_encode(JNIEnv *env, jobject thiz) {
-    MYLOCATD("Encode");
+    LOGCATD("Encode");
     if(encoder != NULL) {
         encoder->Encode();
     }
@@ -19,7 +19,7 @@ Java_com_tao_mp3encoder_Mp3Encoder_encode(JNIEnv *env, jobject thiz) {
 
 extern "C" JNIEXPORT void JNICALL
 Java_com_tao_mp3encoder_Mp3Encoder_destroy(JNIEnv *env, jobject thiz) {
-    MYLOCATD("Destroy");
+    LOGCATD("Destroy");
     if(encoder != NULL) {
         encoder->Destroy();
     }
@@ -35,7 +35,7 @@ Java_com_tao_mp3encoder_Mp3Encoder_init(JNIEnv *env, jobject thiz, jstring pcm_p
     int ret = encoder->Init(pcmPath,mp3Path,sample_rate,channels,bit_rate);
     env->ReleaseStringUTFChars(pcm_path,pcmPath);
     env->ReleaseStringUTFChars(mp3_path,mp3Path);
-    MYLOCATD("Mp3Encoder_init ret = %d ", ret);
+    LOGCATD("Mp3Encoder_init ret = %d ", ret);
     return (jint)ret;
 }
 

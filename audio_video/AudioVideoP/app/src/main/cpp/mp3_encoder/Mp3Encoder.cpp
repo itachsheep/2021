@@ -11,7 +11,7 @@ Mp3Encoder::Mp3Encoder() {
 }
 
 Mp3Encoder::~Mp3Encoder() {
-    MYLOCATD("~Mp3Encoder");
+    LOGCATD("~Mp3Encoder");
 }
 
 int Mp3Encoder::Init(const char *pcmFilePath, const char *mp3FilePath,
@@ -23,7 +23,7 @@ int Mp3Encoder::Init(const char *pcmFilePath, const char *mp3FilePath,
 
         mp3File = fopen(mp3FilePath, "wb");
         if (mp3File) {
-            MYLOCATD("Init lame");
+            LOGCATD("Init lame");
             lameClient = lame_init();
 
             lame_set_in_samplerate(lameClient, sampleRate);
@@ -31,10 +31,10 @@ int Mp3Encoder::Init(const char *pcmFilePath, const char *mp3FilePath,
             lame_set_num_channels(lameClient, channels);
             lame_set_brate(lameClient, bitRate);
             lame_init_params(lameClient);
-            //MYLOCATD("Init pcmFile: %s , mp3file:%s",*pcmFile,*mp3File);
+            //LOGCATD("Init pcmFile: %s , mp3file:%s",*pcmFile,*mp3File);
             ret = 0;
         } else {
-            MYLOCATD("Init mp3file not exist ");
+            LOGCATD("Init mp3file not exist ");
         }
 
     }
@@ -42,7 +42,7 @@ int Mp3Encoder::Init(const char *pcmFilePath, const char *mp3FilePath,
 }
 
 void Mp3Encoder::Encode() {
-    MYLOCATD("Encode --->");
+    LOGCATD("Encode --->");
     int bufferSize = 1024 * 256;//256byte?
     short* buffer = new short[bufferSize / 2];
     short* leftBuffer = new short[bufferSize / 4];
@@ -58,14 +58,14 @@ void Mp3Encoder::Encode() {
                 rightBuffer[i / 2] = buffer[i];
             }
         }
-        MYLOCATD("Encode readBufferSize ---> %d", readBufferSize);
+        LOGCATD("Encode readBufferSize ---> %d", readBufferSize);
         //todo:
         int wroteSize = lame_encode_buffer(lameClient,leftBuffer,rightBuffer,
                 readBufferSize / 2,/* number of samples per channel */
                 mp3_buffer,/* pointer to encoded MP3 stream */
                 bufferSize);/* number of valid octets in this stream */
         fwrite(mp3_buffer,1,wroteSize,mp3File);
-        MYLOCATD("Encode wroteSize = %d", wroteSize);
+        LOGCATD("Encode wroteSize = %d", wroteSize);
     }
     delete[] buffer;
     delete[] leftBuffer;
