@@ -153,3 +153,23 @@ bool AudioDecoder::audioCodecIsSupported() {
     LOGCATD("%s audioCodecIsSupported res = %d",TAG,res);
     return res;
 }
+
+AudioPacket * AudioDecoder::decodePacket() {
+    //todo:
+}
+
+void AudioDecoder::destroy() {
+   //todo:
+}
+
+void AudioDecoder::seek_frame() {
+    //todo:
+}
+
+int AudioDecoder::readFrame() {
+    //todo:
+}
+
+int AudioDecoder::readSamples(short *samples, int size) {
+    //todo:
+}

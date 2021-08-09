@@ -21,6 +21,5 @@ public class MainActivity extends AppCompatActivity {
 
     public void bt_test(View view) {
         LogUtils.d(TAG,"bt_test");
-
     }
 }

@@ -15,10 +15,18 @@ DecoderController::~DecoderController() {
 }
 
 void DecoderController::init(const char *audioPath, const char *pcmFilePath) {
+    LOGCATD("%s init ",TAG);
     //初始化两个decoder
     AudioDecoder *tempDecoder = new AudioDecoder();
     int metaData[2];
     tempDecoder->getMusicMeta(audioPath,metaData);
     delete tempDecoder;
+}
 
+void DecoderController::decode() {
+    LOGCATD("%s decode ",TAG);
+}
+
+void DecoderController::destroy() {
+    LOGCATD("%s destroy ",TAG);
 }
