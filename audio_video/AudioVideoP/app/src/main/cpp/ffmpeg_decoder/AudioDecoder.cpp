@@ -156,6 +156,7 @@ bool AudioDecoder::audioCodecIsSupported() {
 
 AudioPacket * AudioDecoder::decodePacket() {
     //todo:
+    return NULL;
 }
 
 void AudioDecoder::destroy() {
@@ -168,8 +169,10 @@ void AudioDecoder::seek_frame() {
 
 int AudioDecoder::readFrame() {
     //todo:
+    return -1;
 }
 
 int AudioDecoder::readSamples(short *samples, int size) {
     //todo:
+    return -1;
 }

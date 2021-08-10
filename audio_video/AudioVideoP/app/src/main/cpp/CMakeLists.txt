@@ -15,6 +15,8 @@ set(jnilibs ${CMAKE_SOURCE_DIR}/../jniLibs)
 
 include_directories(
         ${CMAKE_SOURCE_DIR}/3rdparty/include
+        ${CMAKE_SOURCE_DIR}/3rdparty/include/libavcodec
+        ${CMAKE_SOURCE_DIR}/3rdparty/include/libavdevice
         ${CMAKE_SOURCE_DIR}/utils
         ${CMAKE_SOURCE_DIR}/mp3_encoder
         ${CMAKE_SOURCE_DIR}/ffmpeg_decoder
@@ -91,5 +93,6 @@ target_link_libraries( # Specifies the target library.
 target_link_libraries(
         ${lib3-ffmpeg-decoder}
         ${3rdparty_ffmpeg_decoder}
+        libz
         android
         log)

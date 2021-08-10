@@ -66,7 +66,7 @@ typedef struct AudioPacket {
     }
 
     ~AudioPacket(){
-        LOGCATD(TAG, "~AudioPacket");
+        LOGCATD("%s ~AudioPacket",TAG);
         if(NULL != buffer) {
             delete [] buffer;
             buffer = NULL;
@@ -75,7 +75,7 @@ typedef struct AudioPacket {
 
 public:
     void testPrint() {
-        LOGCATD(TAG, "this for test 333");
+        LOGCATD("%s this for test 333",TAG);
     }
 
 } AudioPacket;
