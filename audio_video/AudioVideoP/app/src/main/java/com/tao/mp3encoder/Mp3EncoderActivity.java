@@ -37,7 +37,7 @@ public class Mp3EncoderActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mp3encoder);
-
+        //nothing todo
     }
 
     public void bt_mp3encoder(View view) {
