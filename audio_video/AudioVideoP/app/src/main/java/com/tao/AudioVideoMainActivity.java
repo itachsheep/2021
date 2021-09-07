@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.tao.audiovideop.R;
 import com.tao.ffmpegDecoder.FFmpegDecoderActivity;
 import com.tao.mp3encoder.Mp3EncoderActivity;
+import com.tao.practice.PracticeActivity;
 import com.tao.utils.LogUtils;
 
 public class AudioVideoMainActivity extends AppCompatActivity {
@@ -58,6 +59,10 @@ public class AudioVideoMainActivity extends AppCompatActivity {
 
     public void bt_enter_ffmpeg_decoder(View view) {
         startActivity(new Intent(this, FFmpegDecoderActivity.class));
+    }
+
+    public void bt_enter_practice(View view) {
+        startActivity(new Intent(this, PracticeActivity.class));
     }
 
     public boolean checkPermission(String[] permissions) {

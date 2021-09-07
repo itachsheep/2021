@@ -27,4 +27,11 @@
         android:textAllCaps="false"
         android:text="进入mp3编码"/>
 
+    <Button
+        android:onClick="bt_enter_practice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="c 练习"/>
+
 </LinearLayout>
