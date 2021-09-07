@@ -9,8 +9,11 @@
 package com.tao.practice;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,12 +22,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tao.assist.MyAdapter;
+import com.tao.assist.OnItemClickListener;
 import com.tao.audiovideop.R;
+import com.tao.utils.LogUtils;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
 public class PracticeActivity extends AppCompatActivity {
+    private static final String TAG = "PracticeActivity";
     RecyclerView recyclerView;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +51,14 @@ public class PracticeActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         MyAdapter myAdapter = new MyAdapter(getBaseContext(),list);
+        myAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NotNull View view, int position) {
+                LogUtils.d(TAG,"onItemClick pos: " + position);
+                Toast.makeText(PracticeActivity.this,"hello " + position,
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
         recyclerView.setAdapter(myAdapter);
 
     }

@@ -17,15 +17,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tao.audiovideop.R;
+import com.tao.utils.LogUtils;
 
 import java.util.List;
 
 public class MyAdapter<T> extends RecyclerView.Adapter<MyViewHolder> {
+    private static final String TAG = "MyAdapter";
     List<T> mList;
     Context mContext;
+    OnItemClickListener onItemClickListener;
     public MyAdapter(Context context, List<T> list) {
         this.mList = list;
         this.mContext = context;
+        LogUtils.d(TAG,"MyAdapter##");
+
     }
 
     @NonNull
@@ -40,6 +45,15 @@ public class MyAdapter<T> extends RecyclerView.Adapter<MyViewHolder> {
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         T t = mList.get(position);
         holder.button.setText((String)t);
+        holder.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LogUtils.d(TAG,"onClick pos: " + position);
+                if(onItemClickListener != null) {
+                    onItemClickListener.onItemClick(holder.itemView,position);
+                }
+            }
+        });
     }
 
     @Override
@@ -47,5 +61,8 @@ public class MyAdapter<T> extends RecyclerView.Adapter<MyViewHolder> {
         return mList.size();
     }
 
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.onItemClickListener = listener;
+    }
 
 }
