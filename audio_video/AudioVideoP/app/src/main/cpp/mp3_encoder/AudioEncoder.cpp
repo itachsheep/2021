@@ -40,5 +40,3 @@ Java_com_tao_mp3encoder_Mp3Encoder_init(JNIEnv *env, jobject thiz, jstring pcm_p
 }
 
 
-
-

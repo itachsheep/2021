@@ -44,7 +44,7 @@ public class PracticeActivity extends AppCompatActivity {
 
     private void initView() {
         ArrayList<String> list = new ArrayList<>();
-        list.add("测试1");
+        list.add("simdjson-test");
         list.add("测试2");
         list.add("测试3");
         list.add("测试4");
@@ -55,13 +55,20 @@ public class PracticeActivity extends AppCompatActivity {
             @Override
             public void onItemClick(@NotNull View view, int position) {
                 LogUtils.d(TAG,"onItemClick pos: " + position);
-                Toast.makeText(PracticeActivity.this,"hello " + position,
-                        Toast.LENGTH_SHORT).show();
+                /*Toast.makeText(PracticeActivity.this,"hello " + position,
+                        Toast.LENGTH_SHORT).show();*/
+                dealItemClick(position);
             }
         });
         recyclerView.setAdapter(myAdapter);
 
     }
 
+    private void dealItemClick(int position) {
+        switch (position) {
+            case 0:
+                break;
+        }
+    }
 
 }
