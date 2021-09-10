@@ -18,7 +18,7 @@ include_directories(
         ${CMAKE_SOURCE_DIR}/utils
 #        ${CMAKE_SOURCE_DIR}/mp3_encoder
         ${CMAKE_SOURCE_DIR}/ffmpeg_decoder
-#        ${CMAKE_SOURCE_DIR}/test/simdjson
+        ${CMAKE_SOURCE_DIR}/test/simdjson
 )
 
 ## 增加外部依赖链接库
@@ -51,8 +51,8 @@ file(GLOB src_mp3_encoder
 
 file(GLOB src_test
         ${CMAKE_SOURCE_DIR}/test/*.cpp
-#        ${CMAKE_SOURCE_DIR}/simdjson/simdjson.cpp
-#        ${CMAKE_SOURCE_DIR}/simdjson/testSimdJson.cpp
+        ${CMAKE_SOURCE_DIR}/test/simdjson/simdjson.cpp
+        ${CMAKE_SOURCE_DIR}/test/simdjson/testSimdJson.cpp
         )
 
 #file(GLOB src_ffmpeg_decoder

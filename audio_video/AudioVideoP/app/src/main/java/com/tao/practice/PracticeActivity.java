@@ -9,6 +9,7 @@
 package com.tao.practice;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,8 +68,18 @@ public class PracticeActivity extends AppCompatActivity {
     private void dealItemClick(int position) {
         switch (position) {
             case 0:
+                testSimdJson();
                 break;
         }
     }
 
+    private static final String JSON_PATH = "/111/twitter.json";
+    private void testSimdJson() {
+        LogUtils.d(TAG,"testSimdJson");
+        String jsonPath = Environment.getExternalStorageDirectory().getAbsolutePath()
+                + JSON_PATH;
+        //String jsonPath = "/storage/self/primary/111/twitter.json";
+        SimdJson simdJson = new SimdJson();
+        simdJson.testSimdJson(jsonPath);
+    }
 }

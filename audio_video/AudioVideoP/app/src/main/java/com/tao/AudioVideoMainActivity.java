@@ -25,6 +25,7 @@ public class AudioVideoMainActivity extends AppCompatActivity {
 
     private static String[] request_permission = {
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE
     };
 
 

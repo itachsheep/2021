@@ -9,5 +9,5 @@
 package com.tao.practice;
 
 public class SimdJson {
-    native void testSimdJson();
+    native void testSimdJson(String filePath);
 }
