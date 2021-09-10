@@ -75,7 +75,6 @@ class _8_zigzag_Level_Order_traverse {
                 if (curNode.right != null) {
                     nodeQueue.offer(curNode.right);
                 }
-
             }
 
             ans.add(new LinkedList<Integer>(levelList));
