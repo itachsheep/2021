@@ -17,32 +17,21 @@ include_directories(
         ${CMAKE_SOURCE_DIR}/3rdparty/include
         ${CMAKE_SOURCE_DIR}/utils
 #        ${CMAKE_SOURCE_DIR}/mp3_encoder
-        ${CMAKE_SOURCE_DIR}/ffmpeg_decoder
-        ${CMAKE_SOURCE_DIR}/test/simdjson
+#        ${CMAKE_SOURCE_DIR}/ffmpeg_decoder
+#        ${CMAKE_SOURCE_DIR}/test/simdjson
+        ${CMAKE_SOURCE_DIR}/test/demo
+
 )
 
 ## 增加外部依赖链接库
 link_directories(
 #    ${jnilibs}/${CMAKE_ANDROID_ARCH_ABI}
-    ${jnilibs}/armeabi-v7a
+#    ${jnilibs}/armeabi-v7a
 #    ${jnilibs}/arm64-v8a
 )
 
 set(3rdparty_mp3lame
         mp3lame)
-
-#set(3rdparty_ffmpeg_decoder
-#        avcodec
-#        avfilter
-#        avformat
-#        avutil
-#        fdk-aac
-#        postproc
-#        swresample
-#        swscale
-#        vo-aacenc
-#        z
-#        x264)
 
 
 file(GLOB src_mp3_encoder
@@ -51,13 +40,14 @@ file(GLOB src_mp3_encoder
 
 file(GLOB src_test
         ${CMAKE_SOURCE_DIR}/test/*.cpp
-        ${CMAKE_SOURCE_DIR}/test/simdjson/simdjson.cpp
-        ${CMAKE_SOURCE_DIR}/test/simdjson/testSimdJson.cpp
+        ${CMAKE_SOURCE_DIR}/test/demo/*.cpp
+        ${CMAKE_SOURCE_DIR}/test/demo/MyGrammar.cpp
+        ${CMAKE_SOURCE_DIR}/test/demo/JniGrammar.cpp
+#        ${CMAKE_SOURCE_DIR}/test/simdjson/simdjson.cpp
+#        ${CMAKE_SOURCE_DIR}/test/simdjson/testSimdJson.cpp
+
         )
 
-#file(GLOB src_ffmpeg_decoder
-#        ${CMAKE_SOURCE_DIR}/ffmpeg_decoder/*.cpp
-#        )
 
 #add_library(${lib1-mp3encoder}
 #            SHARED
@@ -72,9 +62,6 @@ add_library( # Sets the name of the library.
              # Provides a relative path to your source file(s).
             ${src_test})
 
-#add_library(${lib3-ffmpeg-decoder}
-#        SHARED
-#        ${src_ffmpeg_decoder})
 
 
 
@@ -90,11 +77,5 @@ target_link_libraries( # Specifies the target library.
 #target_link_libraries( # Specifies the target library.
 #        ${lib1-mp3encoder}
 #        ${3rdparty_mp3lame}
-#        android
-#        log)
-
-#target_link_libraries(
-#        ${lib3-ffmpeg-decoder}
-##        ${3rdparty_ffmpeg_decoder}
 #        android
 #        log)

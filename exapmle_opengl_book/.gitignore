@@ -1,6 +1,0 @@
-build/*
-!build/templates
-bin/*
-!bin/media/
-*.lib
-my_build/

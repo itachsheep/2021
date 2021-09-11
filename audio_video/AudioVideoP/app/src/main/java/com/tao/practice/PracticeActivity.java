@@ -46,7 +46,7 @@ public class PracticeActivity extends AppCompatActivity {
     private void initView() {
         ArrayList<String> list = new ArrayList<>();
         list.add("simdjson-test");
-        list.add("测试2");
+        list.add("NewMalloc-test");
         list.add("测试3");
         list.add("测试4");
 
@@ -69,6 +69,9 @@ public class PracticeActivity extends AppCompatActivity {
         switch (position) {
             case 0:
                 testSimdJson();
+                break;
+            case 1:
+                new Grammar().testNewMalloc();
                 break;
         }
     }
