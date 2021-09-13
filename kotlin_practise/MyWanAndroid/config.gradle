@@ -19,4 +19,6 @@ ext {
     compilers = [
             'haolibrary': "com.github.haoshiy.android:library-compiler:$versions.haolibrary",
     ]
+
+    compilerDependencies = compilers.values()
 }
