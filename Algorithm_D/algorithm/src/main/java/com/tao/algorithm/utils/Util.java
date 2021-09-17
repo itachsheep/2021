@@ -181,5 +181,26 @@ public class Util<T> {
         }
     }
 
+    public static TreeNode createTree(int[] nums,int index,TreeNode root) {
+        if(nums.length == 0) {
+            return null;
+        }
 
+        if(index >= nums.length) {
+            return null;
+        }
+
+        if(nums[index] > 0) {
+            root = new TreeNode(nums[index]);
+        } else {
+            return null;
+        }
+
+
+        TreeNode left = createTree(nums, index * 2 + 1,root.left);
+        root.left = left;
+        TreeNode right = createTree(nums, index * 2 + 2,root.right);
+        root.right = right;
+        return root;
+    }
 }
