@@ -69,5 +69,6 @@ class _10_binary_tree_right_slide_view {
         for (int depth = 0; depth <= maxDepth; depth++) {
             rightView.add(rightMostValueAtDepth.get(depth));
         }
+        return rightView;
     }
 }
