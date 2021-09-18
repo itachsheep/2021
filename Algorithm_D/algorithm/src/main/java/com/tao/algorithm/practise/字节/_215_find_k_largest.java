@@ -11,10 +11,11 @@ package com.tao.algorithm.practise.字节;
 import com.tao.algorithm.utils.TreeNode;
 import com.tao.algorithm.utils.Util;
 
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
-
 
 /**
+ *
+ * 215. 数组中的第K个最大元素
+ *
  * 给定整数数组 nums 和整数 k，请返回数组中第 k 个最大的元素。
  *
  * 请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。
@@ -30,17 +31,20 @@ import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
  */
 class _215_find_k_largest {
     public static void main(String[] args) {
-        int[] nums = new int[] {1,2,3,4,5,6,7,8,9};
-        TreeNode root = Util.createTree(nums,0,null);
-        Util.printTree(root);
-        buildMaxHeap(nums,9);
-        System.out.println(" --------------------------------------------- ");
-        TreeNode heap = Util.createTree(nums,0,null);
-        Util.printTree(heap);
+        System.out.println(findKthLargest(new int[]{3,2,1,5,6,4},2));
+        System.out.println(findKthLargest(new int[]{3,2,3,1,2,4,5,5,6},4));
+
     }
 
     public static int findKthLargest(int[] nums, int k) {
-        return 0;
+        int heapSize = nums.length;
+        buildMaxHeap(nums,heapSize);
+        for (int i = nums.length -1 ; i >= nums.length - k + 1; --i) {
+            swap(nums,0,i);
+            --heapSize;
+            maxHeapify(nums,0,heapSize);
+        }
+        return nums[0];
     }
 
     public static void buildMaxHeap(int[] a,int heapSize) {
