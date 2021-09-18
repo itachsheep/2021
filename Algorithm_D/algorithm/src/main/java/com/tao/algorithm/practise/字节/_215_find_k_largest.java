@@ -28,6 +28,10 @@ import com.tao.algorithm.utils.Util;
  *
  * 输入: [3,2,3,1,2,4,5,5,6] 和 k = 4
  * 输出: 4
+ *
+ * 时间复杂度：O(nlog n)，建堆的时间代价是 O(n)，删除的总代价是 O(klog n)，
+ * 空间复杂度：O(log n)，即递归使用栈空间的空间代价。
+ *
  */
 class _215_find_k_largest {
     public static void main(String[] args) {
