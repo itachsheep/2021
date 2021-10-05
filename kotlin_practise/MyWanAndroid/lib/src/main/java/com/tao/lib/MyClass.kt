@@ -1,9 +1,65 @@
 package com.tao.lib
 
-import com.sun.istack.internal.localization.NullLocalizable
-
 fun main(args: Array<String>) {
-    testCreateClass()
+    testReturn()
+}
+
+fun testReturn() {
+    abc@ for (i in 1..100) {
+        if(i == 6) continue@abc
+        if(i == 10) break@abc
+        print("$i ,")
+    }
+    println()
+
+
+    listOf<Int>(1,2,3,4,5,6,7,8).forEach {
+        if(it == 5) return@forEach
+        print("$it ,")
+    }
+    println()
+    println("this is not reachable")
+}
+
+fun testChar() {
+    for (c in "lsdjfuosdfl") {
+        print("$c ,")
+    }
+}
+
+/**
+ * 数组用array表示
+ */
+fun testArray() {
+   //val array = Array<Int>(5) { i -> i * i}
+   val arr = IntArray(5){ 23 }
+    arr.forEach { print("$it , ") }
+}
+
+fun testShL() {
+    println((1 shl 2))
+    println(8 shr 2)
+    println(7 and 4)
+}
+
+fun testBox() {
+    val a: Int = 128
+    val boxedA: Int? = a
+    val anotherBoxedA: Int? = a
+
+    val b: Int = 100
+    val boxedB: Int? = b
+    val anotherBoxedB: Int? = b
+
+    println(boxedA === anotherBoxedA) // true
+    println(boxedB === anotherBoxedB) //false
+}
+
+
+fun testFilter() {
+    val list = listOf<Int>(32, -12,34,-4,3,-32,9,0,88,-91)
+    val positives = list.filter { it > 0 }
+    positives.forEach { print("$it ,") }
 }
 
 fun testCreateClass() {
