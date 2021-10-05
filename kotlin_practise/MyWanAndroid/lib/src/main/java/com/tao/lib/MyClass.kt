@@ -1,7 +1,76 @@
 package com.tao.lib
 
+/*
+** 提示报错
+**
+fun interface IntPredicate {
+    fun accept(i: Int): Boolean
+}
+
+val isEven = IntPredicate { it % 2 == 0 }
+*/
+
+
+
 fun main(args: Array<String>) {
-    testReturn()
+    println(testAnonymousObj().x)
+}
+
+private fun testAnonymousObj() = object {
+    val x = 100
+}
+
+fun testAnonymousObject() {
+    val anonymousObj = object {
+        var x = 0
+        var y: Int = 0
+    }
+    println("${anonymousObj.x} , ${anonymousObj.y}")
+}
+
+fun <T> MutableList<T>.swap(index1: Int, index2: Int) {
+    val tmp = this[index1] // “this”对应该列表
+    this[index1] = this[index2]
+    this[index2] = tmp
+}
+
+
+fun testCompanion() {
+    val instance = MyClsCompanion.create()
+    instance.test()
+
+}
+
+fun testExtraFunction() {
+    val list = mutableListOf<Int>(1, 2, 3)
+    list.forEach { print("$it ,") }
+    list.swap(0,2)
+    println()
+    list.forEach { print("$it ,") }
+}
+
+/**
+ * 先执行Base构造，
+ * 再执行自己的构造
+ */
+fun testConstructorSeqExeute() {
+    Derived("hello","world")
+}
+
+fun testOpenVal() {
+    val rectangle = Rectangle(5.0, 2.0)
+    val triangle = Triangle(1.0,2.0,3.0)
+    println("${rectangle.vertexCount}")
+    println("${triangle.vertexCount}")
+}
+
+fun testConstructor() {
+    //InOrderDemo("hello");
+    val father = Person("father")
+
+    println("------------------------")
+    Person("son",father)
+
 }
 
 fun testReturn() {
