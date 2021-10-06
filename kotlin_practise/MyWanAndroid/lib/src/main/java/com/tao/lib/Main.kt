@@ -11,10 +11,25 @@ val isEven = IntPredicate { it % 2 == 0 }
 */
 
 
-
 fun main(args: Array<String>) {
-    println(testAnonymousObj().x)
+    testWeiTuoMode()
 }
+
+fun testWeiTuoMode() {
+    val b = BasePrintImpl(10)
+    DerivedPrint(b).print()
+}
+
+fun testTypedef() {
+    val f: (Int) -> Boolean = { it > 0 }
+    println(foo(f)) // 输出 "true"
+}
+
+typealias Predicate<T> = (T) -> Boolean
+
+fun foo(p: Predicate<Int>) = p(42)
+
+
 
 private fun testAnonymousObj() = object {
     val x = 100
