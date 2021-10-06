@@ -1,7 +1,73 @@
 package com.tao.lib
 
 import kotlinx.coroutines.*
+import java.lang.ArithmeticException
+import java.lang.Exception
 import kotlin.concurrent.thread
+import kotlin.system.measureTimeMillis
+
+fun testFailedException() {
+    runBlocking {
+        try {
+            println("(${Thread.currentThread().name}): runBlocking")
+            failedConcurrentSum()
+        } catch (e: Exception) {
+            println("exception: " + e.message)
+        }
+    }
+}
+
+suspend fun failedConcurrentSum(): Int {
+    return coroutineScope {
+        val one = async<Int> {
+            delay(1000L)
+            println("(${Thread.currentThread().name}): one")
+            42
+        }
+
+        val two = async<Int> {
+            println("(${Thread.currentThread().name}): two")
+            delay(1200L)
+            throw ArithmeticException("illegal parameter")
+        }
+        return@coroutineScope (one.await() + two.await())
+    }
+}
+
+suspend fun doSomething1(): Int {
+    println("(${Thread.currentThread().name}): doSomething1")
+    delay(1000L)
+    return 22
+}
+
+suspend fun doSomething2(): Int {
+    println("(${Thread.currentThread().name}): doSomething2 ")
+    delay(1000L)
+    return 33
+}
+
+fun somethingAsync1(): Deferred<Int> {
+    return GlobalScope.async { doSomething1() }
+}
+
+fun somethingAsync2(): Deferred<Int> {
+    return GlobalScope.async { doSomething2() }
+}
+
+fun testMeasureTime() {
+    // 我们可以在协程外面启动异步执行
+    val time = measureTimeMillis {
+        val one = somethingAsync1()
+        val two = somethingAsync2()
+        // 但是等待结果必须调用其它的挂起或者阻塞
+        // 当我们等待结果的时候，这里我们使用 `runBlocking { …… }` 来阻塞主线程
+        runBlocking {
+            println("answer = ${one.await() + two.await()}")
+        }
+    }
+    println("cost time = $time")
+
+}
 
 fun testWithTimeOut() {
     runBlocking {
