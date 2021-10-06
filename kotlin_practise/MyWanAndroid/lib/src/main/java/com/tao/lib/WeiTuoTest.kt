@@ -10,4 +10,8 @@ class BasePrintImpl(val x: Int ) : BasePrint {
     }
 }
 
-class DerivedPrint(b: BasePrint) : BasePrint by b
+class DerivedPrint(b: BasePrint) : BasePrint by b {
+    override fun print() {
+        println("abc")
+    }
+}

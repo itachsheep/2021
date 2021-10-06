@@ -12,7 +12,15 @@ val isEven = IntPredicate { it % 2 == 0 }
 
 
 fun main(args: Array<String>) {
-    testWeiTuoMode()
+    testBlock()
+}
+
+fun testVarArg() {
+    val arr = arrayOf(-1, -20, -100)
+    val asList = asList(1, 2, 3, 4, 5, *arr, 6, 7, 7, 88, 10)
+    for (i in asList) {
+        print("$i ,")
+    }
 }
 
 fun testWeiTuoMode() {
