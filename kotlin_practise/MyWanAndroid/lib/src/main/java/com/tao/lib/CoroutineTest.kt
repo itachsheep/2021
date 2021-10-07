@@ -6,6 +6,54 @@ import java.lang.Exception
 import kotlin.concurrent.thread
 import kotlin.system.measureTimeMillis
 
+fun log(msg: String) = println("[${Thread.currentThread().name}] $msg")
+
+fun testSwitchCtxOnThread() {
+    newSingleThreadContext("Thread1").use { thread1 ->
+        newSingleThreadContext("Thread2").use { thread2 ->
+            runBlocking(thread1) {
+                log("run in thread1")
+                withContext(thread2) {
+                    log("run in thread2")
+                }
+                log("back to thread1")
+            }
+        }
+    }
+}
+
+fun testLog() {
+    log("test log begin")
+    runBlocking {
+        val a = async {
+            log("I'm computing a piece of the answer")
+            6
+        }
+        val b = async {
+            log("I'm computing another piece of the answer")
+            7
+        }
+        log("The answer is ${a.await() * b.await()}")
+    }
+}
+
+fun testLaunch() {
+    runBlocking {
+        launch { // 运行在父协程的上下文中，即 runBlocking 主协程
+            println("main runBlocking      : I'm working in thread ${Thread.currentThread().name}")
+        }
+        launch(Dispatchers.Unconfined) { // 不受限的——将工作在主线程中
+            println("Unconfined            : I'm working in thread ${Thread.currentThread().name}")
+        }
+        launch(Dispatchers.Default) { // 将会获取默认调度器
+            println("Default               : I'm working in thread ${Thread.currentThread().name}")
+        }
+        launch(newSingleThreadContext("MyOwnThread")) { // 将使它获得一个新的线程
+            println("newSingleThreadContext: I'm working in thread ${Thread.currentThread().name}")
+        }
+    }
+}
+
 fun testFailedException() {
     runBlocking {
         try {

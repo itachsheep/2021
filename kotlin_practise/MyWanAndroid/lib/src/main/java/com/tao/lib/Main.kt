@@ -12,7 +12,7 @@ val isEven = IntPredicate { it % 2 == 0 }
 
 
 fun main(args: Array<String>) {
-    testMeasureTime()
+    testSwitchCtxOnThread()
 }
 
 fun testVarArg() {
