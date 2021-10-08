@@ -1,5 +1,8 @@
 package com.tao.lib
 
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
+
 /*
 ** 提示报错
 **
@@ -12,7 +15,16 @@ val isEven = IntPredicate { it % 2 == 0 }
 
 
 fun main(args: Array<String>) {
-    testFatherCoroutine()
+    testTransform()
+}
+
+fun testActivity() {
+    val activity = Activity()
+    runBlocking {
+        activity.onCreate()
+        delay(500L)
+        activity.onDestroy()
+    }
 }
 
 fun testVarArg() {

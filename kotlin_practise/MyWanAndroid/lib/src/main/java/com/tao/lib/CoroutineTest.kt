@@ -6,6 +6,33 @@ import java.lang.Exception
 import kotlin.concurrent.thread
 import kotlin.system.measureTimeMillis
 
+fun testCombineName() {
+    runBlocking {
+        launch (Dispatchers.Default + CoroutineName("Haha")){
+            log(" start")
+        }
+    }
+}
+
+fun testCoroutineName() {
+    runBlocking(CoroutineName("Blocking")) {
+        log("runBlocking start")
+        val res1 = async(CoroutineName("Calculate")){
+            log("res1 start")
+            delay(500L)
+            100
+        }
+
+        val res2 = async (CoroutineName("Sum")) {
+            log("res2 start")
+            delay(400L)
+            200
+        }
+
+        log("sum = ${res1.await() + res2.await()}")
+    }
+}
+
 fun testFatherCoroutine() {
     runBlocking {
         log("runBlocking start")
