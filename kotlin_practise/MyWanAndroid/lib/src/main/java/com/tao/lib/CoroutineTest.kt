@@ -6,7 +6,57 @@ import java.lang.Exception
 import kotlin.concurrent.thread
 import kotlin.system.measureTimeMillis
 
+fun testFatherCoroutine() {
+    runBlocking {
+        log("runBlocking start")
+        val request = launch {
+            log(" this is request")
+            repeat(3) { i ->
+                launch {
+                    delay((i + 1) * 100L)
+                    log("coroutine $i is done")
+                }
+            }
+            log(" request is done")
+        }
+        request.join()
+        log("runBlocking is done")
+    }
+}
+
+fun testSubCoroutine() {
+    runBlocking {
+        log("runBlocking start")
+        val request = launch {
+            log(" this is request ")
+            GlobalScope.launch {
+                log("job1: run in GlobalScope")
+                delay(1000)
+                log("job1: i wont affect by cancel")
+            }
+
+            launch {
+                delay(100L)
+                log("job2: i am child of the request coroutine")
+                delay(1000L)
+                log("job2: i will affect by cancel !!")
+            }
+        }
+
+        delay(500L)
+        request.cancelAndJoin()
+        delay(1200L)
+        log("runBlocking end")
+    }
+}
+
 fun log(msg: String) = println("[${Thread.currentThread().name}] $msg")
+
+fun testPrintJob() {
+    runBlocking {
+        println("job is : ${coroutineContext[Job]} , job: $Job")
+    }
+}
 
 fun testSwitchCtxOnThread() {
     newSingleThreadContext("Thread1").use { thread1 ->
