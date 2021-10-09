@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         if (!isModule) {
-            applicationId "com.hao.easy.wan"
+            applicationId "com.tao.module_wan"
         }
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk

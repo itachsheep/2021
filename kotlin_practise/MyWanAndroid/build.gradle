@@ -2,10 +2,10 @@
 buildscript {
     apply from: "config.gradle"
     ext {
-        versions.kotlin = '1.4.32'
+        versions.kotlin = '1.4.21'
     }
 //    ext.kotlin_version = "1.3.72"
-    ext.kotlin_version = "1.4.21"
+//    ext.kotlin_version = "1.4.21"
 //    ext.kotlin_version = "1.5.30"
     repositories {
         maven { url 'https://maven.aliyun.com/repository/google' }
