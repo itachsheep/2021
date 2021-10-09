@@ -18,4 +18,8 @@ class Activity {
     fun onDestroy() {
         coroutineScope.cancel()
     }
+
+    override fun hashCode(): Int {
+        return super.hashCode()
+    }
 }
