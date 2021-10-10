@@ -15,7 +15,7 @@ val isEven = IntPredicate { it % 2 == 0 }
 
 
 fun main(args: Array<String>) {
-    testSelect()
+    testApply()
 }
 
 fun testActivity() {
