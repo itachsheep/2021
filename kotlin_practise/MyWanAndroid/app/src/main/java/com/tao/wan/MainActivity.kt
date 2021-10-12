@@ -8,6 +8,7 @@ import com.hao.library.ui.BaseActivity
 import com.hao.library.ui.FragmentCreator
 import com.hao.library.view.dialog.ConfirmDialog
 import com.hao.library.view.dialog.ConfirmDialogListener
+import com.tao.module_base.LogUtils
 import com.tao.module_user.fragment.UserFragment
 import com.tao.module_wan.fragment.ProjectFragment
 import com.tao.module_wan.fragment.WechatFragment
@@ -20,6 +21,7 @@ class MainActivity : BaseActivity<AppActivityMainBinding, UpgradeViewModel>() {
     override fun initData() {
         viewModel {
             lifecycle.addObserver(this)
+            LogUtils.d("initData viewModel")
             upgradeLiveData.observe(this@MainActivity) {
                 showUpgradeDialog(it)
             }
@@ -27,6 +29,7 @@ class MainActivity : BaseActivity<AppActivityMainBinding, UpgradeViewModel>() {
     }
 
     private fun showUpgradeDialog(upgradeInfo: UpgradeInfo) {
+        LogUtils.d("showUpgradeDialog")
         val message = "版本：${upgradeInfo.versionName}\n\n更新说明：\n${upgradeInfo.newFeature}"
         ConfirmDialog.Builder(this@MainActivity)
                 .setTitle("发现新版本")
@@ -38,12 +41,14 @@ class MainActivity : BaseActivity<AppActivityMainBinding, UpgradeViewModel>() {
                     override fun confirm() {
                         viewModel {
                             //startDownload()
+                            LogUtils.d("ConfirmDialogListener confirm")
                         }
                     }
 
                     override fun cancel() {
                         viewModel {
                             //cancelDownload()
+                            LogUtils.d("ConfirmDialogListener cancel")
                         }
                     }
 
