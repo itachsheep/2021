@@ -11,4 +11,8 @@ data class User(
         var icon: String?,
         var email: String?,
         var extension: String?
-)
+) {
+    override fun toString(): String {
+        return "User(id=$id, userName='$userName', token='$token', icon=$icon, email=$email)"
+    }
+}

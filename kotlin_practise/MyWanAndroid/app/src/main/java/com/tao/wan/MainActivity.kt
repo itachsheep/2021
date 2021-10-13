@@ -1,6 +1,8 @@
 package com.tao.wan
 
+import android.content.Intent
 import android.view.Gravity
+import android.view.View
 import androidx.fragment.app.Fragment
 import com.hao.library.adapter.FragmentAdapter
 import com.hao.library.annotation.AndroidEntryPoint
@@ -103,6 +105,11 @@ class MainActivity : BaseActivity<AppActivityMainBinding, UpgradeViewModel>() {
 
             true
         }
+    }
+
+    fun on_api_test(view: View) {
+        LogUtils.d("on_api_test")
+        startActivity(Intent(baseContext,ApiTestActivity::class.java))
     }
 }
 

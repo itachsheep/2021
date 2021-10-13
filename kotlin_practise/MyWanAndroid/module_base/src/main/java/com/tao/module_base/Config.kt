@@ -22,19 +22,19 @@ object Config {
     fun init() {
         var username: String ?= null
         var token: String ?=  null
-        HttpManager.COOKIE_CACHE.forEach { it ->
-            if(it.name == KEY_USERNAME) {
-                val value = it.value
-                if ("\"\"" != value) {
-                    username = value
-                } else if (it.name == KEY_TOKEN) {
-                    val value = it.value
-                    if ("\"\"" != value) {
-                        token = value
-                    }
-                }
-            }
-        }
+//        HttpManager.COOKIE_CACHE.forEach { it ->
+//            if(it.name == KEY_USERNAME) {
+//                val value = it.value
+//                if ("\"\"" != value) {
+//                    username = value
+//                } else if (it.name == KEY_TOKEN) {
+//                    val value = it.value
+//                    if ("\"\"" != value) {
+//                        token = value
+//                    }
+//                }
+//            }
+//        }
 
         if (null != username && null != token) {
             val user = UserDb.instance().userDao().query(username!!)
