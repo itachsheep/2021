@@ -62,7 +62,7 @@ class ApiTestActivity : AppCompatActivity() {
 
     fun runOnSingleThread(run: () -> Unit): Unit {
         CoroutineUtils.io {
-            LogUtils.d("runOnSingleThread##")
+            LogUtils.d("runOnSingleThread##22")
             run()
         }
         /*runBlocking {
