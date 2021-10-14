@@ -19,7 +19,7 @@ android {
         multiDexKeepProguard file("multiDexKeep.pro")
 
         ndk {
-            abiFilters 'armeabi'
+            abiFilters 'armeabi','x86'
         }
     }
 

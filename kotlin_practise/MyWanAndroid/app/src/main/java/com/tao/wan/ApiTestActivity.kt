@@ -11,6 +11,7 @@ package com.tao.wan
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.hao.library.utils.CoroutineUtils
 import com.tao.module_base.LogUtils
 import com.tao.module_base.user.User
 import com.tao.module_base.user.UserDb
@@ -60,12 +61,16 @@ class ApiTestActivity : AppCompatActivity() {
     }
 
     fun runOnSingleThread(run: () -> Unit): Unit {
-        runBlocking {
+        CoroutineUtils.io {
+            LogUtils.d("runOnSingleThread##")
+            run()
+        }
+        /*runBlocking {
             launch (Dispatchers.Default) {
                 LogUtils.d("runOnSingleThread")
                 run()
             }
-        }
+        }*/
     }
 
 }
