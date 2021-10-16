@@ -12,6 +12,7 @@ import com.hao.library.ui.UIParams
 import com.hao.library.view.dialog.ConfirmDialog
 import com.hao.library.view.dialog.ConfirmDialogListener
 import com.tao.module_base.LogUtils
+import com.tao.module_base.callback.ActivityCallback
 import com.tao.module_user.fragment.UserFragment
 import com.tao.module_wan.fragment.ProjectFragment
 import com.tao.module_wan.fragment.WechatFragment
@@ -20,7 +21,8 @@ import com.tao.wan.databinding.AppActivityMainBinding
 import com.tencent.bugly.beta.UpgradeInfo
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity<AppActivityMainBinding, UpgradeViewModel>() {
+class MainActivity : BaseActivity<AppActivityMainBinding, UpgradeViewModel>(),
+        ActivityCallback{
 
     override fun prepare(uiParams: UIParams, intent: Intent?) {
         uiParams.isTransparentStatusBar = true
@@ -68,6 +70,7 @@ class MainActivity : BaseActivity<AppActivityMainBinding, UpgradeViewModel>() {
                 object : FragmentCreator {
                     override fun createFragment(): Fragment {
                         val fragment = WechatFragment()
+                        fragment.setActivityCallback(this@MainActivity)
                         return fragment
                     }
                 },
@@ -116,6 +119,12 @@ class MainActivity : BaseActivity<AppActivityMainBinding, UpgradeViewModel>() {
     fun on_api_test(view: View) {
         LogUtils.d("on_api_test")
         startActivity(Intent(baseContext,ApiTestActivity::class.java))
+    }
+
+    override fun openDraw() {
+        viewBinding {
+            drawerLayout.open()
+        }
     }
 }
 
