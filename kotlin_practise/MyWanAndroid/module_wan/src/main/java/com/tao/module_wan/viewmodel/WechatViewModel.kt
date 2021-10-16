@@ -12,9 +12,10 @@ class WechatViewModel: AuthorViewModel() {
     fun initData() {
         Api.getAd().subscribeBy({
             if(it != null) {
-                LogUtils.d("getAd size: ${it.size}" )
+//                LogUtils.d("getAd size: ${it.size}" )
                 adLiveData.value = it
             }
         }).add()
+        getAuthors()
     }
 }

@@ -24,7 +24,7 @@ class BannerAdapter : BaseNormalAdapter<WanWechatBannerItemBinding, Ad>() {
             position: Int,
             payloads: MutableList<Any>) {
         viewHolder.viewBinding {
-            LogUtils.d("load url: ${item.imagePath}")
+//            LogUtils.d("load url: ${item.imagePath}")
             root.load(item.imagePath)
         }
 

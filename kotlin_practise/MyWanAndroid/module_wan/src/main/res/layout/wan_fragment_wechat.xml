@@ -112,7 +112,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp">
-                    <TableLayout
+                    <com.google.android.material.tabs.TabLayout
                         android:id="@+id/tabLayout"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -135,6 +135,12 @@
             </com.google.android.material.appbar.AppBarLayout>
 
             <!-- 3.2 每个博客主博客内容 -->
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </com.hao.library.view.RefreshLayout2>
