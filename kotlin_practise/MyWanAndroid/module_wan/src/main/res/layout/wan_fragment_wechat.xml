@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.hao.library.view.StatusBarPlaceholderView
@@ -58,11 +58,7 @@
     <TextView
         android:text="公众号"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        android:layout_height="wrap_content"/>
 
 
 </LinearLayout>

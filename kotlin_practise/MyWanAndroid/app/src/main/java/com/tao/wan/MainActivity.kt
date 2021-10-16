@@ -8,6 +8,7 @@ import com.hao.library.adapter.FragmentAdapter
 import com.hao.library.annotation.AndroidEntryPoint
 import com.hao.library.ui.BaseActivity
 import com.hao.library.ui.FragmentCreator
+import com.hao.library.ui.UIParams
 import com.hao.library.view.dialog.ConfirmDialog
 import com.hao.library.view.dialog.ConfirmDialogListener
 import com.tao.module_base.LogUtils
@@ -20,6 +21,11 @@ import com.tencent.bugly.beta.UpgradeInfo
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<AppActivityMainBinding, UpgradeViewModel>() {
+
+    override fun prepare(uiParams: UIParams, intent: Intent?) {
+        uiParams.isTransparentStatusBar = true
+    }
+
     override fun initData() {
         viewModel {
             lifecycle.addObserver(this)
