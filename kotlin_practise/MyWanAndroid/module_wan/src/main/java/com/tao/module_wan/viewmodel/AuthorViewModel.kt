@@ -14,12 +14,16 @@ open class AuthorViewModel: BaseViewModel() {
     fun getAuthors() {
         CoroutineUtils.io {
             val list = Db.instance().authorDao().queryByVisible(Author.VISIBLE)
+            LogUtils.d("start get author list size: ${list?.size}")
             if(list.isEmpty()) {
                 Api.getAuthors().subscribeBy({
-                    LogUtils.d("start get author data size: ${it?.size}")
                     processData(it)
                 }) .add()
             }
+            /*Api.getAuthors().subscribeBy({
+                LogUtils.d("start get author data size: ${it?.size}")
+                processData(it)
+            }) .add()*/
         }
     }
 

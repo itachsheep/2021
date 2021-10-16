@@ -48,6 +48,7 @@ class WechatFragment: BaseFragment<WanFragmentWechatBinding, WechatViewModel>() 
 
     override fun initData() {
         Db.instance().authorDao().queryLiveDataByVisible(Author.VISIBLE).observe(this) {
+            //在主线程
             LogUtils.d("wechat author data size: ${it.size}")
             if(it.isNotEmpty()) {
                 titles.clear()

@@ -12,7 +12,8 @@ class WechatViewModel: AuthorViewModel() {
     fun initData() {
         Api.getAd().subscribeBy({
             if(it != null) {
-//                LogUtils.d("getAd size: ${it.size}" )
+                //todo：切换到了主线程
+                LogUtils.d("getAd size: ${it.size}" )
                 adLiveData.value = it
             }
         }).add()
