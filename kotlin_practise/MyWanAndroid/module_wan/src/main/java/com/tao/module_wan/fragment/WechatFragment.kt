@@ -1,10 +1,12 @@
 package com.tao.module_wan.fragment
 
 import com.hao.library.annotation.AndroidEntryPoint
+import com.hao.library.annotation.Inject
 import com.hao.library.extensions.loadCircle
 import com.hao.library.ui.BaseFragment
 import com.tao.module_base.callback.ActivityCallback
 import com.tao.module_wan.R
+import com.tao.module_wan.adapter.BannerAdapter
 import com.tao.module_wan.databinding.WanFragmentWechatBinding
 import com.tao.module_wan.viewmodel.WechatViewModel
 
@@ -12,7 +14,9 @@ import com.tao.module_wan.viewmodel.WechatViewModel
 class WechatFragment: BaseFragment<WanFragmentWechatBinding, WechatViewModel>() {
 
     private var activityCallback: ActivityCallback ?= null
-    //lateinit var bannerAdapter:
+
+    @Inject
+    lateinit var bannerAdapter: BannerAdapter
 
     override fun initView() {
         viewBinding {
@@ -21,13 +25,18 @@ class WechatFragment: BaseFragment<WanFragmentWechatBinding, WechatViewModel>() 
                 activityCallback?.openDraw()
             }
 
-            //banner.adapter =
+            banner.adapter = bannerAdapter
+            indicator.setViewPager(banner)
+            bannerAdapter.registerAdapterDataObserver(indicator.adapterDataObserver)
         }
     }
 
     override fun initData() {
         viewModel {
-
+            adLiveData.observe(this@WechatFragment) {
+                bannerAdapter.resetData(it)
+            }
+            initData()
         }
     }
 

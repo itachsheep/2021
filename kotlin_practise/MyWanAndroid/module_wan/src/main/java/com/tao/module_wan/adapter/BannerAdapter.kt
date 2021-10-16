@@ -12,16 +12,25 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.hao.library.adapter.BaseNormalAdapter
 import com.hao.library.adapter.ViewHolder
+import com.hao.library.extensions.load
 import com.tao.module_wan.databinding.WanWechatBannerItemBinding
 import com.tao.module_wan.model.Ad
 
 class BannerAdapter : BaseNormalAdapter<WanWechatBannerItemBinding, Ad>() {
-    override fun bindViewHolder(viewHolder: ViewHolder<WanWechatBannerItemBinding>, item: Ad, position: Int, payloads: MutableList<Any>) {
-        TODO("Not yet implemented")
+    override fun bindViewHolder(
+            viewHolder: ViewHolder<WanWechatBannerItemBinding>,
+            item: Ad,
+            position: Int,
+            payloads: MutableList<Any>) {
+        viewHolder.viewBinding {
+            root.load(item.url)
+        }
+
     }
 
-    override fun getViewBinding(layoutInflater: LayoutInflater, parent: ViewGroup): WanWechatBannerItemBinding {
-        TODO("Not yet implemented")
+    override fun getViewBinding(layoutInflater: LayoutInflater, parent: ViewGroup)
+        : WanWechatBannerItemBinding {
+        return WanWechatBannerItemBinding.inflate(layoutInflater,parent,false)
     }
 
 }
