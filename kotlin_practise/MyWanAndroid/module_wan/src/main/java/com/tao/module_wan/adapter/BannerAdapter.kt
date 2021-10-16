@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import com.hao.library.adapter.BaseNormalAdapter
 import com.hao.library.adapter.ViewHolder
 import com.hao.library.extensions.load
+import com.tao.module_base.LogUtils
 import com.tao.module_wan.databinding.WanWechatBannerItemBinding
 import com.tao.module_wan.model.Ad
 
@@ -23,7 +24,8 @@ class BannerAdapter : BaseNormalAdapter<WanWechatBannerItemBinding, Ad>() {
             position: Int,
             payloads: MutableList<Any>) {
         viewHolder.viewBinding {
-            root.load(item.url)
+            LogUtils.d("load url: ${item.imagePath}")
+            root.load(item.imagePath)
         }
 
     }
