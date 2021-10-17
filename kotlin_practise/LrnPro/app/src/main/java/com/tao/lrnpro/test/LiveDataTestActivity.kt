@@ -13,12 +13,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
+import com.tao.lrnpro.LogUtils
 import com.tao.lrnpro.R
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 @SuppressLint("SetTextI18n")
 class LiveDataTestActivity : AppCompatActivity() {
@@ -26,6 +23,8 @@ class LiveDataTestActivity : AppCompatActivity() {
 
     private var textView: TextView? = null
     lateinit var viewModel: LiveDataViewModel
+
+    private val scope = Dispatchers.Default + Job()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +36,27 @@ class LiveDataTestActivity : AppCompatActivity() {
         viewModel.getScore().observe(this) {
             textView?.text = "count = $it"
         }
+
+        lifecycle.addObserver(MyLifeCycleObserver(scope,lifecycle))
+    }
+
+    override fun onStart() {
+        super.onStart()
+        LogUtils.d("onStart 222")
+        CoroutineScope(scope).launch {
+            delay(3000)
+            LogUtils.d("onStart普通方式开启定位")
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        LogUtils.d("onStop普通方式关闭定位")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        scope.cancel()
     }
 
     fun add_count(view: View) {
