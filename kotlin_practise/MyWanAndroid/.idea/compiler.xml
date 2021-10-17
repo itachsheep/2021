@@ -2,6 +2,10 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.7">
+      <module name="##我的玩安卓##.app" target="1.8" />
+      <module name="##我的玩安卓##.module_base" target="1.8" />
+      <module name="##我的玩安卓##.module_user" target="1.8" />
+      <module name="##我的玩安卓##.module_wan" target="1.8" />
       <module name="MyWanAndroid.app" target="1.8" />
       <module name="MyWanAndroid.module_base" target="1.8" />
       <module name="MyWanAndroid.module_user" target="1.8" />

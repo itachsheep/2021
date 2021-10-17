@@ -3,4 +3,4 @@ include ':module_wan'
 include ':lib'
 include ':module_base'
 include ':app'
-rootProject.name = "MyWanAndroid"
+rootProject.name = "##我的玩安卓##"
