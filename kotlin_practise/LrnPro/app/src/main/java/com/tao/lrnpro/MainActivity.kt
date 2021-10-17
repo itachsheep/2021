@@ -1,8 +1,11 @@
 package com.tao.lrnpro
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
+import com.tao.lrnpro.test.LiveDataTestActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -11,6 +14,10 @@ class MainActivity : AppCompatActivity() {
 
         // Example of a call to a native method
         findViewById<TextView>(R.id.sample_text).text = stringFromJNI()
+    }
+
+    fun goto_live_data_test( view: View) {
+        startActivity(Intent(baseContext,LiveDataTestActivity::class.java))
     }
 
     /**
