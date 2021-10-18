@@ -38,6 +38,23 @@ class LiveDataTestActivity : AppCompatActivity() {
         }
 
         lifecycle.addObserver(MyLifeCycleObserver(scope,lifecycle))
+
+        GlobalScope.launch {
+            val result1 = GlobalScope.async {
+                delay(1000)
+                1
+            }
+            val result2 = GlobalScope.async {
+                delay(4000)
+                4
+            }
+
+            val result = result1.await() + result2.await()
+//            LogUtils.d("onCreate ---> update textView ddd");
+//            textView?.text = "hahah"
+            LogUtils.d("onCreate ---> :协程线程id=${Thread.currentThread().id},result = $result")
+        }
+        LogUtils.d("onCreate end")
     }
 
     override fun onStart() {
@@ -45,7 +62,7 @@ class LiveDataTestActivity : AppCompatActivity() {
         LogUtils.d("onStart 222")
         CoroutineScope(scope).launch {
             delay(3000)
-            LogUtils.d("onStart普通方式开启定位")
+            LogUtils.d("onStart普通方式开启定位,协程线程id=${Thread.currentThread().id}")
         }
     }
 

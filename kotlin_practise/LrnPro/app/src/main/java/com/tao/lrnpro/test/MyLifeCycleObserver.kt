@@ -25,7 +25,7 @@ class MyLifeCycleObserver(val coroutineContext: CoroutineContext,
         CoroutineScope(coroutineContext).launch {
             delay(3000)
             if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
-                LogUtils.d("开启定位")
+                LogUtils.d("开启定位,协程线程id=${Thread.currentThread().id}")
             }
         }
     }
