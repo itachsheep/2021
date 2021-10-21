@@ -14,6 +14,9 @@ import com.tao.module_wan.http.Api
 import com.tao.module_wan.model.Article
 import com.tao.module_wan.model.Author
 
+/**
+ * 公众号页面 - 每个博客主- 对应的文章数据
+ */
 class WechatArticleViewModel : BaseArticleViewModel() {
     var authorId: Int = Author.ID_HONGYANG
 
