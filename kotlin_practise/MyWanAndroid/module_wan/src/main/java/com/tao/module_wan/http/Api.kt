@@ -30,4 +30,8 @@ interface Service {
 
     @GET("project/tree/json")
     fun getProjectType(): Observable<HttpResult<ArrayList<ProjectAdjust>>>
+
+    @GET("article/listproject/{page}/json")
+    fun getNewProjectArticles(@Path("page") page: Int): Observable<HttpResult<ListPaged<Article>>>
+
 }

@@ -14,6 +14,17 @@ import com.tao.module_wan.viewmodel.BaseArticleViewModel
 class ProjectViewModel: BaseArticleViewModel() {
     val projectAdjustLiveData = MutableLiveData<ArrayList<ArrayList<ProjectAdjust>>>()
 
+
+    override fun loadData(page: Int, onResponse: (ArrayList<Article>?) -> Unit) {
+        LogUtils.d("todo:: loadData")
+        Api.getNewProjectArticles(page - 1).subscribeBy({
+           onResponse(it?.datas)
+        },{
+            onResponse(null)
+        }).add()
+    }
+
+
     override fun refresh(callback: PageKeyedDataSource.LoadInitialCallback<Int, Article>) {
         super.refresh(callback)
         LogUtils.d("refresh ")
@@ -50,7 +61,5 @@ class ProjectViewModel: BaseArticleViewModel() {
         ).add()
     }
 
-    override fun loadData(page: Int, onResponse: (ArrayList<Article>?) -> Unit) {
-        LogUtils.d("todo:: loadData")
-    }
+
 }
