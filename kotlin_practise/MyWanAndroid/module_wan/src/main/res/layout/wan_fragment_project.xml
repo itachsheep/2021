@@ -1,16 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical">
 
-    <TextView
-        android:text="项目"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+    <com.hao.library.view.StatusBarPlaceholderView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- 标题 -->
+    <com.hao.library.view.ToolbarLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:toolbarShowBack="false"
+        app:toolbarTitleText="项目" />
+
+    <com.hao.library.view.RefreshLayout2
+        android:id="@id/baseRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- part1:顶部轮播 -->
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appBarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                app:elevation="0dp">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/vpType"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    app:layout_scrollFlags="scroll" />
+
+                <me.relex.circleindicator.CircleIndicator3
+                    android:id="@+id/indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:visibility="gone"
+                    app:ci_drawable="@drawable/wan_indicator_1"
+                    app:ci_drawable_unselected="@drawable/wan_indicator_0"
+                    app:ci_gravity="center"
+                    app:layout_scrollFlags="scroll" />
+
+                <View
+                    android:id="@+id/line"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:background="@color/gray_white"
+                    android:visibility="gone"
+                    app:layout_scrollFlags="scroll" />
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <!-- part2: 项目列表-->
+            <com.hao.library.view.EmptyView
+                android:id="@id/baseEmptyView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@id/baseRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </com.hao.library.view.EmptyView>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </com.hao.library.view.RefreshLayout2>
+
+</LinearLayout>

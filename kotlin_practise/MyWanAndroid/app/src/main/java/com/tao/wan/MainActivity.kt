@@ -14,6 +14,7 @@ import com.hao.library.view.dialog.ConfirmDialogListener
 import com.tao.module_base.LogUtils
 import com.tao.module_base.callback.ActivityCallback
 import com.tao.module_user.fragment.UserFragment
+import com.tao.module_wan.fragment.KnowledgeFragment
 import com.tao.module_wan.fragment.ProjectFragment
 import com.tao.module_wan.fragment.WechatFragment
 import com.tao.module_wan.viewmodel.UpgradeViewModel
@@ -81,7 +82,7 @@ class MainActivity : BaseActivity<AppActivityMainBinding, UpgradeViewModel>(),
                 },
                 object : FragmentCreator {
                     override fun createFragment(): Fragment {
-                        return ProjectFragment()
+                        return KnowledgeFragment()
                     }
                 },
                 object : FragmentCreator {
