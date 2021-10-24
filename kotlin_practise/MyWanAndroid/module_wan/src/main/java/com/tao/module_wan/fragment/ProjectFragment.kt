@@ -1,7 +1,9 @@
 package com.tao.module_wan.fragment
 
 import android.os.Bundle
+import com.google.android.material.appbar.AppBarLayout
 import com.hao.library.annotation.AndroidEntryPoint
+import com.hao.library.annotation.Inject
 import com.hao.library.extensions.visibility
 import com.hao.library.extensions.visible
 import com.hao.library.ui.BaseFragment
@@ -31,16 +33,17 @@ class ProjectFragment: BaseListFragment<WanFragmentProjectBinding,
             vpType.adapter = viewPagerAdapter
             indicator.setViewPager(vpType)
             viewPagerAdapter.registerAdapterDataObserver(indicator.adapterDataObserver)
-
+//            appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
+//                baseRefreshLayout.isEnabled = verticalOffset == 0
+//            })
         }
     }
 
     override fun initData() {
-        LogUtils.d("initData --> ")
+        LogUtils.d("initData 222 ")
         viewModel {
-            lifecycle.addObserver(this)
+//            lifecycle.addObserver(this)
             projectAdjustLiveData.observe(this@ProjectFragment) {
-                LogUtils.d("initData observe refreh view")
                 viewPagerAdapter.resetData(it)
                 viewBinding {
                     line.visible()

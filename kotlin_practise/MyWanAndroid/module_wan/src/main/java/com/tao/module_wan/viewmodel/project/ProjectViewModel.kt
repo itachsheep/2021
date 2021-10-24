@@ -25,6 +25,21 @@ class ProjectViewModel: BaseArticleViewModel() {
                         if (size <= 8) {
                             list.add(it)
                             projectAdjustLiveData.value = list
+                        } else {
+                            var start = 0
+                            var end = 0
+                            while (start < size) {
+                                if (start + 8 < size) {
+                                    end += 8
+                                } else {
+                                    end = size
+                                }
+                                val temp = ArrayList<ProjectAdjust>()
+                                temp.addAll(it.subList(start, end))
+                                list.add(temp)
+                                start += 8
+                            }
+                            projectAdjustLiveData.value = list
                         }
                     }
                 },

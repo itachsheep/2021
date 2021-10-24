@@ -4,7 +4,7 @@ import android.util.Log
 
 class LogUtils {
     companion object {
-        var TAG: String = "T_WanAndroid."
+        var TAG: String = "T_WanAndroid"
         val flag: Boolean = true
 
         fun d(a: Any) = log(a)

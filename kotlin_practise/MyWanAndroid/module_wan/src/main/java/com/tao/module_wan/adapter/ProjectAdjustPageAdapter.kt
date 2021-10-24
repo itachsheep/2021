@@ -45,6 +45,7 @@ class ProjectAdjustItemAdapter : BaseNormalAdapter<WanItemofItemProjectAdjustVpB
                                 position: Int,
                                 payloads: MutableList<Any>) {
         viewHolder.viewBinding {
+            //LogUtils.d("bindViewHolder pos: $position, item: ${item.name}")
             tvText.text = item.name
             ivIcon.setImageResource(R.mipmap.ic_icon)
         }
