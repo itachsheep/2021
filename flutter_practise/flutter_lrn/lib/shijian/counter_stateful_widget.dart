@@ -19,13 +19,6 @@ class _CounterWidgetState extends State<CounterWidget> {
   int _counter = 0;
 
   @override
-  void initState() {
-    super.initState();
-    _counter = widget.initValue;
-    LogUtils.d(tag, "initState");
-  }
-
-  @override
   Widget build(BuildContext context) {
     LogUtils.d(tag, "build");
     return Scaffold(
@@ -41,6 +34,13 @@ class _CounterWidgetState extends State<CounterWidget> {
         ),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _counter = widget.initValue;
+    LogUtils.d(tag, "initState");
   }
 
   @override

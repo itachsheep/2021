@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_lrn/shijian/echo_widget.dart';
+import 'package:flutter_lrn/shijian/normal_test_home_page_wdiget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'TaoWei')
+      // home: const MyHomePage(title: 'TaoWei')
+      home: const NormalTestHomePage()
     );
   }
 }
