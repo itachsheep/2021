@@ -1,9 +1,33 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_lrn/shijian/echo_widget.dart';
 import 'package:flutter_lrn/shijian/normal_test_home_page_wdiget.dart';
 
+
+void calculate(int a, int b) {
+
+}
+
+void collectLog(String line) {
+
+}
+
 void main() {
-  runApp(const MyApp());
+  runZoned(() => runApp(const MyApp()),
+    zoneSpecification: ZoneSpecification(
+      print:(Zone self, ZoneDelegate parent, Zone zone, String line) {
+        collectLog(line);
+        parent.print(zone, "Interceptor: $line");
+      },
+
+      handleUncaughtError: (Zone self, ZoneDelegate parent, Zone zone,
+        Object error, StackTrace stackTrace) {
+        parent.print(zone, '${error.toString()} $stackTrace');
+      },
+    )
+  );
+
 }
 
 class MyApp extends StatelessWidget {
