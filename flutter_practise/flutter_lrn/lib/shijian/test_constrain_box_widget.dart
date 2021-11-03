@@ -29,10 +29,15 @@ class TestConstrainState extends State<TestConstrainWidget> {
           )
         ],
       ),
-      body: Center(
+      body: Container(
+        decoration: BoxDecoration(
+          color: Colors.blue[300]
+        ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          //mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const Padding(padding: EdgeInsets.all(10.0)),
+
             ConstrainedBox(
               constraints: const BoxConstraints(
                   minWidth: double.infinity, minHeight: 50.0),
@@ -78,6 +83,14 @@ class TestConstrainState extends State<TestConstrainWidget> {
               children:const  <Widget>[
                 Text(" hello world ", style: TextStyle(fontSize: 30.0),),
                 Text(" I am Jack "),
+              ],
+            ),
+
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children:const <Widget>[
+                Text("hi"),
+                Text("world"),
               ],
             ),
           ],
