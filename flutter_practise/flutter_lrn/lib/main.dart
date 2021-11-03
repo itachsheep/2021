@@ -14,7 +14,8 @@ void collectLog(String line) {
 }
 
 void main() {
-  runZoned(() => runApp(const MyApp()),
+  runApp(const MyApp());
+  /*runZoned(() => runApp(const MyApp()),
     zoneSpecification: ZoneSpecification(
       print:(Zone self, ZoneDelegate parent, Zone zone, String line) {
         collectLog(line);
@@ -26,7 +27,7 @@ void main() {
         parent.print(zone, '${error.toString()} $stackTrace');
       },
     )
-  );
+  );*/
 
 }
 
