@@ -8,6 +8,7 @@ import 'package:flutter_lrn/shijian/test_constrain_box_widget.dart';
 import 'package:flutter_lrn/shijian/test_flex_widget.dart';
 import 'package:flutter_lrn/shijian/test_layout_builder_widget.dart';
 import 'package:flutter_lrn/shijian/test_list_view.dart';
+import 'package:flutter_lrn/shijian/test_list_view_more.dart';
 import 'package:flutter_lrn/shijian/test_single_scroll.dart';
 import 'package:flutter_lrn/shijian/test_stack_widget.dart';
 
@@ -25,7 +26,8 @@ class NormalTestHomePage extends StatelessWidget {
     // return TestLayoutBuilderWidget();
     // return TestClipWidget();
     // return TestSingleScrollWidget();
-    return TestListViewWidget();
+    // return TestListViewWidget();
+    return TestLoadMoreListView();
   }
 
 }
