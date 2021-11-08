@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_lrn/shijian/echo_widget.dart';
 import 'package:flutter_lrn/shijian/normal_test_home_page_wdiget.dart';
+import 'package:flutter_lrn/shijian/test_tab_bar.dart';
 
 
 void calculate(int a, int b) {
@@ -43,7 +44,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       // home: const MyHomePage(title: 'TaoWei')
-      home: const NormalTestHomePage()
+      // home: const NormalTestHomePage()
+      home: TestTabView()
     );
   }
 }
