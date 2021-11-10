@@ -16,6 +16,16 @@ class TestCustomScrollViewState extends State<TestCustomScrollViewWidget> {
       ),
     );
   }
+
+  // 构建 header
+  Widget buildHeader(int i) {
+    return Container(
+      color: Colors.lightBlue.shade200,
+      alignment: Alignment.centerLeft,
+      child: Text("PersistentHeader $i"),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var list = <String>[
@@ -46,7 +56,14 @@ class TestCustomScrollViewState extends State<TestCustomScrollViewWidget> {
               ),
             ),
           ),
-
+          
+          SliverPersistentHeader(
+            pinned: true,
+            delegate: MySliverHeadDelegate.fixedHeight(
+                height: 80,
+                child: buildHeader(1))
+          ),
+          
           SliverPadding(
             padding: EdgeInsets.all(8.0),
             sliver: SliverGrid(
@@ -70,7 +87,11 @@ class TestCustomScrollViewState extends State<TestCustomScrollViewWidget> {
 
           SliverPersistentHeader(
             pinned: true,
-            delegate: ,
+            delegate: MySliverHeadDelegate(
+              maxHeight: 80,
+              minHeight: 50,
+              child: buildHeader(2),
+            ),
           ),
 
           SliverFixedExtentList(
@@ -109,10 +130,33 @@ class MySliverHeadDelegate extends SliverPersistentHeaderDelegate {
   })  : builder = ((a, b, c) => child),
         assert(minHeight <= maxHeight && minHeight >= 0);
 
+
+  //最大和最小高度相同
+  MySliverHeadDelegate.fixedHeight({
+    required double height,
+    required Widget child,
+  })  : builder = ((a, b, c) => child),
+        maxHeight = height,
+        minHeight = height;
+
+  //需要自定义builder时使用
+  MySliverHeadDelegate.builder({
+    required this.maxHeight,
+    this.minHeight = 0,
+    required this.builder,
+  });
+
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
-    // TODO: implement build
-    throw UnimplementedError();
+    //测试代码：如果子组件设置了key，则打印日志
+    // if (child.key != null) {
+    //   print('${child.key}: shrink: $shrinkOffset，overlaps:$overlapsContent');
+    // }
+    // 让 header 尽可能充满限制的空间；宽度为 Viewport 宽度，
+    // 高度随着用户滑动在[minHeight,maxHeight]之间变化。
+    return SizedBox.expand(
+      child: builder(context, shrinkOffset, overlapsContent),
+    );
   }
 
   @override
@@ -122,9 +166,8 @@ class MySliverHeadDelegate extends SliverPersistentHeaderDelegate {
   double get minExtent => minHeight;
 
   @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
-    // TODO: implement shouldRebuild
-    throw UnimplementedError();
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate old) {
+    return old.maxExtent != maxExtent || old.minExtent != minExtent;
   }
 
 }
