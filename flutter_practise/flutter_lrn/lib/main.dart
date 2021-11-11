@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_lrn/shijian/echo_widget.dart';
 import 'package:flutter_lrn/shijian/normal_test_home_page_wdiget.dart';
 import 'package:flutter_lrn/shijian/test_custom_scroll_view.dart';
+import 'package:flutter_lrn/shijian/test_nested_scroll_tap.dart';
 import 'package:flutter_lrn/shijian/test_nested_scroll_view_2.dart';
 import 'package:flutter_lrn/shijian/test_scroller.dart';
 import 'package:flutter_lrn/shijian/test_tab_bar.dart';
@@ -50,7 +51,8 @@ class MyApp extends StatelessWidget {
       // home: const NormalTestHomePage()
       // home: TestTabView()
       // home: TestCustomScrollViewWidget()
-      home: SnapAppBar()
+      // home: SnapAppBar()
+      home: NestedScrollTabViewWidget()
     );
   }
 }
