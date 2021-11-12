@@ -8,6 +8,7 @@ import 'package:flutter_lrn/shijian/test_nested_scroll_tap.dart';
 import 'package:flutter_lrn/shijian/test_nested_scroll_view_2.dart';
 import 'package:flutter_lrn/shijian/test_scroller.dart';
 import 'package:flutter_lrn/shijian/test_tab_bar.dart';
+import 'package:flutter_lrn/shijian/test_will_scope.dart';
 
 
 void calculate(int a, int b) {
@@ -48,11 +49,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       // home: const MyHomePage(title: 'TaoWei')
-      // home: const NormalTestHomePage()
+      home: const NormalTestHomePage()
       // home: TestTabView()
       // home: TestCustomScrollViewWidget()
       // home: SnapAppBar()
-      home: NestedScrollTabViewWidget()
+      // home: NestedScrollTabViewWidget()
     );
   }
 }

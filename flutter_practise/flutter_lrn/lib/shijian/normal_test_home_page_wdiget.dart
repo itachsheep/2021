@@ -17,6 +17,7 @@ import 'package:flutter_lrn/shijian/test_scroll_notification.dart';
 import 'package:flutter_lrn/shijian/test_scroller.dart';
 import 'package:flutter_lrn/shijian/test_single_scroll.dart';
 import 'package:flutter_lrn/shijian/test_stack_widget.dart';
+import 'package:flutter_lrn/shijian/test_will_scope.dart';
 
 class NormalTestHomePage extends StatelessWidget {
   const NormalTestHomePage({Key? key}) : super(key: key);
@@ -42,7 +43,8 @@ class NormalTestHomePage extends StatelessWidget {
       ),
       // body: ScrollNotificationTestRoute(),
       // body: TestGridViewWidget(),
-      body: TestPageView(),
+      // body: TestPageView(),
+      body: WillPopScopeTestRoute(),
     );
   }
 
