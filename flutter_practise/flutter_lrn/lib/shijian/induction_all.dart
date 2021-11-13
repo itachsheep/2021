@@ -108,7 +108,8 @@ class InductionAllWidgetState extends State<InductionAllWidget>
 
   Widget builderSilver(BuildContext ctx,String name, int count) {
     if(name == tabs[1]) {//功能型和事件
-        var list = <RouteBean>[];
+        // var list = <RouteBean>[];
+        List<RouteBean> list = [];
         list.add(new RouteBean("数据共享",TestInheritedWidget()));
         list.add(new RouteBean("数据共享1",TestInheritedWidget()));
         list.add(new RouteBean("数据共享2",TestInheritedWidget()));

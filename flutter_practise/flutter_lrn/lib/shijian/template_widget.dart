@@ -17,5 +17,6 @@ abstract class TemplateRoute extends StatelessWidget {
       body: getBody(),
     );
   }
-
 }
+
+
