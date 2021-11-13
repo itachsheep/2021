@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_lrn/shijian/route_bean.dart';
+import 'package:flutter_lrn/shijian/test_inherited_widget.dart';
 
 class InductionAllWidget extends StatefulWidget {
   @override
@@ -9,7 +11,7 @@ class InductionAllWidget extends StatefulWidget {
 class InductionAllWidgetState extends State<InductionAllWidget>
     with SingleTickerProviderStateMixin {
   // List tabs = <String>["新闻", "历史", "图片"];
-  final tabs = <String>['猜你喜欢', '今日特价', '发现更多'];
+  final tabs = <String>['基础组件', '功能型和事件', '动画和自定义'];
   Widget getPagedView(String content) {
     return Container(
       color: Colors.green[200],
@@ -92,7 +94,7 @@ class InductionAllWidgetState extends State<InductionAllWidget>
                       ),
                       SliverPadding(
                         padding: const EdgeInsets.all(8.0),
-                        sliver: builderSilver(50),
+                        sliver: builderSilver(ctx,name,50),
                       ),
                     ],
                   );
@@ -104,18 +106,55 @@ class InductionAllWidgetState extends State<InductionAllWidget>
     );
   }
 
-  Widget builderSilver(int count) {
-    return SliverFixedExtentList(
-      delegate: SliverChildBuilderDelegate((ctx,index){
-        //创建列表项
-        return Container(
-          alignment: Alignment.center,
-          color: Colors.lightBlue[100 * (index % 9)],
-          child: Text('list item $index'),
-        );},
-          childCount: count
-      ),
-      itemExtent: 50,
-    );
-  }
+  Widget builderSilver(BuildContext ctx,String name, int count) {
+    if(name == tabs[1]) {//功能型和事件
+        var list = <RouteBean>[];
+        list.add(new RouteBean("数据共享",TestInheritedWidget()));
+        list.add(new RouteBean("数据共享1",TestInheritedWidget()));
+        list.add(new RouteBean("数据共享2",TestInheritedWidget()));
+        list.add(new RouteBean("数据共享3",TestInheritedWidget()));
+        list.add(new RouteBean("数据共享3",TestInheritedWidget()));
+        list.add(new RouteBean("数据共享4",TestInheritedWidget()));
+        list.add(new RouteBean("数据共享5",TestInheritedWidget()));
+        list.add(new RouteBean("数据共享6",TestInheritedWidget()));
+        list.add(new RouteBean("数据共享7",TestInheritedWidget()));
+
+        return SliverFixedExtentList(
+          delegate: SliverChildBuilderDelegate((ctx,index){
+            //创建列表项
+            return Container(
+              alignment: Alignment.center,
+              color: Colors.lightBlue[100 * (index % 9)],
+              child: TextButton(
+                child: Text(list[index].name),
+                onPressed:(){
+                  Navigator.push(
+                      ctx,
+                      MaterialPageRoute(builder:(ctx) {
+                        return list[index].route;
+                      }),
+                  );
+                }
+                ),
+            );},
+              childCount: list.length
+          ),
+          itemExtent: 50,
+        );
+    } else {
+      return SliverFixedExtentList(
+        delegate: SliverChildBuilderDelegate((ctx,index){
+          //创建列表项
+          return Container(
+            alignment: Alignment.center,
+            color: Colors.lightBlue[100 * (index % 9)],
+            child: Text('list item $index'),
+          );},
+            childCount: count
+        ),
+        itemExtent: 50,
+      );
+    }
+    }
+
 }
