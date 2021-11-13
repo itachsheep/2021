@@ -40,7 +40,19 @@ class NestedScrollTabViewWidget extends StatelessWidget {
                       tabs: _tabs.map((String name) => Tab(text: name)).toList(),
                     ),
                   ),
-                )
+                ),
+
+                SliverAppBar(
+                  pinned: true, // 滑动到顶端时会固定住
+                  expandedHeight: 250.0,
+                  flexibleSpace: FlexibleSpaceBar(
+                    title: Text("CustomScrollView"),
+                    background: Image.asset(
+                      "pics/bg.jpeg",
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
               ];
             },
             body: TabBarView(
