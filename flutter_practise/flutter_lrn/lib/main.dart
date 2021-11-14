@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_lrn/shijian/echo_widget.dart';
-import 'package:flutter_lrn/shijian/induction_all.dart';
+import 'package:flutter_lrn/shijian/entrance/induction_all.dart';
 import 'package:flutter_lrn/shijian/normal_test_home_page_wdiget.dart';
 import 'package:flutter_lrn/shijian/test_custom_scroll_view.dart';
 import 'package:flutter_lrn/shijian/test_nested_scroll_tap.dart';

@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_lrn/log.dart';
-import 'package:flutter_lrn/shijian/share_data/template_share_widget.dart';
-import 'package:flutter_lrn/shijian/template_widget.dart';
+import 'package:flutter_lrn/template/template_share_widget.dart';
+import 'package:flutter_lrn/template/template_widget.dart';
 
 class TestInheritedWidget extends TemplateRoute {
   TestInheritedWidget(String name,{Key? key}) : super(key: key,title:name);
@@ -13,10 +13,10 @@ class TestInheritedWidget extends TemplateRoute {
     return InheritedWidgetTestRoute();
   }
 
-  @override
-  Widget getTitle() {
-    return Text(this.title);
-  }
+  // @override
+  // Widget getTitle() {
+  //   return Text(this.title);
+  // }
 }
 
 class InheritedWidgetTestRoute extends StatefulWidget {

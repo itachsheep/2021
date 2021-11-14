@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_lrn/log.dart';
-import 'package:flutter_lrn/shijian/template_widget.dart';
+import 'package:flutter_lrn/template/template_widget.dart';
 
 import 'model.dart';
-import 'template_share_widget.dart';
+import '../../template/template_share_widget.dart';
 
 const String TAG = "ShareProvider";
 
@@ -16,10 +16,10 @@ class TestShareDataProviderWidget extends TemplateRoute {
     return ProviderRoute();
   }
 
-  @override
-  Widget getTitle() {
-    return Text(this.title);
-  }
+  // @override
+  // Widget getTitle() {
+  //   return Text(this.title);
+  // }
 }
 
 class ProviderRoute extends StatefulWidget {

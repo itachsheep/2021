@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_lrn/shijian/color_theme/test_color_widget.dart';
+import 'package:flutter_lrn/shijian/color_theme/test_theme_widget.dart';
+import 'package:flutter_lrn/shijian/color_theme/test_value_builder_listener.dart';
+import 'package:flutter_lrn/shijian/feature_builder/test_feature_builder.dart';
 import 'package:flutter_lrn/shijian/route_bean.dart';
 import 'package:flutter_lrn/shijian/share_data/test_inherited_widget.dart';
 import 'package:flutter_lrn/shijian/share_data/test_share_data_provider_widget.dart';
@@ -60,7 +64,11 @@ class InductionAllWidgetState extends State<InductionAllWidget>
                       ),
                     ),
                     bottom: TabBar(
-                      tabs: tabs.map((String name) => Tab(text: name)).toList(),
+                      tabs: tabs.map((String name) {
+                        return Tab(
+                            text: name,
+                        );
+                      }).toList(),
                     ),
                     forceElevated: innerBoxIsScrolled,
                   ),
@@ -107,14 +115,19 @@ class InductionAllWidgetState extends State<InductionAllWidget>
     );
   }
 
+
   Widget builderSilver(BuildContext ctx,String name, int count) {
     if(name == tabs[1]) {//功能型和事件
         // var list = <RouteBean>[];
         List<RouteBean> list = [];
-        String content = "数据共享";
-        final routeBean = new RouteBean(content,TestInheritedWidget(content));
-        list.add(new RouteBean("跨组件共享",TestShareDataProviderWidget("跨组件")));
-        list.add(routeBean);
+        list.add(new RouteBean("数据共享",TestInheritedWidget("数据共享")));
+        list.add(new RouteBean("跨组件共享provider",TestShareDataProviderWidget("跨组件")));
+        list.add(new RouteBean("颜色", TestColorTheme("颜色")));
+        list.add(new RouteBean("主题", TestTheme()));
+        list.add(new RouteBean("横向数据共享",TestValueListenableWidget("横向数据流")));
+        list.add(new RouteBean("异步ui刷新", TestFutureBuilderWidget("异步ui刷新")));
+        
+        var routeBean = new RouteBean("凑数", TestInheritedWidget("凑数"));
         list.add(routeBean);
         list.add(routeBean);
         list.add(routeBean);
@@ -130,18 +143,21 @@ class InductionAllWidgetState extends State<InductionAllWidget>
             //创建列表项
             return Container(
               alignment: Alignment.center,
-              color: Colors.lightBlue[100 * (index % 9)],
+              // color: Colors.lightBlue[100 * (1 % 9)],
+              decoration: BoxDecoration(
+                color: Colors.lightBlue[100 * (1 % 9)],
+              ),
               child: TextButton(
-                child: Text(list[index].name),
-                onPressed:(){
-                  Navigator.push(
+                  child: Text(list[index].name),
+                  onPressed:(){
+                    Navigator.push(
                       ctx,
                       MaterialPageRoute(builder:(ctx) {
                         return list[index].route;
                       }),
-                  );
-                }
-                ),
+                    );
+                  }
+              ),
             );},
               childCount: list.length
           ),
@@ -153,8 +169,11 @@ class InductionAllWidgetState extends State<InductionAllWidget>
           //创建列表项
           return Container(
             alignment: Alignment.center,
-            color: Colors.lightBlue[100 * (index % 9)],
-            child: Text('list item $index'),
+            color: Colors.lightBlue[100 * (1 % 9)] ,
+            child: Text(
+              'list item $index',
+              style: TextStyle(),
+            ),
           );},
             childCount: count
         ),

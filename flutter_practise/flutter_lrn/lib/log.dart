@@ -5,5 +5,9 @@ class LogUtils {
     print(TAG + tag + ": " + msg);
   }
 
+  static void dd(String msg, {String tag = ""}) {
+    print(TAG + tag + ": " + msg);
+  }
+
 
 }
