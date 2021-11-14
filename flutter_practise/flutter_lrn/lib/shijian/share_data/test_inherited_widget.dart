@@ -2,10 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_lrn/log.dart';
-import 'package:flutter_lrn/shijian/template_share_widget.dart';
+import 'package:flutter_lrn/shijian/share_data/template_share_widget.dart';
 import 'package:flutter_lrn/shijian/template_widget.dart';
 
 class TestInheritedWidget extends TemplateRoute {
+  TestInheritedWidget(String name,{Key? key}) : super(key: key,title:name);
+
   @override
   Widget getBody() {
     return InheritedWidgetTestRoute();
@@ -13,7 +15,7 @@ class TestInheritedWidget extends TemplateRoute {
 
   @override
   Widget getTitle() {
-    return Text("数据共享");
+    return Text(this.title);
   }
 }
 

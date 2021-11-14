@@ -3,7 +3,8 @@
 import 'package:flutter/material.dart';
 
 abstract class TemplateRoute extends StatelessWidget {
-  const TemplateRoute({Key? key}) : super(key: key);
+  final String title;
+  TemplateRoute({Key? key,required this.title}) : super(key: key);
 
   Widget getTitle();
   Widget getBody();

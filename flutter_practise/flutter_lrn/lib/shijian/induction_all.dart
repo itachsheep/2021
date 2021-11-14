@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lrn/shijian/route_bean.dart';
-import 'package:flutter_lrn/shijian/test_inherited_widget.dart';
+import 'package:flutter_lrn/shijian/share_data/test_inherited_widget.dart';
+import 'package:flutter_lrn/shijian/share_data/test_share_data_provider_widget.dart';
 
 class InductionAllWidget extends StatefulWidget {
   @override
@@ -110,15 +111,19 @@ class InductionAllWidgetState extends State<InductionAllWidget>
     if(name == tabs[1]) {//功能型和事件
         // var list = <RouteBean>[];
         List<RouteBean> list = [];
-        list.add(new RouteBean("数据共享",TestInheritedWidget()));
-        list.add(new RouteBean("数据共享1",TestInheritedWidget()));
-        list.add(new RouteBean("数据共享2",TestInheritedWidget()));
-        list.add(new RouteBean("数据共享3",TestInheritedWidget()));
-        list.add(new RouteBean("数据共享3",TestInheritedWidget()));
-        list.add(new RouteBean("数据共享4",TestInheritedWidget()));
-        list.add(new RouteBean("数据共享5",TestInheritedWidget()));
-        list.add(new RouteBean("数据共享6",TestInheritedWidget()));
-        list.add(new RouteBean("数据共享7",TestInheritedWidget()));
+        String content = "数据共享";
+        final routeBean = new RouteBean(content,TestInheritedWidget(content));
+        list.add(new RouteBean("跨组件共享",TestShareDataProviderWidget("跨组件")));
+        list.add(routeBean);
+        list.add(routeBean);
+        list.add(routeBean);
+        list.add(routeBean);
+        list.add(routeBean);
+        list.add(routeBean);
+        list.add(routeBean);
+        list.add(routeBean);
+        list.add(routeBean);
+
 
         return SliverFixedExtentList(
           delegate: SliverChildBuilderDelegate((ctx,index){
