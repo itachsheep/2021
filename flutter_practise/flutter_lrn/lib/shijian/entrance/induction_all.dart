@@ -9,6 +9,9 @@ import 'package:flutter_lrn/shijian/feature_builder/test_stream_builder.dart';
 import 'package:flutter_lrn/shijian/route_bean.dart';
 import 'package:flutter_lrn/shijian/share_data/test_inherited_widget.dart';
 import 'package:flutter_lrn/shijian/share_data/test_share_data_provider_widget.dart';
+import 'package:flutter_lrn/shijian/touch_event/test_geesture_detector.dart';
+import 'package:flutter_lrn/shijian/touch_event/test_gesture_drag.dart';
+import 'package:flutter_lrn/shijian/touch_event/test_touch_event.dart';
 
 class InductionAllWidget extends StatefulWidget {
   @override
@@ -122,16 +125,24 @@ class InductionAllWidgetState extends State<InductionAllWidget>
       //功能型和事件
       // var list = <RouteBean>[];
       List<RouteBean> list = [];
-      list.add(new RouteBean("数据共享", TestInheritedWidget("数据共享")));
+
+      /**************事件和手势******************/
+      list.add(RouteBean("指针事件", TestOnPointWidget("指针事件")));
+      list.add(RouteBean("手势", TestGestureWidget("手势")));
+      list.add(RouteBean("手势-拖动", TestDragWidget("手势-拖动")));
+
+
+      /**************功能型组件******************/
+      list.add( RouteBean("数据共享", TestInheritedWidget("数据共享")));
       list.add(
-          new RouteBean("跨组件共享provider", TestShareDataProviderWidget("跨组件")));
-      list.add(new RouteBean("颜色", TestColorTheme("颜色")));
-      list.add(new RouteBean("主题", TestTheme()));
-      list.add(new RouteBean("横向数据共享", TestValueListenableWidget("横向数据流")));
-      list.add(new RouteBean("异步ui刷新", TestFutureBuilderWidget("异步ui刷新")));
-      list.add(new RouteBean(
+           RouteBean("跨组件共享provider", TestShareDataProviderWidget("跨组件")));
+      list.add( RouteBean("颜色", TestColorTheme("颜色")));
+      list.add( RouteBean("主题", TestTheme()));
+      list.add( RouteBean("横向数据共享", TestValueListenableWidget("横向数据流")));
+      list.add( RouteBean("异步ui刷新", TestFutureBuilderWidget("异步ui刷新")));
+      list.add( RouteBean(
           "异步ui刷新StreamBuilder", TestStreamBuilder("异步ui刷新StreamBuilder")));
-      list.add(new RouteBean("对话框", new TestDialog("对话框")));
+      list.add( RouteBean("对话框",  TestDialog("对话框")));
 
       return SliverFixedExtentList(
         delegate: SliverChildBuilderDelegate((ctx, index) {
