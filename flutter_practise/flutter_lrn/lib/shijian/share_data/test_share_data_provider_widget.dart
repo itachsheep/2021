@@ -12,7 +12,7 @@ class TestShareDataProviderWidget extends TemplateRoute {
   TestShareDataProviderWidget(String name) : super(title: name);
 
   @override
-  Widget getBody() {
+  Widget getBody(BuildContext context) {
     return ProviderRoute();
   }
 

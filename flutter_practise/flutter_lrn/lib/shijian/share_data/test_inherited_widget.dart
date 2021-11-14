@@ -9,7 +9,7 @@ class TestInheritedWidget extends TemplateRoute {
   TestInheritedWidget(String name,{Key? key}) : super(key: key,title:name);
 
   @override
-  Widget getBody() {
+  Widget getBody(BuildContext context) {
     return InheritedWidgetTestRoute();
   }
 

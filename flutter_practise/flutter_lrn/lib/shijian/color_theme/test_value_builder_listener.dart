@@ -8,7 +8,7 @@ class TestValueListenableWidget extends TemplateRoute {
   TestValueListenableWidget(String name) : super(title: name);
 
   @override
-  Widget getBody() {
+  Widget getBody(BuildContext context) {
     return ValueListenableRoute();
   }
 }

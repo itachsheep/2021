@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_lrn/shijian/color_theme/test_color_widget.dart';
 import 'package:flutter_lrn/shijian/color_theme/test_theme_widget.dart';
 import 'package:flutter_lrn/shijian/color_theme/test_value_builder_listener.dart';
+import 'package:flutter_lrn/shijian/dialog/test_dialog.dart';
 import 'package:flutter_lrn/shijian/feature_builder/test_feature_builder.dart';
+import 'package:flutter_lrn/shijian/feature_builder/test_stream_builder.dart';
 import 'package:flutter_lrn/shijian/route_bean.dart';
 import 'package:flutter_lrn/shijian/share_data/test_inherited_widget.dart';
 import 'package:flutter_lrn/shijian/share_data/test_share_data_provider_widget.dart';
@@ -17,6 +19,7 @@ class InductionAllWidgetState extends State<InductionAllWidget>
     with SingleTickerProviderStateMixin {
   // List tabs = <String>["新闻", "历史", "图片"];
   final tabs = <String>['基础组件', '功能型和事件', '动画和自定义'];
+
   Widget getPagedView(String content) {
     return Container(
       color: Colors.green[200],
@@ -47,9 +50,8 @@ class InductionAllWidgetState extends State<InductionAllWidget>
         length: tabs.length,
         child: Scaffold(
           body: NestedScrollView(
-            headerSliverBuilder: (ctx, innerBoxIsScrolled){
+            headerSliverBuilder: (ctx, innerBoxIsScrolled) {
               return <Widget>[
-
                 SliverOverlapAbsorber(
                   handle: NestedScrollView.sliverOverlapAbsorberHandleFor(ctx),
                   sliver: SliverAppBar(
@@ -66,7 +68,7 @@ class InductionAllWidgetState extends State<InductionAllWidget>
                     bottom: TabBar(
                       tabs: tabs.map((String name) {
                         return Tab(
-                            text: name,
+                          text: name,
                         );
                       }).toList(),
                     ),
@@ -92,18 +94,19 @@ class InductionAllWidgetState extends State<InductionAllWidget>
                 )*/
               ];
             },
-            body:  TabBarView(
-              children: tabs.map((name){
+            body: TabBarView(
+              children: tabs.map((name) {
                 return Builder(builder: (ctx) {
                   return CustomScrollView(
                     key: PageStorageKey<String>(name),
-                    slivers:<Widget>[
+                    slivers: <Widget>[
                       SliverOverlapInjector(
-                        handle: NestedScrollView.sliverOverlapAbsorberHandleFor(ctx),
+                        handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                            ctx),
                       ),
                       SliverPadding(
                         padding: const EdgeInsets.all(8.0),
-                        sliver: builderSilver(ctx,name,50),
+                        sliver: builderSilver(ctx, name, 50),
                       ),
                     ],
                   );
@@ -111,75 +114,63 @@ class InductionAllWidgetState extends State<InductionAllWidget>
               }).toList(),
             ),
           ),
-        )
-    );
+        ));
   }
 
+  Widget builderSilver(BuildContext ctx, String name, int count) {
+    if (name == tabs[1]) {
+      //功能型和事件
+      // var list = <RouteBean>[];
+      List<RouteBean> list = [];
+      list.add(new RouteBean("数据共享", TestInheritedWidget("数据共享")));
+      list.add(
+          new RouteBean("跨组件共享provider", TestShareDataProviderWidget("跨组件")));
+      list.add(new RouteBean("颜色", TestColorTheme("颜色")));
+      list.add(new RouteBean("主题", TestTheme()));
+      list.add(new RouteBean("横向数据共享", TestValueListenableWidget("横向数据流")));
+      list.add(new RouteBean("异步ui刷新", TestFutureBuilderWidget("异步ui刷新")));
+      list.add(new RouteBean(
+          "异步ui刷新StreamBuilder", TestStreamBuilder("异步ui刷新StreamBuilder")));
+      list.add(new RouteBean("对话框", new TestDialog("对话框")));
 
-  Widget builderSilver(BuildContext ctx,String name, int count) {
-    if(name == tabs[1]) {//功能型和事件
-        // var list = <RouteBean>[];
-        List<RouteBean> list = [];
-        list.add(new RouteBean("数据共享",TestInheritedWidget("数据共享")));
-        list.add(new RouteBean("跨组件共享provider",TestShareDataProviderWidget("跨组件")));
-        list.add(new RouteBean("颜色", TestColorTheme("颜色")));
-        list.add(new RouteBean("主题", TestTheme()));
-        list.add(new RouteBean("横向数据共享",TestValueListenableWidget("横向数据流")));
-        list.add(new RouteBean("异步ui刷新", TestFutureBuilderWidget("异步ui刷新")));
-        
-        var routeBean = new RouteBean("凑数", TestInheritedWidget("凑数"));
-        list.add(routeBean);
-        list.add(routeBean);
-        list.add(routeBean);
-        list.add(routeBean);
-        list.add(routeBean);
-        list.add(routeBean);
-        list.add(routeBean);
-        list.add(routeBean);
-
-
-        return SliverFixedExtentList(
-          delegate: SliverChildBuilderDelegate((ctx,index){
-            //创建列表项
-            return Container(
-              alignment: Alignment.center,
-              // color: Colors.lightBlue[100 * (1 % 9)],
-              decoration: BoxDecoration(
-                color: Colors.lightBlue[100 * (1 % 9)],
-              ),
-              child: TextButton(
-                  child: Text(list[index].name),
-                  onPressed:(){
-                    Navigator.push(
-                      ctx,
-                      MaterialPageRoute(builder:(ctx) {
-                        return list[index].route;
-                      }),
-                    );
-                  }
-              ),
-            );},
-              childCount: list.length
-          ),
-          itemExtent: 50,
-        );
-    } else {
       return SliverFixedExtentList(
-        delegate: SliverChildBuilderDelegate((ctx,index){
+        delegate: SliverChildBuilderDelegate((ctx, index) {
           //创建列表项
           return Container(
             alignment: Alignment.center,
-            color: Colors.lightBlue[100 * (1 % 9)] ,
+            // color: Colors.lightBlue[100 * (1 % 9)],
+            decoration: BoxDecoration(
+              color: Colors.lightBlue[100 * (1 % 9)],
+            ),
+            child: TextButton(
+                child: Text(list[index].name),
+                onPressed: () {
+                  Navigator.push(
+                    ctx,
+                    MaterialPageRoute(builder: (ctx) {
+                      return list[index].route;
+                    }),
+                  );
+                }),
+          );
+        }, childCount: list.length),
+        itemExtent: 50,
+      );
+    } else {
+      return SliverFixedExtentList(
+        delegate: SliverChildBuilderDelegate((ctx, index) {
+          //创建列表项
+          return Container(
+            alignment: Alignment.center,
+            color: Colors.lightBlue[100 * (1 % 9)],
             child: Text(
               'list item $index',
               style: TextStyle(),
             ),
-          );},
-            childCount: count
-        ),
+          );
+        }, childCount: count),
         itemExtent: 50,
       );
     }
-    }
-
+  }
 }

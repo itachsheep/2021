@@ -8,7 +8,7 @@ class TestColorTheme extends TemplateRoute {
   TestColorTheme(String name) : super(title: name);
 
   @override
-  Widget getBody() {
+  Widget getBody(BuildContext context) {
     return Column(
         children: <Widget>[
           //背景为蓝色，则title自动为白色

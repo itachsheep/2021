@@ -7,7 +7,7 @@ abstract class TemplateRoute extends StatelessWidget {
   TemplateRoute({Key? key,required this.title}) : super(key: key);
 
   // Widget getTitle();
-  Widget getBody();
+  Widget getBody(BuildContext context);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ abstract class TemplateRoute extends StatelessWidget {
       appBar: AppBar(
         title: Text(this.title),
       ),
-      body: getBody(),
+      body: getBody(context),
     );
   }
 }

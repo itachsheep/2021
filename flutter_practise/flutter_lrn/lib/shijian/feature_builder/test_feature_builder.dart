@@ -8,7 +8,7 @@ class TestFutureBuilderWidget extends TemplateRoute {
   TestFutureBuilderWidget(String name) : super(title: name);
 
   @override
-  Widget getBody() {
+  Widget getBody(BuildContext context) {
     return MyFutureBuilderWidget();
   }
 
