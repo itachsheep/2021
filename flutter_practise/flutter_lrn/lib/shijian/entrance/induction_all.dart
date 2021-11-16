@@ -12,6 +12,7 @@ import 'package:flutter_lrn/shijian/share_data/test_share_data_provider_widget.d
 import 'package:flutter_lrn/shijian/touch_event/test_geesture_detector.dart';
 import 'package:flutter_lrn/shijian/touch_event/test_gesture_drag.dart';
 import 'package:flutter_lrn/shijian/touch_event/test_hint_test.dart';
+import 'package:flutter_lrn/shijian/touch_event/test_receive_event_bus.dart';
 import 'package:flutter_lrn/shijian/touch_event/test_touch_event.dart';
 
 class InductionAllWidget extends StatefulWidget {
@@ -132,6 +133,7 @@ class InductionAllWidgetState extends State<InductionAllWidget>
       list.add(RouteBean("手势", TestGestureWidget("手势")));
       list.add(RouteBean("手势-拖动", TestDragWidget("手势-拖动")));
       list.add(RouteBean("事件机制", HintTestWidget("事件机制")));
+      list.add(RouteBean("bus事件总线", ReceivedBusWidget("事件总线")));
 
 
       /**************功能型组件******************/
