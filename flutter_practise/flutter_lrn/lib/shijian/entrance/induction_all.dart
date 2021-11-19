@@ -25,7 +25,7 @@ class InductionAllWidget extends StatefulWidget {
 class InductionAllWidgetState extends State<InductionAllWidget>
     with SingleTickerProviderStateMixin {
   // List tabs = <String>["新闻", "历史", "图片"];
-  final tabs = <String>['基础组件', '功能型和事件', '动画和自定义'];
+  final tabs = <String>['功能型和事件', '动画和自定义'];//+基础组件
 
   Widget getPagedView(String content) {
     return Container(
@@ -125,11 +125,10 @@ class InductionAllWidgetState extends State<InductionAllWidget>
   }
 
   Widget builderSilver(BuildContext ctx, String name, int count) {
+    List<RouteBean> list = [];
     if (name == tabs[1]) {
       //功能型和事件
       // var list = <RouteBean>[];
-      List<RouteBean> list = [];
-
       /**************事件和手势******************/
       list.add(RouteBean("指针事件", TestOnPointWidget("指针事件")));
       list.add(RouteBean("手势", TestGestureWidget("手势")));
@@ -151,45 +150,46 @@ class InductionAllWidgetState extends State<InductionAllWidget>
       list.add( RouteBean(
           "异步ui刷新StreamBuilder", TestStreamBuilder("异步ui刷新StreamBuilder")));
       list.add( RouteBean("对话框",  TestDialog("对话框")));
-
-      return SliverFixedExtentList(
-        delegate: SliverChildBuilderDelegate((ctx, index) {
-          //创建列表项
-          return Container(
-            alignment: Alignment.center,
-            // color: Colors.lightBlue[100 * (1 % 9)],
-            decoration: BoxDecoration(
-              color: Colors.lightBlue[100 * (1 % 9)],
-            ),
-            child: TextButton(
-                child: Text(list[index].name),
-                onPressed: () {
-                  Navigator.push(
-                    ctx,
-                    MaterialPageRoute(builder: (ctx) {
-                      return list[index].route;
-                    }),
-                  );
-                }),
-          );
-        }, childCount: list.length),
-        itemExtent: 50,
-      );
-    } else {
-      return SliverFixedExtentList(
-        delegate: SliverChildBuilderDelegate((ctx, index) {
-          //创建列表项
-          return Container(
-            alignment: Alignment.center,
-            color: Colors.lightBlue[100 * (1 % 9)],
-            child: Text(
-              'list item $index',
-              style: TextStyle(),
-            ),
-          );
-        }, childCount: count),
-        itemExtent: 50,
-      );
     }
+
+    return SliverFixedExtentList(
+      delegate: SliverChildBuilderDelegate((ctx, index) {
+        //创建列表项
+        return Container(
+          alignment: Alignment.center,
+          // color: Colors.lightBlue[100 * (1 % 9)],
+          decoration: BoxDecoration(
+            color: Colors.lightBlue[100 * (1 % 9)],
+          ),
+          child: TextButton(
+              child: Text(list[index].name),
+              onPressed: () {
+                Navigator.push(
+                  ctx,
+                  MaterialPageRoute(builder: (ctx) {
+                    return list[index].route;
+                  }),
+                );
+              }),
+        );
+      }, childCount: list.length),
+      itemExtent: 50,
+    );
   }
+  //else {
+//       return SliverFixedExtentList(
+//         delegate: SliverChildBuilderDelegate((ctx, index) {
+//           //创建列表项
+//           return Container(
+//             alignment: Alignment.center,
+//             color: Colors.lightBlue[100 * (1 % 9)],
+//             child: Text(
+//               'list item $index',
+//               style: TextStyle(),
+//             ),
+//           );
+//         }, childCount: count),
+//         itemExtent: 50,
+//       );
+//     }
 }
