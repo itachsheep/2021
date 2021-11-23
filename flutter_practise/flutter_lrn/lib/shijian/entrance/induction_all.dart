@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_lrn/shijian/animate/test_scale_animate.dart';
 import 'package:flutter_lrn/shijian/color_theme/test_color_widget.dart';
 import 'package:flutter_lrn/shijian/color_theme/test_theme_widget.dart';
 import 'package:flutter_lrn/shijian/color_theme/test_value_builder_listener.dart';
@@ -126,30 +127,12 @@ class InductionAllWidgetState extends State<InductionAllWidget>
 
   Widget builderSilver(BuildContext ctx, String name, int count) {
     List<RouteBean> list = [];
-    if (name == tabs[1]) {
+    if (name == tabs[0]) {
       //功能型和事件
-      // var list = <RouteBean>[];
-      /**************事件和手势******************/
-      list.add(RouteBean("指针事件", TestOnPointWidget("指针事件")));
-      list.add(RouteBean("手势", TestGestureWidget("手势")));
-      list.add(RouteBean("手势-拖动", TestDragWidget("手势-拖动")));
-      list.add(RouteBean("事件机制", HintTestWidget("事件机制")));
-      list.add(RouteBean("bus事件总线", ReceivedBusWidget("事件总线")));
-      list.add(RouteBean("通知", TestNotification("通知")));
-      list.add(RouteBean("自定义通知", AdjustNotificationWidget("自定义通知")));
-
-
-      /**************功能型组件******************/
-      list.add( RouteBean("数据共享", TestInheritedWidget("数据共享")));
-      list.add(
-           RouteBean("跨组件共享provider", TestShareDataProviderWidget("跨组件")));
-      list.add( RouteBean("颜色", TestColorTheme("颜色")));
-      list.add( RouteBean("主题", TestTheme()));
-      list.add( RouteBean("横向数据共享", TestValueListenableWidget("横向数据流")));
-      list.add( RouteBean("异步ui刷新", TestFutureBuilderWidget("异步ui刷新")));
-      list.add( RouteBean(
-          "异步ui刷新StreamBuilder", TestStreamBuilder("异步ui刷新StreamBuilder")));
-      list.add( RouteBean("对话框",  TestDialog("对话框")));
+      initFunctionEventList(list);
+    } else if(name == tabs[1]) {
+      //动画和自定义
+      initAnimateAdjustViewList(list);
     }
 
     return SliverFixedExtentList(
@@ -175,6 +158,36 @@ class InductionAllWidgetState extends State<InductionAllWidget>
       }, childCount: list.length),
       itemExtent: 50,
     );
+  }
+
+  void initAnimateAdjustViewList(List<RouteBean> list) {
+    /**************动画******************/
+    list.add(RouteBean("缩放动画", TestScaleAnimate("缩放动画")));
+  }
+
+  void initFunctionEventList(List<RouteBean> list) {
+    // var list = <RouteBean>[];
+    /**************事件和手势******************/
+    list.add(RouteBean("指针事件", TestOnPointWidget("指针事件")));
+    list.add(RouteBean("手势", TestGestureWidget("手势")));
+    list.add(RouteBean("手势-拖动", TestDragWidget("手势-拖动")));
+    list.add(RouteBean("事件机制", HintTestWidget("事件机制")));
+    list.add(RouteBean("bus事件总线", ReceivedBusWidget("事件总线")));
+    list.add(RouteBean("通知", TestNotification("通知")));
+    list.add(RouteBean("自定义通知", AdjustNotificationWidget("自定义通知")));
+    
+    
+    /**************功能型组件******************/
+    list.add( RouteBean("数据共享", TestInheritedWidget("数据共享")));
+    list.add(
+         RouteBean("跨组件共享provider", TestShareDataProviderWidget("跨组件")));
+    list.add( RouteBean("颜色", TestColorTheme("颜色")));
+    list.add( RouteBean("主题", TestTheme()));
+    list.add( RouteBean("横向数据共享", TestValueListenableWidget("横向数据流")));
+    list.add( RouteBean("异步ui刷新", TestFutureBuilderWidget("异步ui刷新")));
+    list.add( RouteBean(
+        "异步ui刷新StreamBuilder", TestStreamBuilder("异步ui刷新StreamBuilder")));
+    list.add( RouteBean("对话框",  TestDialog("对话框")));
   }
   //else {
 //       return SliverFixedExtentList(
