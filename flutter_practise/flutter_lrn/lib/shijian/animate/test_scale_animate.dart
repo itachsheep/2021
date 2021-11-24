@@ -90,6 +90,7 @@ class AnimatedImage extends AnimatedWidget {
   }) : super(key: key, listenable: animation);
 
   Widget build(BuildContext context) {
+    //todo:hahah
     final animation = listenable as Animation<double>;
     return  Image.asset(
       "pics/bg.jpeg",
