@@ -27,7 +27,7 @@ class InductionAllWidget extends StatefulWidget {
 class InductionAllWidgetState extends State<InductionAllWidget>
     with SingleTickerProviderStateMixin {
   // List tabs = <String>["新闻", "历史", "图片"];
-  final tabs = <String>['功能型和事件', '动画和自定义'];//+基础组件
+  final tabs = <String>['功能型和事件', '动画和自定义']; //+基础组件
 
   Widget getPagedView(String content) {
     return Container(
@@ -131,7 +131,7 @@ class InductionAllWidgetState extends State<InductionAllWidget>
     if (name == tabs[0]) {
       //功能型和事件
       initFunctionEventList(list);
-    } else if(name == tabs[1]) {
+    } else if (name == tabs[1]) {
       //动画和自定义
       initAnimateAdjustViewList(list);
     }
@@ -150,9 +150,19 @@ class InductionAllWidgetState extends State<InductionAllWidget>
               onPressed: () {
                 Navigator.push(
                   ctx,
-                  MaterialPageRoute(builder: (ctx) {
-                    return list[index].route;
-                  }),
+                  // MaterialPageRoute(builder: (ctx) {
+                  //   return list[index].route;
+                  // }),
+                  PageRouteBuilder(
+                    transitionDuration: Duration(milliseconds: 500), //动画时间为500毫秒,
+                      pageBuilder: (BuildContext context,Animation animation,
+                          Animation secondaryAnimation){
+                          return FadeTransition(
+                            //使用渐隐渐入过渡,
+                            opacity: animation,
+                            child: list[index].route,
+                          );
+                      }),
                 );
               }),
         );
@@ -177,21 +187,19 @@ class InductionAllWidgetState extends State<InductionAllWidget>
     list.add(RouteBean("bus事件总线", ReceivedBusWidget("事件总线")));
     list.add(RouteBean("通知", TestNotification("通知")));
     list.add(RouteBean("自定义通知", AdjustNotificationWidget("自定义通知")));
-    
-    
+
     /**************功能型组件******************/
-    list.add( RouteBean("数据共享", TestInheritedWidget("数据共享")));
-    list.add(
-         RouteBean("跨组件共享provider", TestShareDataProviderWidget("跨组件")));
-    list.add( RouteBean("颜色", TestColorTheme("颜色")));
-    list.add( RouteBean("主题", TestTheme()));
-    list.add( RouteBean("横向数据共享", TestValueListenableWidget("横向数据流")));
-    list.add( RouteBean("异步ui刷新", TestFutureBuilderWidget("异步ui刷新")));
-    list.add( RouteBean(
+    list.add(RouteBean("数据共享", TestInheritedWidget("数据共享")));
+    list.add(RouteBean("跨组件共享provider", TestShareDataProviderWidget("跨组件")));
+    list.add(RouteBean("颜色", TestColorTheme("颜色")));
+    list.add(RouteBean("主题", TestTheme()));
+    list.add(RouteBean("横向数据共享", TestValueListenableWidget("横向数据流")));
+    list.add(RouteBean("异步ui刷新", TestFutureBuilderWidget("异步ui刷新")));
+    list.add(RouteBean(
         "异步ui刷新StreamBuilder", TestStreamBuilder("异步ui刷新StreamBuilder")));
-    list.add( RouteBean("对话框",  TestDialog("对话框")));
+    list.add(RouteBean("对话框", TestDialog("对话框")));
   }
-  //else {
+//else {
 //       return SliverFixedExtentList(
 //         delegate: SliverChildBuilderDelegate((ctx, index) {
 //           //创建列表项
