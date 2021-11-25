@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_lrn/template/template_widget.dart';
 
@@ -7,7 +6,6 @@ class TestScaleAnimate extends TemplateRoute {
 
   @override
   Widget getBody(BuildContext context) => ScaleAnimationRoute();
-
 }
 
 class ScaleAnimationRoute extends StatefulWidget {
@@ -17,7 +15,6 @@ class ScaleAnimationRoute extends StatefulWidget {
 
 class _ScaleAnimationRouteState extends State<ScaleAnimationRoute>
     with SingleTickerProviderStateMixin {
-
   late Animation<double> animation;
   late AnimationController animationController;
 
@@ -46,10 +43,10 @@ class _ScaleAnimationRouteState extends State<ScaleAnimationRoute>
     animationController.forward();
 
 */
-    animationControllerNoRefresh = AnimationController(
-        duration: Duration(seconds:  4),
-        vsync: this);
-    animationNoRefresh = Tween(begin: 0.0, end: 300.0).animate(animationControllerNoRefresh);
+    animationControllerNoRefresh =
+        AnimationController(duration: Duration(seconds: 4), vsync: this);
+    animationNoRefresh =
+        Tween(begin: 0.0, end: 300.0).animate(animationControllerNoRefresh);
     animationControllerNoRefresh.forward();
   }
 
@@ -57,7 +54,6 @@ class _ScaleAnimationRouteState extends State<ScaleAnimationRoute>
   void dispose() {
     animationController.dispose();
     super.dispose();
-
   }
 
   @override
@@ -72,10 +68,21 @@ class _ScaleAnimationRouteState extends State<ScaleAnimationRoute>
             height: animation.value,
           ),*/
 
-          const Padding(
-              padding: EdgeInsets.only(top: 10.0)),
+          // const Padding(padding: EdgeInsets.only(top: 10.0)),
+          // AnimatedImage(animation: animationNoRefresh),
 
-          AnimatedImage(animation: animationNoRefresh),
+          AnimatedBuilder(
+              animation: animationNoRefresh,
+              child: Image.asset("pics/bg.jpeg"),
+              builder: (ctx,child) {
+                return Center(
+                    child: Container(
+                    height: animationNoRefresh.value,
+                    width: animationNoRefresh.value,
+                    child: child,)
+                );
+              }
+          ),
 
         ],
       ),
@@ -92,7 +99,7 @@ class AnimatedImage extends AnimatedWidget {
   Widget build(BuildContext context) {
     //todo:hahah
     final animation = listenable as Animation<double>;
-    return  Image.asset(
+    return Image.asset(
       "pics/bg.jpeg",
       width: animation.value,
       height: animation.value,

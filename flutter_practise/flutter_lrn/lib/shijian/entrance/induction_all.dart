@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_lrn/shijian/animate/test_grow_transition.dart';
 import 'package:flutter_lrn/shijian/animate/test_scale_animate.dart';
 import 'package:flutter_lrn/shijian/color_theme/test_color_widget.dart';
 import 'package:flutter_lrn/shijian/color_theme/test_theme_widget.dart';
@@ -163,6 +164,7 @@ class InductionAllWidgetState extends State<InductionAllWidget>
   void initAnimateAdjustViewList(List<RouteBean> list) {
     /**************动画******************/
     list.add(RouteBean("缩放动画", TestScaleAnimate("缩放动画")));
+    list.add(RouteBean("Growth封装", TestGrowTransition("Growth封装")));
   }
 
   void initFunctionEventList(List<RouteBean> list) {
