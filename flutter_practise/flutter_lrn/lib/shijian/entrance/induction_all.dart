@@ -150,12 +150,15 @@ class InductionAllWidgetState extends State<InductionAllWidget>
               onPressed: () {
                 Navigator.push(
                   ctx,
+                  //普通
                   // MaterialPageRoute(builder: (ctx) {
                   //   return list[index].route;
                   // }),
+
+                  //路由动画，渐隐渐入过渡,
                   PageRouteBuilder(
                     transitionDuration: Duration(milliseconds: 500), //动画时间为500毫秒,
-                      pageBuilder: (BuildContext context,Animation animation,
+                      pageBuilder: (BuildContext context,Animation<double> animation,
                           Animation secondaryAnimation){
                           return FadeTransition(
                             //使用渐隐渐入过渡,
