@@ -21,6 +21,7 @@ import 'package:flutter_lrn/shijian/touch_event/test_receive_event_bus.dart';
 import 'package:flutter_lrn/shijian/touch_event/test_touch_event.dart';
 
 import 'animate/test_hero_animation.dart';
+import 'animate/test_stragger_animation.dart';
 
 class InductionAllWidget extends StatefulWidget {
   @override
@@ -183,6 +184,7 @@ class InductionAllWidgetState extends State<InductionAllWidget>
     list.add(RouteBean("Growth封装", TestGrowTransition("Growth封装")));
     list.add(RouteBean("自定义路由动画", TestFadeRouteWidget("路由动画测试---")));
     list.add(RouteBean("hero动画", HeroAnimationWidget("hero动画")));
+    list.add(RouteBean("多种交织一起动画", TestStraggerRoute("多种交织一起动画")));
 
   }
 
