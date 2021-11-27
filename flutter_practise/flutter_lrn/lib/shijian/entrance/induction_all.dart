@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_lrn/shijian/animate/test_fade_route_widget.dart';
 import 'package:flutter_lrn/shijian/animate/test_grow_transition.dart';
 import 'package:flutter_lrn/shijian/animate/test_scale_animate.dart';
 import 'package:flutter_lrn/shijian/color_theme/test_color_widget.dart';
@@ -178,6 +179,8 @@ class InductionAllWidgetState extends State<InductionAllWidget>
     /**************动画******************/
     list.add(RouteBean("缩放动画", TestScaleAnimate("缩放动画")));
     list.add(RouteBean("Growth封装", TestGrowTransition("Growth封装")));
+    list.add(RouteBean("自定义路由动画", TestFadeRouteWidget("路由动画测试---")));
+
   }
 
   void initFunctionEventList(List<RouteBean> list) {
