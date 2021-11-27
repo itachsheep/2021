@@ -9,7 +9,7 @@ import 'package:flutter_lrn/shijian/color_theme/test_value_builder_listener.dart
 import 'package:flutter_lrn/shijian/dialog/test_dialog.dart';
 import 'package:flutter_lrn/shijian/feature_builder/test_feature_builder.dart';
 import 'package:flutter_lrn/shijian/feature_builder/test_stream_builder.dart';
-import 'package:flutter_lrn/shijian/route_bean.dart';
+import 'package:flutter_lrn/shijian/othwe_todo/route_bean.dart';
 import 'package:flutter_lrn/shijian/share_data/test_inherited_widget.dart';
 import 'package:flutter_lrn/shijian/share_data/test_share_data_provider_widget.dart';
 import 'package:flutter_lrn/shijian/touch_event/test_adjust_notification.dart';
@@ -19,6 +19,8 @@ import 'package:flutter_lrn/shijian/touch_event/test_hint_test.dart';
 import 'package:flutter_lrn/shijian/touch_event/test_notification.dart';
 import 'package:flutter_lrn/shijian/touch_event/test_receive_event_bus.dart';
 import 'package:flutter_lrn/shijian/touch_event/test_touch_event.dart';
+
+import 'animate/test_hero_animation.dart';
 
 class InductionAllWidget extends StatefulWidget {
   @override
@@ -180,6 +182,7 @@ class InductionAllWidgetState extends State<InductionAllWidget>
     list.add(RouteBean("缩放动画", TestScaleAnimate("缩放动画")));
     list.add(RouteBean("Growth封装", TestGrowTransition("Growth封装")));
     list.add(RouteBean("自定义路由动画", TestFadeRouteWidget("路由动画测试---")));
+    list.add(RouteBean("hero动画", HeroAnimationWidget("hero动画")));
 
   }
 

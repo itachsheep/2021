@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../log.dart';
+import '../../log.dart';
 
 class TestScrollerWidget extends StatefulWidget {
   @override

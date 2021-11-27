@@ -1,15 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_lrn/shijian/echo_widget.dart';
-import 'package:flutter_lrn/shijian/entrance/induction_all.dart';
+import 'package:flutter_lrn/shijian/othwe_todo/echo_widget.dart';
+import 'package:flutter_lrn/shijian/induction_all.dart';
 import 'package:flutter_lrn/shijian/normal_test_home_page_wdiget.dart';
-import 'package:flutter_lrn/shijian/test_custom_scroll_view.dart';
-import 'package:flutter_lrn/shijian/test_nested_scroll_tap.dart';
-import 'package:flutter_lrn/shijian/test_nested_scroll_view_2.dart';
-import 'package:flutter_lrn/shijian/test_scroller.dart';
-import 'package:flutter_lrn/shijian/test_tab_bar.dart';
-import 'package:flutter_lrn/shijian/test_will_scope.dart';
+import 'package:flutter_lrn/shijian/othwe_todo/test_custom_scroll_view.dart';
+import 'package:flutter_lrn/shijian/othwe_todo/test_nested_scroll_tap.dart';
+import 'package:flutter_lrn/shijian/othwe_todo/test_nested_scroll_view_2.dart';
+import 'package:flutter_lrn/shijian/othwe_todo/test_scroller.dart';
+import 'package:flutter_lrn/shijian/othwe_todo/test_tab_bar.dart';
+import 'package:flutter_lrn/shijian/othwe_todo/test_will_scope.dart';
 
 
 void calculate(int a, int b) {
