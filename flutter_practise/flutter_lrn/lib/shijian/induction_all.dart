@@ -20,6 +20,7 @@ import 'package:flutter_lrn/shijian/touch_event/test_notification.dart';
 import 'package:flutter_lrn/shijian/touch_event/test_receive_event_bus.dart';
 import 'package:flutter_lrn/shijian/touch_event/test_touch_event.dart';
 
+import 'animate/test_guodu_animation.dart';
 import 'animate/test_hero_animation.dart';
 import 'animate/test_stragger_animation.dart';
 import 'animate/test_switch_animiation.dart';
@@ -187,6 +188,7 @@ class InductionAllWidgetState extends State<InductionAllWidget>
     list.add(RouteBean("hero动画", HeroAnimationWidget("hero动画")));
     list.add(RouteBean("多种交织一起动画", TestStraggerRoute("多种交织一起动画")));
     list.add(RouteBean("动画切换组件", TestSwitchAnimationRoute("动画切换组件")));
+    list.add(RouteBean("动画过渡组件", GuoduAniamtionRoute("动画过渡组件")));
 
   }
 
