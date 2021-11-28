@@ -1,4 +1,3 @@
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -10,19 +9,19 @@ class CheckerBoarder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: CustomPaint(
-        size: Size(300,300),
-        painter: MyPainter(),
+      child: RepaintBoundary(
+        child: CustomPaint(
+          size: Size(300, 300),
+          painter: MyPainter(),
+        ),
       ),
     );
   }
-
 }
 
 class MyPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-
     var rect = Offset.zero & size;
     LogUtils.dd("start paint ---> $rect");
     //画棋盘
@@ -86,7 +85,5 @@ class MyPainter extends CustomPainter {
       min(eWidth / 2, eHeight / 2) - 2,
       paint,
     );
-
   }
-
 }

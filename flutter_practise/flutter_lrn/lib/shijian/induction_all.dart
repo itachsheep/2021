@@ -26,6 +26,7 @@ import 'animate/test_stragger_animation.dart';
 import 'animate/test_switch_animiation.dart';
 import 'custom_widget/test_combine_widget.dart';
 import 'custom_widget/test_custom_paint.dart';
+import 'custom_widget/test_custom_renderobject.dart';
 
 class InductionAllWidget extends StatefulWidget {
   @override
@@ -188,6 +189,7 @@ class InductionAllWidgetState extends State<InductionAllWidget>
     /**************自定义组件******************/
     list.add(RouteBean("组合-自定义组件", CustomCombineWidgetRoute("组合组件")));
     list.add(RouteBean("customPain自绘组件", CustomPaintRoute("customPain自绘组件")));
+    list.add(RouteBean("customRenderObject自绘组件", CustomRenderObject("customRenderObject自绘组件")));
   }
 
 
