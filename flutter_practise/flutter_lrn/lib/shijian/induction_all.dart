@@ -24,6 +24,7 @@ import 'animate/test_guodu_animation.dart';
 import 'animate/test_hero_animation.dart';
 import 'animate/test_stragger_animation.dart';
 import 'animate/test_switch_animiation.dart';
+import 'custom_widget/test_combine_widget.dart';
 
 class InductionAllWidget extends StatefulWidget {
   @override
@@ -33,7 +34,7 @@ class InductionAllWidget extends StatefulWidget {
 class InductionAllWidgetState extends State<InductionAllWidget>
     with SingleTickerProviderStateMixin {
   // List tabs = <String>["新闻", "历史", "图片"];
-  final tabs = <String>['功能型和事件', '动画和自定义']; //+基础组件
+  final tabs = <String>['功能型和事件', '动画','自定义组件']; //+基础组件
 
   Widget getPagedView(String content) {
     return Container(
@@ -140,6 +141,8 @@ class InductionAllWidgetState extends State<InductionAllWidget>
     } else if (name == tabs[1]) {
       //动画和自定义
       initAnimateAdjustViewList(list);
+    } else if(name == tabs[2]) {
+      initCustomizeWidget(list);
     }
 
     return SliverFixedExtentList(
@@ -180,6 +183,12 @@ class InductionAllWidgetState extends State<InductionAllWidget>
     );
   }
 
+  void initCustomizeWidget(List<RouteBean> list) {
+    /**************自定义组件******************/
+    list.add(RouteBean("组合-自定义组件", CustomCombineWidgetRoute("组合组件")));
+  }
+
+
   void initAnimateAdjustViewList(List<RouteBean> list) {
     /**************动画******************/
     list.add(RouteBean("缩放动画", TestScaleAnimate("缩放动画")));
@@ -214,20 +223,4 @@ class InductionAllWidgetState extends State<InductionAllWidget>
         "异步ui刷新StreamBuilder", TestStreamBuilder("异步ui刷新StreamBuilder")));
     list.add(RouteBean("对话框", TestDialog("对话框")));
   }
-//else {
-//       return SliverFixedExtentList(
-//         delegate: SliverChildBuilderDelegate((ctx, index) {
-//           //创建列表项
-//           return Container(
-//             alignment: Alignment.center,
-//             color: Colors.lightBlue[100 * (1 % 9)],
-//             child: Text(
-//               'list item $index',
-//               style: TextStyle(),
-//             ),
-//           );
-//         }, childCount: count),
-//         itemExtent: 50,
-//       );
-//     }
 }

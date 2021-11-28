@@ -124,7 +124,7 @@ class _AnimatedWidgetsTestState extends State<AnimatedWidgetsTest> {
             duration: duration,
           ),
 
-          
+
 
         ],
       ),
