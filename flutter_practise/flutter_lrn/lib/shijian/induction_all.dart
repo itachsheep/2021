@@ -27,6 +27,7 @@ import 'animate/test_switch_animiation.dart';
 import 'custom_widget/test_combine_widget.dart';
 import 'custom_widget/test_custom_paint.dart';
 import 'custom_widget/test_custom_renderobject.dart';
+import 'file_network/test_file_operator.dart';
 
 class InductionAllWidget extends StatefulWidget {
   @override
@@ -36,7 +37,7 @@ class InductionAllWidget extends StatefulWidget {
 class InductionAllWidgetState extends State<InductionAllWidget>
     with SingleTickerProviderStateMixin {
   // List tabs = <String>["新闻", "历史", "图片"];
-  final tabs = <String>['功能型和事件', '动画','自定义组件']; //+基础组件
+  final tabs = <String>['功能型和事件', '动画和自定义组件','网络']; //+基础组件
 
   Widget getPagedView(String content) {
     return Container(
@@ -186,10 +187,9 @@ class InductionAllWidgetState extends State<InductionAllWidget>
   }
 
   void initCustomizeWidget(List<RouteBean> list) {
-    /**************自定义组件******************/
-    list.add(RouteBean("组合-自定义组件", CustomCombineWidgetRoute("组合组件")));
-    list.add(RouteBean("customPain自绘组件", CustomPaintRoute("customPain自绘组件")));
-    list.add(RouteBean("customRenderObject自绘组件", CustomRenderObject("customRenderObject自绘组件")));
+    /**************文件和网络******************/
+    list.add(RouteBean("文件", FileOperationTestRoute("文件")));
+
   }
 
 
@@ -202,6 +202,10 @@ class InductionAllWidgetState extends State<InductionAllWidget>
     list.add(RouteBean("多种交织一起动画", TestStraggerRoute("多种交织一起动画")));
     list.add(RouteBean("动画切换组件", TestSwitchAnimationRoute("动画切换组件")));
     list.add(RouteBean("动画过渡组件", GuoduAniamtionRoute("动画过渡组件")));
+    /**************自定义组件******************/
+    list.add(RouteBean("组合-自定义组件", CustomCombineWidgetRoute("组合组件")));
+    list.add(RouteBean("customPain自绘组件", CustomPaintRoute("customPain自绘组件")));
+    list.add(RouteBean("customRenderObject自绘组件", CustomRenderObject("customRenderObject自绘组件")));
 
   }
 
