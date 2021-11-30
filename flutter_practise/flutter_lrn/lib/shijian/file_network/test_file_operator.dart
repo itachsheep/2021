@@ -30,7 +30,11 @@ class _FileOperationRouteState extends State<FileOperationRoute> {
   @override
   void initState() {
     super.initState();
-
+    _readCount().then((value){
+      setState(() {
+        _counter = value;
+      });
+    });
   }
 
   Future<File> _getLocalFile() async {
@@ -44,10 +48,33 @@ class _FileOperationRouteState extends State<FileOperationRoute> {
       String content = await file.readAsString();
       return int.parse(content);
     } on FileSystemException {
-      //LogUtils.dd("msg")
+      LogUtils.dd("FileSystemException ");
       return 0;
     }
-    
+  }
+
+  _incrementCounter() async {
+    setState(() {
+      _counter++;
+    });
+    // 将点击次数以字符串类型写到文件中
+    await (await _getLocalFile()).writeAsString('$_counter');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child:Column(
+        children: [
+          Text("点击了 $_counter 次"),
+          Padding(padding: EdgeInsets.only(top: 10)),
+          ElevatedButton(
+              onPressed: _incrementCounter,
+              child: Text("inCrement"))
+        ],
+      ),
+
+    );
   }
 
 }
