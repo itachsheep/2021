@@ -9,6 +9,7 @@ import 'package:flutter_lrn/shijian/color_theme/test_value_builder_listener.dart
 import 'package:flutter_lrn/shijian/dialog/test_dialog.dart';
 import 'package:flutter_lrn/shijian/feature_builder/test_feature_builder.dart';
 import 'package:flutter_lrn/shijian/feature_builder/test_stream_builder.dart';
+import 'package:flutter_lrn/shijian/file_network/http_request.dart';
 import 'package:flutter_lrn/shijian/othwe_todo/route_bean.dart';
 import 'package:flutter_lrn/shijian/share_data/test_inherited_widget.dart';
 import 'package:flutter_lrn/shijian/share_data/test_share_data_provider_widget.dart';
@@ -189,6 +190,7 @@ class InductionAllWidgetState extends State<InductionAllWidget>
   void initCustomizeWidget(List<RouteBean> list) {
     /**************文件和网络******************/
     list.add(RouteBean("文件", FileOperationTestRoute("文件")));
+    list.add(RouteBean("网络请求", HttpRoute("网络请求")));
 
   }
 
