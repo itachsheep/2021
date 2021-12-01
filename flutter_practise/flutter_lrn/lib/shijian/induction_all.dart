@@ -28,6 +28,7 @@ import 'animate/test_switch_animiation.dart';
 import 'custom_widget/test_combine_widget.dart';
 import 'custom_widget/test_custom_paint.dart';
 import 'custom_widget/test_custom_renderobject.dart';
+import 'file_network/http_dio.dart';
 import 'file_network/test_file_operator.dart';
 
 class InductionAllWidget extends StatefulWidget {
@@ -190,7 +191,8 @@ class InductionAllWidgetState extends State<InductionAllWidget>
   void initCustomizeWidget(List<RouteBean> list) {
     /**************文件和网络******************/
     list.add(RouteBean("文件", FileOperationTestRoute("文件")));
-    list.add(RouteBean("网络请求", HttpRoute("网络请求")));
+    list.add(RouteBean("httpClient网络请求", HttpRoute("httpClient网络请求")));
+    list.add(RouteBean("dio库", HttpDioRoute("dio库")));
 
   }
 
