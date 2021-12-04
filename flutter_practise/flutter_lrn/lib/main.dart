@@ -10,6 +10,7 @@ import 'package:flutter_lrn/shijian/othwe_todo/test_nested_scroll_view_2.dart';
 import 'package:flutter_lrn/shijian/othwe_todo/test_scroller.dart';
 import 'package:flutter_lrn/shijian/othwe_todo/test_tab_bar.dart';
 import 'package:flutter_lrn/shijian/othwe_todo/test_will_scope.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 
 void calculate(int a, int b) {
@@ -45,6 +46,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: const [
+        // 本地化的代理类
+        //为Material 组件库提供的本地化的字符串和其他值，
+        // 它可以使Material 组件支持多语言。
+        GlobalMaterialLocalizations.delegate,
+        //定义组件默认的文本方向，从左到右或从右到左，
+        // 这是因为有些语言的阅读习惯并不是从左到右，比如如阿拉伯语就是从右向左的
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      //表示我们的应用支持的语言列表，
+        // 在本例中我们的应用只支持美国英语和中文简体两种语言。
+      supportedLocales: const [
+        Locale('en', 'US'), // 美国英语
+        Locale('zh', 'CN'), // 中文简体
+      ],
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
