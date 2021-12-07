@@ -41,7 +41,7 @@ class InductionAllWidget extends StatefulWidget {
 class InductionAllWidgetState extends State<InductionAllWidget>
     with SingleTickerProviderStateMixin {
   // List tabs = <String>["新闻", "历史", "图片"];
-  final tabs = <String>['功能型和事件', '动画和自定义组件','网络']; //+基础组件
+  final tabs = <String>['功能型和事件', '动画和自定义组件','网络','flutter核心']; //+基础组件
 
   Widget getPagedView(String content) {
     return Container(
@@ -150,6 +150,8 @@ class InductionAllWidgetState extends State<InductionAllWidget>
       initAnimateAdjustViewList(list);
     } else if(name == tabs[2]) {
       initCustomizeWidget(list);
+    } else if(name == tabs[3]) {
+      initFlutterCore(list);
     }
 
     return SliverFixedExtentList(
@@ -190,6 +192,9 @@ class InductionAllWidgetState extends State<InductionAllWidget>
     );
   }
 
+  void initFlutterCore(List<RouteBean> list) {
+    /**************flutter核心******************/
+  }
   void initCustomizeWidget(List<RouteBean> list) {
     /**************文件和网络******************/
     list.add(RouteBean("文件", FileOperationTestRoute("文件")));

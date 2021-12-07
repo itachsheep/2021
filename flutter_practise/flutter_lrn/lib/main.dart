@@ -1,6 +1,9 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_lrn/shijian/custom_widget/cheker_boarder.dart';
 import 'package:flutter_lrn/shijian/othwe_todo/echo_widget.dart';
 import 'package:flutter_lrn/shijian/induction_all.dart';
 import 'package:flutter_lrn/shijian/normal_test_home_page_wdiget.dart';
@@ -21,7 +24,29 @@ void collectLog(String line) {
 
 }
 
+/// Flutter 绘制流程
+void drawMyChess() {
+  //1.创建绘制记录器和Canvas
+  PictureRecorder recorder = PictureRecorder();
+  Canvas canvas = Canvas(recorder);
+  //2.在指定位置区域绘制。
+  var rect = Rect.fromLTWH(30, 200, 300,300 );
+  drawChessboard(canvas,rect); //画棋盘
+  drawPieces(canvas,rect);//画棋子
+  //3.创建layer，将绘制的产物保存在layer中
+  var pictureLayer = PictureLayer(rect);
+  //recorder.endRecording()获取绘制产物。
+  pictureLayer.picture = recorder.endRecording();
+  var rootLayer = OffsetLayer();
+  rootLayer.append(pictureLayer);
+  //4.上屏，将绘制的内容显示在屏幕上。
+  final SceneBuilder builder = SceneBuilder();
+  final Scene scene = rootLayer.buildScene(builder);
+  window.render(scene);
+}
 void main() {
+  /// 体验自绘流程
+  //drawMyChess();
   runApp(const MyApp());
   /*runZoned(() => runApp(const MyApp()),
     zoneSpecification: ZoneSpecification(
