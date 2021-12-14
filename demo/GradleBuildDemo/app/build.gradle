@@ -43,3 +43,51 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
+
+gradle.addBuildListener(new BuildListener() {
+    @Override
+    void buildStarted(Gradle gradle) {
+        println("BuildListener# buildStarted")
+
+    }
+
+    @Override
+    void settingsEvaluated(Settings settings) {
+        println("BuildListener# settingsEvaluated")
+    }
+
+    @Override
+    void projectsLoaded(Gradle gradle) {
+        println("BuildListener# projectsLoaded")
+    }
+
+    @Override
+    void projectsEvaluated(Gradle gradle) {
+        println("BuildListener# projectsEvaluated")
+    }
+
+    @Override
+    void buildFinished(BuildResult buildResult) {
+        println("BuildListener# buildFinished")
+    }
+})
+
+gradle.taskGraph.whenReady {
+    println("taskGraph# build ready")
+}
+
+gradle.taskGraph.beforeTask {
+    println("taskGraph# $name beforeTask")
+}
+
+gradle.taskGraph.afterTask {
+    println("taskGraph# $name afterTask")
+}
+
+gradle.beforeProject {
+    println("project# $name beforeProject")
+}
+
+gradle.afterProject {
+    println("project# $name afterProject")
+}
