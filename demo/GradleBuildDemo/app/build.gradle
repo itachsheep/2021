@@ -72,7 +72,7 @@ gradle.addBuildListener(new BuildListener() {
     }
 })
 
-gradle.taskGraph.whenReady {
+/*gradle.taskGraph.whenReady {
     println("taskGraph# build ready")
 }
 
@@ -82,7 +82,7 @@ gradle.taskGraph.beforeTask {
 
 gradle.taskGraph.afterTask {
     println("taskGraph# $name afterTask")
-}
+}*/
 
 gradle.beforeProject {
     println("project# $name beforeProject")

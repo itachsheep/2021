@@ -24,3 +24,19 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+task hello {
+    doLast {
+        println("hello world!!")
+
+        4.times {
+            println("$it")
+        }
+    }
+}
+
+task intro(dependsOn: hello) {
+    doLast {
+        println("this is task intro ")
+    }
+}
