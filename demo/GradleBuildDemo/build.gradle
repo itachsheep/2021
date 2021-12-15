@@ -12,6 +12,8 @@ buildscript {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
+
+
 }
 
 allprojects {
@@ -25,7 +27,7 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-task hello {
+task ahello {
     doLast {
         println("hello world!!")
 
@@ -35,8 +37,20 @@ task hello {
     }
 }
 
-task intro(dependsOn: hello) {
+task aIntro(dependsOn: ahello) {
     doLast {
         println("this is task intro ")
     }
 }
+
+4.times { counter ->
+    task "aTask$counter" {
+        doLast {
+            println "I'm task number $counter"
+        }
+
+    }
+}
+//task0.dependsOn task2, task3
+aTask0.dependsOn(aTask1,aTask2,aTask3)
+apply from: "jichu.gradle"

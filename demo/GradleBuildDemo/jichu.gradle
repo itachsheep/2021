@@ -1,0 +1,9 @@
+task myTask {
+    ext.userName = "tao"
+}
+
+task printTaskProperty {
+    doLast {
+        println("userName -----> ${myTask.userName}")
+    }
+}
