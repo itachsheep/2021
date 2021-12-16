@@ -1,2 +1,3 @@
+//include(':my_java_lib')
 include ':app'
 rootProject.name = "GradleBuildDemo"
