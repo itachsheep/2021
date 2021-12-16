@@ -7,3 +7,17 @@ task printTaskProperty {
         println("userName -----> ${myTask.userName}")
     }
 }
+
+task loadfile {
+    doLast {
+        def mFiles = file("antLoadfileResources").listFiles().sort()
+        mFiles.each {File temp ->
+            if(temp.isFile()) {
+                ant.loadfile(srcFile:temp, property: temp.name)
+                println " *** $temp.name ***"
+                println "${ant.properties[temp.name]}"
+            }
+        }
+    }
+
+}
