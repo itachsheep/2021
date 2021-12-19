@@ -1,0 +1,17 @@
+
+task myCopy(type: Copy) {
+    println("myCopy ---> start")
+    from("copyFrom")
+    into("dest")
+    include("*.txt")
+}
+task buy {
+    doLast {
+        println(" ----> buy")
+    }
+}
+task sell {
+    doLast {
+        println (" ----> sell")
+    }
+}

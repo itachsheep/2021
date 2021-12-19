@@ -26,3 +26,16 @@ task dist(dependsOn: [test2, test1]) {
         println("userName = ${userName}")
     }
 }
+
+tasks.create(name: 'copy', type: Copy) {
+    doLast {
+        def srcDir = './src'
+        println("buildDir = $buildDir, srcDir = $srcDir")
+        from(file(srcDir))
+        into(buildDir)
+    }
+}
+
+println (" ----->  ${project.dist.name}")
+println (" ----->  ${project.test1.name}")
+println (" ----->  ${tasks.dist.name}")
