@@ -1,6 +1,6 @@
 
 task myCopy(type: Copy) {
-    println("myCopy ---> start")
+   // println("myCopy ---> start")
     from("copyFrom")
     into("dest")
     include("*.txt")
@@ -15,3 +15,31 @@ task sell {
         println (" ----> sell")
     }
 }
+
+
+buy.dependsOn("sell")
+task lib1 {
+    doLast {
+        println (" ----> lib1 ")
+    }
+}
+
+task lib2 {
+    doLast {
+        println (" ----> lib2 ")
+    }
+}
+
+task cacu1 {
+    doLast {
+        println (" ----> cacu1 ")
+    }
+}
+
+sell.dependsOn{
+    tasks.findAll { task ->
+        task.name.startsWith("lib") || task.name.startsWith("cacu")
+    }
+}
+
+lib1.mustRunAfter(lib2)

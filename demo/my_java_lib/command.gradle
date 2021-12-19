@@ -35,7 +35,7 @@ tasks.create(name: 'copy', type: Copy) {
         into(buildDir)
     }
 }
-
-println (" ----->  ${project.dist.name}")
-println (" ----->  ${project.test1.name}")
-println (" ----->  ${tasks.dist.name}")
+//
+//println (" ----->  ${project.dist.name}")
+//println (" ----->  ${project.test1.name}")
+//println (" ----->  ${tasks.dist.name}")
