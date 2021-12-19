@@ -17,8 +17,12 @@ task test1(dependsOn: [test2, test3]) {
     }
 }
 
+defaultTasks('dist')
+
 task dist(dependsOn: [test2, test1]) {
     doLast {
         println 'building the distribution'
+        println("email = ${userEmail} ")
+        println("userName = ${userName}")
     }
 }

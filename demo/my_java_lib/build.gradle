@@ -1,5 +1,9 @@
 apply plugin: "java"
 
+ext {
+    userEmail = 'itach@163.com'
+    userName = 'itach'
+}
 repositories {
     mavenCentral()
 }
