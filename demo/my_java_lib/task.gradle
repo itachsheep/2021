@@ -43,3 +43,15 @@ sell.dependsOn{
 }
 
 lib1.mustRunAfter(lib2)
+
+task find() {
+    doLast {
+        println("find -->")
+    }
+}
+
+task find(overwrite: true) {
+    doLast {
+        println(" find new --->")
+    }
+}
