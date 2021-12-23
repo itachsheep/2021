@@ -50,8 +50,18 @@ task find() {
     }
 }
 
-task find(overwrite: true) {
+tasks.create("find2") {
     doLast {
-        println(" find new --->")
+        println(" find2 --->")
+    }
+}
+
+//./gradlew -PcmdLineProp=123 printProps
+task printProps() {
+    doLast {
+        println cmdLineProp
+        println gradlePropertiesProp
+        println envProjectProp
+        println System.properties['system']
     }
 }
