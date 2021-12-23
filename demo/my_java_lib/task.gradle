@@ -58,6 +58,14 @@ tasks.create("find2") {
 
 //./gradlew -PcmdLineProp=123 printProps
 task printProps() {
+    logger.lifecycle("logger printProps ---->")
+    logger.quiet('An info log message which is always logged.')
+    logger.error('An error log message.')
+    logger.warn('A warning log message.')
+    logger.lifecycle('A lifecycle info log message.')
+    logger.info('An info log message.')
+    logger.debug('A debug log message.')
+    logger.trace('A trace log message.')
     doLast {
         println cmdLineProp
         println gradlePropertiesProp
