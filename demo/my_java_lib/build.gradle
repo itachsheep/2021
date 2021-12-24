@@ -4,12 +4,20 @@ ext {
     userEmail = 'itach@163.com'
     userName = 'itach'
 }
+
+buildscript {
+    dependencies {
+    }
+}
+
 repositories {
     mavenCentral()
+    google()
 }
 dependencies {
     compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
     testCompile group: 'junit', name: 'junit', version: '4.+'
+    compile 'com.android.tools.build:gradle:3.0.1'
 }
 //测试阶段加入一个系统属性
 //todo: 实际貌似没有加入成功
