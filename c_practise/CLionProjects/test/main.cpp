@@ -52,7 +52,9 @@ void test_p() {
 }
 
 int main() {
-    test_p();
+    //test_p();
+
+    cout << "hello 2022!! " << endl;
     return 0;
 }
 
