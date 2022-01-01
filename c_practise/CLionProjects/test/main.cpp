@@ -43,9 +43,16 @@ void test_pi() {
     cout << a << endl;
 }
 
+
+void test_p() {
+    char *p = "world";
+    cout << *p << endl;
+    p[1] = 'A';
+    cout << *p << endl;
+}
+
 int main() {
-    test_pi();
-    test_c();
+    test_p();
     return 0;
 }
 
