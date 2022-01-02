@@ -1,5 +1,47 @@
 
 
+-2022.1.2
+
+未来发展应该是高质量发展，元宇宙，智能机器人，ai智能训练模型，大数据
+元宇宙依赖的应该是 游戏引擎，opengl，可能会涉及到视频直播之类
+
+未来5G发展，车联网，万物互联，网速变快，可能会导致视频直播相关取代主流文字的表达方式
+
+音视频学习规划参考
+
+鸿杨 https://mp.weixin.qq.com/s?__biz=MzAxMTI4MTkwNQ==&mid=2650826247&idx=1&sn=b25846e36cb43ba7ea8b1ce694e9690d&chksm=80b7b299b7c03b8fec61fdf33de9b8e75be4086238a1e34a8cba880bcff23aac33a6686f6481&scene=21#wechat_redirect
+
+匿名 https://www.sohu.com/a/423088535_611601
+
+入门
+  audioTrack
+  pcm
+  camera API
+  MediaCodec
+中级
+  opengles
+  绘制
+  使用投影
+  添加运动
+  响应触摸
+  ...
+
+高级（进阶）
+  ffmpeg工具使用
+  ffmpeg安装 移植
+  ffmpeg结构体学习
+  rtmp推流
+
+
+道阻且长，你是否有勇气接下去！！！
+未来视频直播领域可能是重点。
+未来c c++作用可能很大
+未来游戏娱乐方式更加多样，
+
+
+
+
+-2021.12.29
 1，熟悉flutter
 2，c++ 语法开始
 
