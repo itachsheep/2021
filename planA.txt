@@ -13,6 +13,8 @@
 
 匿名 https://www.sohu.com/a/423088535_611601
 
+知乎： https://zhuanlan.zhihu.com/p/419624852 字节 Android 音视频开发进阶指南
+
 入门
   audioTrack
   pcm
