@@ -2,7 +2,7 @@
 #include "common.h"
 
 #include "hello.c"
-
+#include "simplest_mediadata_raw.cpp"
 using namespace std;
 
 
@@ -54,11 +54,13 @@ void test_pi() {
 
 int main() {
     //test_p();
+    //printSize();
 
-    cout << "hello 2022!! " << endl;
-    printHello();
+    simplest_yuv420_split("lena_256x256_yuv420p.yuv",256,256,1);
     return 0;
 }
+
+
 
 
 
