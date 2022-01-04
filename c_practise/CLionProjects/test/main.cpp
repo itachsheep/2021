@@ -1,11 +1,12 @@
 #include <iostream>
 #include "common.h"
 
+#include "hello.c"
+
 using namespace std;
 
 
 extern int globe;
-
 extern void func();
 
 void test() {
@@ -44,17 +45,18 @@ void test_pi() {
 }
 
 
-void test_p() {
+/*void test_p() {
     char *p = "world";
     cout << *p << endl;
     p[1] = 'A';
     cout << *p << endl;
-}
+}*/
 
 int main() {
     //test_p();
 
     cout << "hello 2022!! " << endl;
+    printHello();
     return 0;
 }
 
