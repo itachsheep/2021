@@ -2,13 +2,12 @@
 #include "common.h"
 
 #include "hello.c"
-#include "simplest_mediadata_raw.cpp"
 using namespace std;
 
 
 extern int globe;
 extern void func();
-
+extern int simplest_yuv420_split(char *url, int w, int h ,int num);
 void test() {
     std::cout << "Hello, World!" << std::endl;
     std::cout << "Hello, World11111!" << std::endl;
@@ -55,8 +54,10 @@ void test_pi() {
 int main() {
     //test_p();
     //printSize();
-
-    simplest_yuv420_split("lena_256x256_yuv420p.yuv",256,256,1);
+    string path = "/Users/weitao/f/2021/c_practise/CLionProjects/test/lena_256x256_yuv420p.yuv";
+    char *p = (char * )path.data();
+    int res = simplest_yuv420_split(p,256,256,1);
+    cout << "res = " << res << endl;
     return 0;
 }
 
