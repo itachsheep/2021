@@ -7,7 +7,12 @@ using namespace std;
 
 extern int globe;
 extern void func();
+
+extern string CUR_DIR;
 extern int simplest_yuv420_split(char *url, int w, int h ,int num);
+extern int simplest_yuv420_gray(char *url, int w, int h, int num);
+extern void copyFile(char *url);
+
 void test() {
     std::cout << "Hello, World!" << std::endl;
     std::cout << "Hello, World11111!" << std::endl;
@@ -51,13 +56,31 @@ void test_pi() {
     cout << *p << endl;
 }*/
 
-int main() {
-    //test_p();
-    //printSize();
+//char *source_yuv = (char *)(CUR_DIR + "lena_256x256_yuv420p.yuv").c_str();
+
+
+void test_simplest_yuv420_split() {
     string path = "/Users/weitao/f/2021/c_practise/CLionProjects/test/lena_256x256_yuv420p.yuv";
     char *p = (char * )path.data();
     int res = simplest_yuv420_split(p,256,256,1);
     cout << "res = " << res << endl;
+}
+
+void test_simplest_yuv420_gray() {
+    char *source = (char *)(CUR_DIR + "lena_256x256_yuv420p.yuv").c_str();
+    simplest_yuv420_gray(source, 256, 256, 1);
+
+}
+
+void test_copyFile() {
+    char *source_yuv = (char *)(CUR_DIR + "lena_256x256_yuv420p.yuv").c_str();
+    copyFile(source_yuv);
+}
+
+
+int main() {
+    //test_simplest_yuv420_gray();
+
     return 0;
 }
 

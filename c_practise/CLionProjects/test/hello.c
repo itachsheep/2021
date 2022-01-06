@@ -27,4 +27,5 @@ int printSize() {
     //long 4/8 字节
     printf("long 存储大小: %lu \n", sizeof(long));
     printf("unsinged long 存储大小: %lu \n", sizeof(unsigned long));
+    return 0;
 }
