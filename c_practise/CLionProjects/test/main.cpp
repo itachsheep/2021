@@ -48,17 +48,6 @@ void test_pi() {
     cout << a << endl;
 }
 
-
-/*void test_p() {
-    char *p = "world";
-    cout << *p << endl;
-    p[1] = 'A';
-    cout << *p << endl;
-}*/
-
-//char *source_yuv = (char *)(CUR_DIR + "lena_256x256_yuv420p.yuv").c_str();
-
-
 void test_simplest_yuv420_split() {
     string path = "/Users/weitao/f/2021/c_practise/CLionProjects/test/lena_256x256_yuv420p.yuv";
     char *p = (char * )path.data();
@@ -69,7 +58,6 @@ void test_simplest_yuv420_split() {
 void test_simplest_yuv420_gray() {
     char *source = (char *)(CUR_DIR + "lena_256x256_yuv420p.yuv").c_str();
     simplest_yuv420_gray(source, 256, 256, 1);
-
 }
 
 void test_copyFile() {
@@ -79,7 +67,7 @@ void test_copyFile() {
 
 
 int main() {
-    //test_simplest_yuv420_gray();
+    test_simplest_yuv420_gray();
 
     return 0;
 }

@@ -46,27 +46,26 @@ int simplest_yuv420_split(char *url, int w, int h, int num) {
 int simplest_yuv420_gray(char *url, int w, int h, int num) {
 
     FILE *fp = fopen(url, "rb+");
-    char *p = (char *) (CUR_DIR + "output_gray.yuv").c_str();
+    char *p = (char *) (CUR_DIR + "gray_3" + OUTPUT_YUV_SUFFIX).c_str();
     FILE *fp_output = fopen(p, "wb+");
 
-//如果视频帧的宽和高分别为w和h，那么一帧YUV420P像素数据一共占用w*h*3/2 Byte的数据。
+    //如果视频帧的宽和高分别为w和h，那么一帧YUV420P像素数据一共占用w*h*3/2 Byte的数据。
     // 其中前w*h Byte存储Y，接着的w*h*1/4 Byte存储U，最后w*h*1/4 Byte存储V
     unsigned char *pic = (unsigned char * )malloc( w * h * 3 / 2);
 
-    cout << "gray 11" << endl;
     for (int i = 0; i < num; ++i) {
         fread(pic, 1 , w * h * 3 / 2, fp);
-        cout << "gray 22" << endl;
+
         //gray
         //从pic + w * h 指针位置开始，往后的n个字节用 128 替换并且返回，pic + w * h指针
-        //memset(pic + w * h, 128, w * h / 4);
+        memset(pic + w * h, 0, w * h / 4);
         //如果想把YUV格式像素数据变成灰度图像，只需要将U、V分量设置成128即可。这是因为U、V是图像中的经过偏置处理的色度分量。
         // 色度分量在偏置处理前的取值范围是-128至127，这时候的无色对应的是“0”值。
         // 经过偏置后色度分量取值变成了0至255，因而此时的无色对应的就是128了。
-        cout << "gray 33" << endl;
+
         fwrite(pic,1, w * h * 3 / 2, fp_output);
     }
-    cout << "gray 44" << endl;
+
     free(pic);
     fclose(fp);
     fclose(fp_output);
