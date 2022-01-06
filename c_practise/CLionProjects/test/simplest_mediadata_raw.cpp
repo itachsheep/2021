@@ -23,7 +23,7 @@ int simplest_yuv420_split(char *url, int w, int h, int num) {
 
     for (int i = 0; i < num; ++i) {
         cout << "start 222" << endl;
-        //函数每次从stream中最多读取count个单元，每个单元大小为size个字节，
+        //函数每次从stream中最多读取 nitems 个单元，每个单元大小为size个字节，
         // 将读取的数据放到buffer；文件流的位置指针后移 size * count 字节。
         fread(pic, 1, w * h * 3 / 2, fp);
         cout << "start 33" << endl;
@@ -70,6 +70,31 @@ int simplest_yuv420_gray(char *url, int w, int h, int num) {
     fclose(fp);
     fclose(fp_output);
     return 0;
+}
+
+void simplest_yuv_420_border(char *url, int w, int h,int border, int num) {
+    unsigned int yuvSize = w * h * 3 / 2;
+
+    FILE *fp_in = fopen(url, "rb+");
+    char *p = (char *) (CUR_DIR + "border" + OUTPUT_YUV_SUFFIX).c_str();
+    FILE *fp_out = fopen(p, "wb+");
+
+    unsigned char *pic = (unsigned char *) malloc( yuvSize);
+    for (int i = 0; i < num; ++i) {
+        fread(pic,1, yuvSize, fp_in);
+        for (int j = 0; j < h; ++j) {
+            for (int k = 0; k < w; ++k) {
+                if(k < border || k > w - border || j < border || j > h - border) {
+                    pic[j * w + k] = 255;
+                }
+            }
+        }
+        fwrite(pic, 1, yuvSize, fp_out);
+    }
+    free(pic);
+    fclose(fp_in);
+    fclose(fp_out);
+
 }
 
 void copyFile(char *url) {

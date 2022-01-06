@@ -12,6 +12,7 @@ extern string CUR_DIR;
 extern int simplest_yuv420_split(char *url, int w, int h ,int num);
 extern int simplest_yuv420_gray(char *url, int w, int h, int num);
 extern void copyFile(char *url);
+extern void simplest_yuv_420_border(char *url, int w, int h,int border, int num);
 
 void test() {
     std::cout << "Hello, World!" << std::endl;
@@ -65,10 +66,15 @@ void test_copyFile() {
     copyFile(source_yuv);
 }
 
+void test_simplest_yuv_420_border() {
+    char *source_yuv = (char *)(CUR_DIR + "lena_256x256_yuv420p.yuv").c_str();
+    simplest_yuv_420_border(source_yuv,256,256,20,1);
+}
 
 int main() {
-    test_simplest_yuv420_gray();
+    //test_simplest_yuv420_gray();
 
+    test_simplest_yuv_420_border();
     return 0;
 }
 
