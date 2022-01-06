@@ -8,11 +8,12 @@ using namespace std;
 extern int globe;
 extern void func();
 
-extern string CUR_DIR;
+extern string CUR_RES_DIR;
 extern int simplest_yuv420_split(char *url, int w, int h ,int num);
 extern int simplest_yuv420_gray(char *url, int w, int h, int num);
 extern void copyFile(char *url);
 extern void simplest_yuv_420_border(char *url, int w, int h,int border, int num);
+extern int simplest_rgb24_split(char *url, int w, int h, int num);
 
 void test() {
     std::cout << "Hello, World!" << std::endl;
@@ -57,24 +58,31 @@ void test_simplest_yuv420_split() {
 }
 
 void test_simplest_yuv420_gray() {
-    char *source = (char *)(CUR_DIR + "lena_256x256_yuv420p.yuv").c_str();
+    char *source = (char *)(CUR_RES_DIR + "lena_256x256_yuv420p.yuv").c_str();
     simplest_yuv420_gray(source, 256, 256, 1);
 }
 
 void test_copyFile() {
-    char *source_yuv = (char *)(CUR_DIR + "lena_256x256_yuv420p.yuv").c_str();
+    char *source_yuv = (char *)(CUR_RES_DIR + "lena_256x256_yuv420p.yuv").c_str();
     copyFile(source_yuv);
 }
 
 void test_simplest_yuv_420_border() {
-    char *source_yuv = (char *)(CUR_DIR + "lena_256x256_yuv420p.yuv").c_str();
+    char *source_yuv = (char *)(CUR_RES_DIR + "lena_256x256_yuv420p.yuv").c_str();
     simplest_yuv_420_border(source_yuv,256,256,20,1);
+}
+
+void test_simplest_rgb24_split() {
+    char *source_yuv = (char *)(CUR_RES_DIR + "cie1931_500x500.rgb").c_str();
+    simplest_rgb24_split(source_yuv,500, 500,1);
 }
 
 int main() {
     //test_simplest_yuv420_gray();
+    //test_simplest_yuv_420_border();
 
-    test_simplest_yuv_420_border();
+    test_simplest_rgb24_split();
+
     return 0;
 }
 

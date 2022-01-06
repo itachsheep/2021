@@ -7,8 +7,10 @@
 
 using namespace std;
 
-string CUR_DIR = "/Users/weitao/f/2021/c_practise/CLionProjects/test/res";
+string CUR_RES_DIR = "/Users/weitao/f/2021/c_practise/CLionProjects/test/res/";
+string TARGET_RES_DIR = "/Users/weitao/f/2021/c_practise/CLionProjects/test/tmp/";
 const string OUTPUT_YUV_SUFFIX = "_output_256x256_yuv420p.yuv";
+const string OUTPUT_RGB_SUFFIX = "_output_500x500.rgb";
 
 int simplest_yuv420_split(char *url, int w, int h, int num) {
     cout << "start" << endl;
@@ -46,15 +48,15 @@ int simplest_yuv420_split(char *url, int w, int h, int num) {
 int simplest_yuv420_gray(char *url, int w, int h, int num) {
 
     FILE *fp = fopen(url, "rb+");
-    char *p = (char *) (CUR_DIR + "gray_3" + OUTPUT_YUV_SUFFIX).c_str();
+    char *p = (char *) (TARGET_RES_DIR + "gray_3" + OUTPUT_YUV_SUFFIX).c_str();
     FILE *fp_output = fopen(p, "wb+");
 
     //如果视频帧的宽和高分别为w和h，那么一帧YUV420P像素数据一共占用w*h*3/2 Byte的数据。
     // 其中前w*h Byte存储Y，接着的w*h*1/4 Byte存储U，最后w*h*1/4 Byte存储V
-    unsigned char *pic = (unsigned char * )malloc( w * h * 3 / 2);
+    unsigned char *pic = (unsigned char *) malloc(w * h * 3 / 2);
 
     for (int i = 0; i < num; ++i) {
-        fread(pic, 1 , w * h * 3 / 2, fp);
+        fread(pic, 1, w * h * 3 / 2, fp);
 
         //gray
         //从pic + w * h 指针位置开始，往后的n个字节用 128 替换并且返回，pic + w * h指针
@@ -63,7 +65,7 @@ int simplest_yuv420_gray(char *url, int w, int h, int num) {
         // 色度分量在偏置处理前的取值范围是-128至127，这时候的无色对应的是“0”值。
         // 经过偏置后色度分量取值变成了0至255，因而此时的无色对应的就是128了。
 
-        fwrite(pic,1, w * h * 3 / 2, fp_output);
+        fwrite(pic, 1, w * h * 3 / 2, fp_output);
     }
 
     free(pic);
@@ -72,19 +74,19 @@ int simplest_yuv420_gray(char *url, int w, int h, int num) {
     return 0;
 }
 
-void simplest_yuv_420_border(char *url, int w, int h,int border, int num) {
+void simplest_yuv_420_border(char *url, int w, int h, int border, int num) {
     unsigned int yuvSize = w * h * 3 / 2;
 
     FILE *fp_in = fopen(url, "rb+");
-    char *p = (char *) (CUR_DIR + "border" + OUTPUT_YUV_SUFFIX).c_str();
+    char *p = (char *) (TARGET_RES_DIR + "border" + OUTPUT_YUV_SUFFIX).c_str();
     FILE *fp_out = fopen(p, "wb+");
 
-    unsigned char *pic = (unsigned char *) malloc( yuvSize);
+    unsigned char *pic = (unsigned char *) malloc(yuvSize);
     for (int i = 0; i < num; ++i) {
-        fread(pic,1, yuvSize, fp_in);
+        fread(pic, 1, yuvSize, fp_in);
         for (int j = 0; j < h; ++j) {
             for (int k = 0; k < w; ++k) {
-                if(k < border || k > w - border || j < border || j > h - border) {
+                if (k < border || k > w - border || j < border || j > h - border) {
                     pic[j * w + k] = 255;
                 }
             }
@@ -97,19 +99,63 @@ void simplest_yuv_420_border(char *url, int w, int h,int border, int num) {
 
 }
 
+
 void copyFile(char *url) {
     cout << "url = " << url << endl;
-    FILE *in = fopen(url,"rb+");
-    FILE *out = fopen((char *)(CUR_DIR + "copy" +OUTPUT_YUV_SUFFIX).c_str(),"wb+");
+    FILE *in = fopen(url, "rb+");
+    FILE *out = fopen((char *) (TARGET_RES_DIR + "copy" + OUTPUT_YUV_SUFFIX).c_str(), "wb+");
 
     const int buffSize = 2048;
     unsigned char buff[buffSize];
     int readCount = 0;
     while (!feof(in)) {
-        readCount = fread(buff,sizeof(unsigned char),buffSize,in);
+        readCount = fread(buff, sizeof(unsigned char), buffSize, in);
         cout << "count = " << readCount << endl;
-        fwrite(buff,sizeof(unsigned char),readCount,out);
+        fwrite(buff, sizeof(unsigned char), readCount, out);
     }
     fclose(in);
     fclose(out);
+}
+
+int simplest_rgb24_split(char *url, int w, int h, int num) {
+    FILE *fp = fopen(url, "rb+");
+    FILE *fp1 = fopen((TARGET_RES_DIR + "r_" + OUTPUT_RGB_SUFFIX).c_str(), "wb+");
+    FILE *fp2 = fopen((TARGET_RES_DIR + "g_" + OUTPUT_RGB_SUFFIX).c_str(), "wb+");
+    FILE *fp3 = fopen((TARGET_RES_DIR + "b_" + OUTPUT_RGB_SUFFIX).c_str(), "wb+");
+
+    unsigned char *pic = (unsigned char *) malloc(w * h * 3);
+
+    unsigned char fill[1] = {0};
+
+    for (int i = 0; i < num; i++) {
+
+        fread(pic, 1, w * h * 3, fp);
+
+        for (int j = 0; j < w * h * 3; j = j + 3) {
+            //R
+            fwrite(pic + j, 1, 1, fp1);
+            fwrite(fill,1,1,fp1);
+            fwrite(fill,1,1,fp1);
+
+            //G
+            fwrite(fill,1,1,fp2);
+            fwrite(pic + j + 1, 1, 1, fp2);
+            fwrite(fill,1,1,fp2);
+
+            //B
+            fwrite(fill,1,1,fp3);
+            fwrite(fill,1,1,fp3);
+            fwrite(pic + j + 2, 1, 1, fp3);
+
+        }
+        cout << endl;
+    }
+
+    free(pic);
+    fclose(fp);
+    fclose(fp1);
+    fclose(fp2);
+    fclose(fp3);
+
+    return 0;
 }
