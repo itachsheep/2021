@@ -7,7 +7,7 @@
 
 using namespace std;
 
-string CUR_DIR = "/Users/weitao/f/2021/c_practise/CLionProjects/test/";
+string CUR_DIR = "/Users/weitao/f/2021/c_practise/CLionProjects/test/res";
 const string OUTPUT_YUV_SUFFIX = "_output_256x256_yuv420p.yuv";
 
 int simplest_yuv420_split(char *url, int w, int h, int num) {
