@@ -2,6 +2,8 @@
 #include "common.h"
 
 #include "hello.c"
+#include "simplest_rgb_to_bmp.c"
+
 using namespace std;
 
 
@@ -9,6 +11,7 @@ extern int globe;
 extern void func();
 
 extern string CUR_RES_DIR;
+extern string TARGET_RES_DIR;
 extern int simplest_yuv420_split(char *url, int w, int h ,int num);
 extern int simplest_yuv420_gray(char *url, int w, int h, int num);
 extern void copyFile(char *url);
@@ -77,12 +80,19 @@ void test_simplest_rgb24_split() {
     simplest_rgb24_split(source_yuv,500, 500,1);
 }
 
+void test_simplest_rgb24_to_bmp() {
+    char *source = (char *)(CUR_RES_DIR + "lena_256x256_rgb24.rgb").c_str();
+//    char *out = (char *)(TARGET_RES_DIR + "output_lena.bmp").c_str();
+    simplest_rgb24_to_bmp(source,256,256);
+}
+
 int main() {
     //test_simplest_yuv420_gray();
     //test_simplest_yuv_420_border();
 
-    test_simplest_rgb24_split();
+    //test_simplest_rgb24_split();
 
+    test_simplest_rgb24_to_bmp();
     return 0;
 }
 
