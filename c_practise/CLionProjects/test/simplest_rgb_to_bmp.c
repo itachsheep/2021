@@ -44,7 +44,7 @@ int simplest_rgb24_to_bmp(char *rgb24path, int width, int height/*, char *bmppat
     fwrite(bfType, 1, sizeof(bfType), fp_bmp);
     fwrite(&m_BMPHeader, 1, sizeof(m_BMPHeader), fp_bmp);
     fwrite(&m_BMPInfoHeader, 1, sizeof(m_BMPInfoHeader), fp_bmp);
-
+    printf("write body \n");
     //BMP save R1|G1|B1,R2|G2|B2 as B1|G1|R1,B2|G2|R2
     //It saves pixel data in Little Endian
     //So we change 'R' and 'B'
@@ -55,6 +55,7 @@ int simplest_rgb24_to_bmp(char *rgb24path, int width, int height/*, char *bmppat
             rgb24_buffer[(j * width + i) * 3 + 0] = temp;
         }
     }
+    printf("write body2 \n");
     fwrite(rgb24_buffer, 3 * width * height, 1, fp_bmp);
     fclose(fp_rgb24);
     fclose(fp_bmp);

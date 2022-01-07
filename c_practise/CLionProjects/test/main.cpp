@@ -3,7 +3,7 @@
 
 #include "hello.c"
 #include "simplest_rgb_to_bmp.c"
-
+#include "simplest_rgb_to_yuv.h"
 using namespace std;
 
 
@@ -86,13 +86,36 @@ void test_simplest_rgb24_to_bmp() {
     simplest_rgb24_to_bmp(source,256,256);
 }
 
+void test_pass_param() {
+    string s1 = CUR_RES_DIR + "111";
+    string s2 = CUR_RES_DIR + "222";
+    string s3 = CUR_RES_DIR + "333";
+    char *str1 = (char *)s1.c_str();
+    char *str2 = (char *)s2.c_str();
+    char *str3 = (char *)s3.c_str();
+
+//    test_pass_param("111","222","333");
+    test_pass_param(str1,str2,str3);
+}
+
+void test_simplest_rgb24_to_yuv420() {
+    string source = CUR_RES_DIR + "lena_256x256_rgb24.rgb";
+    string out = TARGET_RES_DIR + "output_256x256_yuv420p.yuv";
+    char *in = (char *)source.c_str();
+    char *output = (char *)out.c_str();
+    simplest_rgb24_to_yuv420(in,256,256,1,output);
+}
+
 int main() {
     //test_simplest_yuv420_gray();
     //test_simplest_yuv_420_border();
 
     //test_simplest_rgb24_split();
 
-    test_simplest_rgb24_to_bmp();
+    //test_simplest_rgb24_to_bmp();
+
+    test_simplest_rgb24_to_yuv420();
+
     return 0;
 }
 
