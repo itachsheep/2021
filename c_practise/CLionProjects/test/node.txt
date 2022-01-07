@@ -1,0 +1,6 @@
+
+
+#播放 pcm
+/Applications/VLC.app/Contents/MacOS/VLC --demux=rawaud --rawaud-channels 2 --rawaud-samplerate 44100 ./res/record.pcm
+
+/Applications/VLC.app/Contents/MacOS/VLC --demux=rawaud --rawaud-channels 2 --rawaud-samplerate 44100 ./res/NocturneNo2inEflat_44.1k_s16le.pcm
