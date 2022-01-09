@@ -36,3 +36,17 @@ int test_sprintf() {
     printf("ss = %s \n",ss);
     return 0;
 }
+
+int test_pointer() {
+    char *buff = "123456789";
+    printf("buff[0] = %c \n",buff[0]);
+    buff++;
+    printf("buff[0] = %c \n",buff[0]);
+
+    return 0;
+}
+
+int test_pointer_param(int *data_size) {
+    *data_size = 100;
+    return 0;
+}

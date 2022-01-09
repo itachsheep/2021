@@ -7,6 +7,7 @@
 #include "pcm/simplest_pcm_split.h"
 #include "jichu/jichu_c_cpp.h"
 #include "h264/simplest_h264_parser.h"
+#include "aac/simplest_aac_parser.h"
 
 using namespace std;
 
@@ -142,8 +143,21 @@ void test_simplest_h264_parser() {
     simplest_h264_parser((char *)source.c_str());
 }
 
+void test_test_pointer_param() {
+    int num = 1;
+    int *a = &num;
+    cout << "a = " << *a << endl;
+    test_pointer_param(a);
+    cout << "a = " << *a << endl;
+}
+
+void test_simplest_aac_parse() {
+    string source = CUR_RES_DIR + "nocturne.aac";
+    simplest_aac_parse((char *)source.c_str());
+}
 int main() {
-    test_simplest_h264_parser();
+    test_simplest_aac_parse();
+
     return 0;
 }
 

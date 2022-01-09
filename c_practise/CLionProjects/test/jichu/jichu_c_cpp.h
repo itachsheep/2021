@@ -14,5 +14,7 @@ using namespace std;
 
 int test_calloc_malloc();
 int test_sprintf();
+int test_pointer();
+int test_pointer_param(int *data_size);
 
 #endif //TEST_JICHU_C_CPP_H
