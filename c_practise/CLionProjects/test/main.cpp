@@ -5,9 +5,9 @@
 #include "simplest_rgb_to_bmp.c"
 #include "simplest_rgb_to_yuv.h"
 #include "pcm/simplest_pcm_split.h"
+#include "jichu/jichu_c_cpp.h"
 
 using namespace std;
-
 
 extern int globe;
 
@@ -138,7 +138,7 @@ void test_simplest_pcm16le_cut_single_channel() {
 
 int main() {
 
-    test_simplest_pcm16le_cut_single_channel();
+    test_calloc_malloc();
 
     return 0;
 }
