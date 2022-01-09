@@ -13,5 +13,6 @@
 using namespace std;
 
 int test_calloc_malloc();
+int test_sprintf();
 
 #endif //TEST_JICHU_C_CPP_H

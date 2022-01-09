@@ -25,3 +25,14 @@ int test_calloc_malloc() {
     free(ip_b);
     return 0;
 }
+
+int test_sprintf() {
+    char s[40];
+    char *ss;
+    sprintf(s,"%s%d%c","test",100,'$');
+    printf("s = %s \n",s);
+
+    sprintf(ss,"%s%d%c","niubi",666,'#');
+    printf("ss = %s \n",ss);
+    return 0;
+}

@@ -6,6 +6,7 @@
 #include "simplest_rgb_to_yuv.h"
 #include "pcm/simplest_pcm_split.h"
 #include "jichu/jichu_c_cpp.h"
+#include "h264/simplest_h264_parser.h"
 
 using namespace std;
 
@@ -136,10 +137,13 @@ void test_simplest_pcm16le_cut_single_channel() {
                                         (char *) out_stat_txt.c_str(), 0, 10240);
 }
 
+void test_simplest_h264_parser() {
+    string source = CUR_RES_DIR + "sintel.h264";
+    simplest_h264_parser((char *)source.c_str());
+}
+
 int main() {
-
-    test_calloc_malloc();
-
+    test_simplest_h264_parser();
     return 0;
 }
 
