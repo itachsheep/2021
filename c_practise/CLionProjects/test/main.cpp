@@ -113,17 +113,17 @@ void test_simplest_pcm16le_split() {
     string right = TARGET_RES_DIR + "output_r.pcm";
     simplest_pcm16le_split((char *)source.c_str(),(char *)left.c_str(),(char *)right.c_str());
 }
+
+void test_simplest_pcm16le_doublespeed() {
+    string source = CUR_RES_DIR + "NocturneNo2inEflat_44.1k_s16le.pcm";
+    string out = TARGET_RES_DIR + "output_double_speed.pcm";
+    simplest_pcm16le_doublespeed((char *)source.c_str(),(char *)out.c_str());
+}
+
 int main() {
-    //test_simplest_yuv420_gray();
-    //test_simplest_yuv_420_border();
 
-    //test_simplest_rgb24_split();
+    test_simplest_pcm16le_doublespeed();
 
-    //test_simplest_rgb24_to_bmp();
-
-    //test_simplest_rgb24_to_yuv420();
-
-    test_simplest_pcm16le_split();
     return 0;
 }
 
