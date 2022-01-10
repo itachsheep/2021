@@ -1,0 +1,5 @@
+/cmake-build-debug
+/.idea
+/.idea/workspace.xml
+/tmp
+.DS_Store

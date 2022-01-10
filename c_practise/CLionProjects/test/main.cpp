@@ -10,6 +10,10 @@
 #include "aac/simplest_aac_parser.h"
 #include "flv/simplest_flv_parser.h"
 
+//测试引入静态库
+#include "include/library.h"
+#include "include/senior_play/play_video.h"
+
 using namespace std;
 
 extern int globe;
@@ -165,8 +169,16 @@ void test_simplest_flv_parser() {
                         (char *) out_video.c_str());
 }
 
+void test_call_library() {
+    string source = "res/video.mp3";
+    play_my_video((char *)source.c_str());
+    printf("\n");
+    int res = my_add(100,200);
+    printf("res = %d \n", res);
+
+}
 int main() {
-    test_simplest_flv_parser();
+    test_call_library();
     return 0;
 }
 

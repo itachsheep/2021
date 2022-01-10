@@ -10,7 +10,7 @@
 #include <string.h>
 
 //Important!
-#pragma pack(1)
+//#pragma pack(1)
 
 #define TAG_TYPE_SCRIPT 18
 #define TAG_TYPE_AUDIO  8
