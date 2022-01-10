@@ -1,4 +1,5 @@
-
+afh = fopen("output.mp3", "wb");  --  afh = fopen(out_audio, "wb");
+vfh = fopen("output.flv", "wb");  --  vfh = fopen(out_video, "wb");
 
 #播放 pcm
 /Applications/VLC.app/Contents/MacOS/VLC --demux=rawaud --rawaud-channels 2 --rawaud-samplerate 44100 ./res/record.pcm

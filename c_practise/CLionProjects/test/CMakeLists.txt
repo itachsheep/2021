@@ -14,5 +14,7 @@ add_executable(test
         pcm/simplest_pcm_split.cpp pcm/simplest_pcm_split.h
         h264/simplest_h264_parser.cpp h264/simplest_h264_parser.h
         jichu/jichu_c_cpp.cpp jichu/jichu_c_cpp.h
-        aac/simplest_aac_parser.cpp aac/simplest_aac_parser.h)
+        aac/simplest_aac_parser.cpp aac/simplest_aac_parser.h
+        flv/simplest_flv_parser.cpp flv/simplest_flv_parser.h
+        )
 #add_executable()

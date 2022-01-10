@@ -8,6 +8,7 @@
 #include "jichu/jichu_c_cpp.h"
 #include "h264/simplest_h264_parser.h"
 #include "aac/simplest_aac_parser.h"
+#include "flv/simplest_flv_parser.h"
 
 using namespace std;
 
@@ -140,7 +141,7 @@ void test_simplest_pcm16le_cut_single_channel() {
 
 void test_simplest_h264_parser() {
     string source = CUR_RES_DIR + "sintel.h264";
-    simplest_h264_parser((char *)source.c_str());
+    simplest_h264_parser((char *) source.c_str());
 }
 
 void test_test_pointer_param() {
@@ -153,11 +154,19 @@ void test_test_pointer_param() {
 
 void test_simplest_aac_parse() {
     string source = CUR_RES_DIR + "nocturne.aac";
-    simplest_aac_parse((char *)source.c_str());
+    simplest_aac_parse((char *) source.c_str());
 }
-int main() {
-    test_simplest_aac_parse();
 
+void test_simplest_flv_parser() {
+    string source = CUR_RES_DIR + "cuc_ieschool.flv";
+    string out_audio = TARGET_RES_DIR + "output_audio.mp3";
+    string out_video = TARGET_RES_DIR + "output_video.flv";
+    simplest_flv_parser((char *) source.c_str(), (char *) out_audio.c_str(),
+                        (char *) out_video.c_str());
+}
+
+int main() {
+    test_simplest_flv_parser();
     return 0;
 }
 
