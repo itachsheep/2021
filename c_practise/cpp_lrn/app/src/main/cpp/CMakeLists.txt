@@ -16,9 +16,10 @@ project("cpp_lrn")
 
 #音频渲染
 set(OpenSL ${CMAKE_SOURCE_DIR}/opensl)
-
+set(utils ${CMAKE_SOURCE_DIR}/utils)
 include_directories(
         ${OpenSL}
+        ${utils}
 )
 
 file(GLOB src_cpp
