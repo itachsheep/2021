@@ -17,15 +17,18 @@ project("cpp_lrn")
 #音频渲染
 set(OpenSL ${CMAKE_SOURCE_DIR}/opensl)
 set(utils ${CMAKE_SOURCE_DIR}/utils)
+set(test ${CMAKE_SOURCE_DIR}/test)
 include_directories(
         ${OpenSL}
         ${utils}
+        ${test}
         ${OpenSL}/opensl_audio_play.h
 
 )
 
 file(GLOB src_cpp
         ${OpenSL}/*.cpp
+        ${test}/*.cpp
         native-lib.cpp
 )
 
