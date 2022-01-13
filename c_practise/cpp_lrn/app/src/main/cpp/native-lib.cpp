@@ -23,8 +23,11 @@ Java_com_tao_cpp_1lrn_AudioPlay_nativeStopPcm(JNIEnv *env, jobject thiz) {
 
 extern "C" JNIEXPORT void JNICALL
 Java_com_tao_cpp_1lrn_AudioPlay_testFriend(JNIEnv *env, jobject thiz) {
-    Box box;
+    LogD("test_friend!!");
+    /*Box box;
     box.setWidth(100);
-    printWith(box);
+    printWith(box);*/
+
+    test_multi_dimensional_array();
 }
 

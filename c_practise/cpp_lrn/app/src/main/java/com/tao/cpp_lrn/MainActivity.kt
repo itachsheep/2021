@@ -2,6 +2,7 @@ package com.tao.cpp_lrn
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
@@ -24,5 +25,9 @@ class MainActivity : AppCompatActivity() {
         init {
             System.loadLibrary("audio_video")
         }
+    }
+
+    fun bt_test_friend(view: View) {
+        AudioPlay.testFriend();
     }
 }

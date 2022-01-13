@@ -15,4 +15,6 @@ public:
         LogD("printWidth box width = %d ",box.width);
     }
 };
+
+void test_multi_dimensional_array();
 #endif //CPP_LRN_BASE_C_H
