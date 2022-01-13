@@ -20,6 +20,8 @@ set(utils ${CMAKE_SOURCE_DIR}/utils)
 include_directories(
         ${OpenSL}
         ${utils}
+        ${OpenSL}/opensl_audio_play.h
+
 )
 
 file(GLOB src_cpp
