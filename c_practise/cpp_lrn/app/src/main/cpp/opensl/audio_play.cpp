@@ -3,3 +3,9 @@
 //
 
 #include "audio_play.h"
+
+void test_start() {
+    LogD("%s test_start",__FILE_NAME__);
+    OpenSLAudioPlay openSlAudioPlay(44100,16,1);
+    openSlAudioPlay.init();
+}

@@ -4,12 +4,13 @@
 
 #ifndef CPP_LRN_OPENSL_AUDIO_PLAY_H
 #define CPP_LRN_OPENSL_AUDIO_PLAY_H
+#include <pthread.h>
 #include "audio_engine.h"
 #define SAMPLE_FORMAT_16 16
 
 class OpenSLAudioPlay {
 private:
-    AudioEngine *audioEngine;
+    AudioEngine *mAudioEngine;
     SLObjectItf mPlayerObj;
     SLPlayItf  mPlayer;
     SLAndroidSimpleBufferQueueItf mBufferQueue;
