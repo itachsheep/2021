@@ -21,4 +21,18 @@
         android:layout_height="wrap_content"
         android:text="testFriend"
         android:textAllCaps="false"/>
+
+    <Button
+        android:onClick="bt_test_playPcm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="playPcm"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:onClick="bt_test_stopPcm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="stopPcm"
+        android:textAllCaps="false"/>
 </LinearLayout>
