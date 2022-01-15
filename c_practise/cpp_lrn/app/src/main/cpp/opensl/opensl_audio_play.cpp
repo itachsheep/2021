@@ -115,10 +115,83 @@ bool OpenSLAudioPlay::init() {
     // 4.2 设置回调 void playerCallback(SLAndroidSimpleBufferQueueItf bq, void *context)
     result = (*mBufferQueue)->RegisterCallback(mBufferQueue, playerCallback, this);
     if (result != SL_RESULT_SUCCESS) {
-        LogE("%s init failed 4: ", __FILE_NAME__);
+        LogE("%s init failed 5: ", __FILE_NAME__);
         return false;
     }
 
-    LogD("%s init ---->", __FILE_NAME__);
+    mEffectSend = nullptr;
+    if (mSampleRate == 0) {
+        result = (*mPlayerObj)->GetInterface(mPlayerObj, SL_IID_EFFECTSEND, &mEffectSend);
+        if (result != SL_RESULT_SUCCESS) {
+            LogE("%s init failed 6: ", __FILE_NAME__);
+            return false;
+        }
+    }
+    result = (*mPlayerObj)->GetInterface(mPlayerObj, SL_IID_VOLUME, &mVolume);
+    if (result != SL_RESULT_SUCCESS) {
+        LogE("%s init failed 7: ", __FILE_NAME__);
+        return false;
+    }
+
+    // TODO 第五大步：设置播放器状态为播放状态
+    result = (*mPlayer)->SetPlayState(mPlayer, SL_PLAYSTATE_PLAYING);
+    if (result != SL_RESULT_SUCCESS) {
+        LogE("%s init set play state failed ", __FILE_NAME__);
+        return false;
+    }
+    LogD("%s init finished ---->", __FILE_NAME__);
     return true;
 }
+
+void OpenSLAudioPlay::enqueueSample(void *data, size_t length) {
+    LogD("%s enqueueSample",__FILE_NAME__);
+    // 必须等待一帧音频播放完毕后才可以 Enqueue 第二帧音频
+    pthread_mutex_lock(&mMutex);
+    if (mBuffSize < length) {
+        mBuffSize = length;
+        if (mBuffers[0]) {
+            delete[] mBuffers[0];
+        }
+        if (mBuffers[1]) {
+            delete[] mBuffers[1];
+        }
+        mBuffers[0] = new uint8_t[mBuffSize];
+        mBuffers[1] = new uint8_t[mBuffSize];
+    }
+    memcpy(mBuffers[mIndex], data, length);
+    // TODO 第六步：手动激活回调函数
+    (*mBufferQueue)->Enqueue(mBufferQueue, mBuffers[mIndex], length);
+    mIndex = 1 - mIndex;
+}
+
+void OpenSLAudioPlay::release() {
+    LogD("%s release",__FILE_NAME__);
+    //释放资源
+    pthread_mutex_lock(&mMutex);
+    if(mPlayerObj) {
+        (*mPlayerObj)->Destroy(mPlayerObj);
+        mPlayerObj = nullptr;
+        mPlayer = nullptr;
+        mBufferQueue = nullptr;
+        mEffectSend = nullptr;
+        mVolume = nullptr;
+    }
+
+    if (mAudioEngine) {
+        delete mAudioEngine;
+        mAudioEngine = nullptr;
+    }
+
+    if (mBuffers[0]) {
+        delete[] mBuffers[0];
+        mBuffers[0] = nullptr;
+    }
+
+    if (mBuffers[1]) {
+        delete[] mBuffers[1];
+        mBuffers[1] = nullptr;
+    }
+    pthread_mutex_unlock(&mMutex);
+    pthread_mutex_destroy(&mMutex);
+}
+

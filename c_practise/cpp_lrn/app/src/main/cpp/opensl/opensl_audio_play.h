@@ -27,8 +27,14 @@ public:
     OpenSLAudioPlay(int sampleRate,int sampleFormat,int channels);
     bool init();
     void enqueueSample(void *data, size_t length);
+    void release();
     ~OpenSLAudioPlay();
-    friend void playerCallback();
+
+    // 一帧音频播放完毕后就会回调这个函数
+    friend void playerCallback(SLAndroidSimpleBufferQueueItf bq, void *context) {
+        OpenSLAudioPlay *player = (OpenSLAudioPlay *)context;
+        pthread_mutex_unlock(&player->mMutex);
+    }
 };
 
 #endif //CPP_LRN_OPENSL_AUDIO_PLAY_H

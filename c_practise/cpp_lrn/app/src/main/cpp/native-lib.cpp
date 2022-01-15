@@ -13,12 +13,12 @@ Java_com_tao_cpp_1lrn_MainActivity_stringFromJNI(
 
 extern "C" JNIEXPORT void JNICALL
 Java_com_tao_cpp_1lrn_AudioPlay_nativePlayPcm(JNIEnv *env, jobject thiz, jstring pcm_path) {
-
+    playPcm(env,pcm_path);
 }
 
 extern "C" JNIEXPORT void JNICALL
 Java_com_tao_cpp_1lrn_AudioPlay_nativeStopPcm(JNIEnv *env, jobject thiz) {
-
+    stopPcm();
 }
 
 extern "C" JNIEXPORT void JNICALL

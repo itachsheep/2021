@@ -13,6 +13,10 @@ private:
 public:
     void setWidth(int w);
 
+    Box(int w):width(w) {
+        LogD("Box cs");
+    }
+
     friend void printWith(Box box) {
         LogD( "%s printWidth box width = %d ", box.width,__FILE_NAME__);
     }
