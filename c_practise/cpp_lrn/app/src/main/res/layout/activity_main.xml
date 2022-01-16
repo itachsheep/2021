@@ -1,38 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="30dp"
-    android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/sample_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:textSize="20dp"
-        />
-    <Button
-        android:onClick="bt_test_friend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="testFriend"
-        android:textAllCaps="false"/>
+    <ScrollView
+        android:id="@+id/scroll_menu"
+        android:layout_width="80dp"
+        android:layout_height="match_parent">
 
-    <Button
-        android:onClick="bt_test_playPcm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="playPcm"
-        android:textAllCaps="false"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <Button
-        android:onClick="bt_test_stopPcm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="stopPcm"
-        android:textAllCaps="false"/>
-</LinearLayout>
+            <TextView
+                android:id="@+id/sample_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hello World!"
+                android:textSize="20dp" />
+
+            <Button
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="bt_test_friend"
+                android:text="testFriend"
+                android:textAllCaps="false" />
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="bt_test_playPcm"
+                android:text="playPcm"
+                android:textAllCaps="false" />
+
+            <Button
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="bt_test_stopPcm"
+                android:text="stopPcm"
+                android:textAllCaps="false" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="bt_test_playVideo"
+                android:text="playVideo"
+                android:textAllCaps="false" />
+        </LinearLayout>
+    </ScrollView>
+
+    <SurfaceView
+        android:id="@+id/surface"
+        android:layout_width="500dp"
+        android:layout_height="500dp"
+        android:layout_toRightOf="@id/scroll_menu" />
+
+</RelativeLayout>

@@ -1,0 +1,7 @@
+
+Oppo手机 
+
+Pcm mp3 等文件，需要push 或者上传到 
+/data/data/应用名/files 目录下，
+该目录就是 context.getfiledir目录，虽然打印的是/data/user/0/com.tao.cpp_lrn/files/
+实际重定向到 上面目录

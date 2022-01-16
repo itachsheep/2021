@@ -18,18 +18,20 @@ project("cpp_lrn")
 set(OpenSL ${CMAKE_SOURCE_DIR}/opensl)
 set(utils ${CMAKE_SOURCE_DIR}/utils)
 set(test ${CMAKE_SOURCE_DIR}/test)
+set(gles ${CMAKE_SOURCE_DIR}/gles)
 include_directories(
         ${OpenSL}
         ${utils}
         ${test}
-        ${OpenSL}/opensl_audio_play.h
-
+        ${gles}
 )
 
 file(GLOB src_cpp
         ${OpenSL}/*.cpp
         ${test}/*.cpp
+        ${gles}/*.cpp
         native-lib.cpp
+        ${gles}/gles_core.cpp
 )
 
 add_library( # Sets the name of the library.
@@ -58,6 +60,10 @@ set(native-libs
         android
         OpenSLES
         log
+        #OpenGL 与 NativeWindow 连接本地窗口的中间者
+        EGL
+        #视频渲染
+        GLESv2
 )
 
 # Specifies libraries CMake should link to your target library. You

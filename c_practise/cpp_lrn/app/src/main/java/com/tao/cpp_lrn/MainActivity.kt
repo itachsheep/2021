@@ -4,6 +4,8 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Environment
+import android.view.Surface
+import android.view.SurfaceView
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -15,14 +17,14 @@ class MainActivity : AppCompatActivity() {
     private val REQUEST_OK = 10001
     private val tag = "MainActivity"
     private val request_permission = arrayOf(
-        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-        Manifest.permission.READ_EXTERNAL_STORAGE
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE
     )
 
     fun checkPermission(permissions: Array<String>): Boolean {
         for (permission in permissions) {
             if (ActivityCompat.checkSelfPermission(this, permission!!)
-                != PackageManager.PERMISSION_GRANTED
+                    != PackageManager.PERMISSION_GRANTED
             ) {
                 return false
             }
@@ -32,14 +34,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String?>,
-        grantResults: IntArray
+            requestCode: Int,
+            permissions: Array<String?>,
+            grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         LogUtils.d(
-            tag,
-            "onRequestPermissionsResult: $requestCode"
+                tag,
+                "onRequestPermissionsResult: $requestCode"
         )
         if (requestCode != REQUEST_OK) {
             Toast.makeText(this, "权限申请失败", Toast.LENGTH_LONG).show()
@@ -51,9 +53,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         if (!checkPermission(request_permission)) {
             ActivityCompat.requestPermissions(
-                this,
-                request_permission,
-                REQUEST_OK
+                    this,
+                    request_permission,
+                    REQUEST_OK
             )
         }
         // Example of a call to a native method
@@ -83,13 +85,13 @@ class MainActivity : AppCompatActivity() {
         //val path = Environment.getExternalStorageDirectory().absolutePath + "/111/test.pcm"
         val path = filesDir.absolutePath + "/test.pcm"
 
-        LogUtils.d(tag,"pcm file path  = " + path)
+        LogUtils.d(tag, "pcm file path  = " + path)
         val file = File(path)
         if (!file.exists()) {
             Toast.makeText(this, "pcm文件不存在", Toast.LENGTH_SHORT).show()
             return
-        } else  {
-            LogUtils.d(tag,"pcm file exist: " + file.absolutePath)
+        } else {
+            LogUtils.d(tag, "pcm file exist: " + file.absolutePath)
         }
         AudioPlay.nativePlayPcm(path)
     }
@@ -97,5 +99,14 @@ class MainActivity : AppCompatActivity() {
 
     fun bt_test_stopPcm(view: View) {
         AudioPlay.nativeStopPcm()
+    }
+
+    fun bt_test_playVideo(view: View) {
+        val surfaceView: SurfaceView = findViewById(R.id.surface)
+        val videoPath = filesDir.absolutePath + "/yuvtest.yuv"
+        val thread = Thread {
+            AudioPlay.nativePlayVideo(videoPath, surfaceView.holder.surface)
+        }
+        thread.start()
     }
 }
