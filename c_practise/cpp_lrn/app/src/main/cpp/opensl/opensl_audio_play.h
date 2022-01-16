@@ -35,8 +35,8 @@ public:
     // 一帧音频播放完毕后就会回调这个函数
     friend void playerCallback(SLAndroidSimpleBufferQueueItf bq, void *context) {
         OpenSLAudioPlay *player = (OpenSLAudioPlay *)context;
-//        LogD("%s callback",__FILE_NAME__);
-        usleep(25 * 1000);//停留 n 毫秒
+        //可以增加延时，实现慢速播放
+        usleep(1 * 1000);//停留 n 毫秒
         pthread_mutex_unlock(&player->mMutex);
     }
 };

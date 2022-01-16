@@ -13,20 +13,23 @@ void test_start() {
 OpenSLAudioPlay *slAudioPlayer = nullptr;
 FILE *pcmFile = nullptr;
 bool isPlaying = false;
+int playCount = -1;
 
 void *playThreadFunc(void *arg) {
     const int buffSize = 2048;
     short buffer[buffSize];
     while (isPlaying && !feof(pcmFile)) {
-        fread(buffer,1,buffSize,pcmFile);
-        slAudioPlayer->enqueueSample(buffer,buffSize);
+        int length = fread(buffer, 1, buffSize, pcmFile);
+        //LogD("%s pcm read length = %d", __FILE_NAME__, length);
+        slAudioPlayer->enqueueSample(buffer, length);
     }
-
     return 0;
 }
 
+
+pthread_t tIds[100];
 void playPcm(JNIEnv *env, jstring pcmPath_) {
-    LogD("%s playPcm", __FILE_NAME__);
+    playCount++;
     const char *pcmPath = env->GetStringUTFChars(pcmPath_, NULL);
     if (slAudioPlayer) {
         slAudioPlayer->release();
@@ -37,23 +40,22 @@ void playPcm(JNIEnv *env, jstring pcmPath_) {
     slAudioPlayer->init();
     pcmFile = fopen(pcmPath, "r");
     isPlaying = true;
-    pthread_t playThread;
-    pthread_create(&playThread, nullptr, playThreadFunc, 0);
-
+    LogD("%s playPcm playCount = %d, pcmFile = %p", __FILE_NAME__,playCount,pcmFile);
+    pthread_create(&tIds[playCount], nullptr, playThreadFunc, NULL);
     env->ReleaseStringUTFChars(pcmPath_, pcmPath);
 }
 
 void stopPcm() {
-    LogD("%s stopPcm",__FILE_NAME__);
     isPlaying = false;
-    if(slAudioPlayer) {
+    if (slAudioPlayer) {
         slAudioPlayer->release();
         delete slAudioPlayer;
         slAudioPlayer = nullptr;
     }
-    if(pcmFile) {
+    LogD("stopPcm pcmFile = %p ",pcmFile);
+    if (pcmFile) {
         fclose(pcmFile);
-        delete pcmFile;
+//        delete pcmFile;
         pcmFile = nullptr;
     }
 }

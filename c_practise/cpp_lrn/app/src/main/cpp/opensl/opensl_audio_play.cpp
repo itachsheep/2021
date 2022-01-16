@@ -144,7 +144,7 @@ bool OpenSLAudioPlay::init() {
 }
 
 void OpenSLAudioPlay::enqueueSample(void *data, size_t length) {
-    LogD("%s enqueueSample",__FILE_NAME__);
+//    LogD("%s enqueueSample",__FILE_NAME__);
     // 必须等待一帧音频播放完毕后才可以 Enqueue 第二帧音频
     pthread_mutex_lock(&mMutex);
     if (mBuffSize < length) {
