@@ -33,7 +33,7 @@ void playPcm(JNIEnv *env, jstring pcmPath_) {
         delete slAudioPlayer;
         slAudioPlayer = nullptr;
     }
-    slAudioPlayer = new OpenSLAudioPlay(11, 22, 33);
+    slAudioPlayer = new OpenSLAudioPlay(44100, SAMPLE_FORMAT_16, 1);
     slAudioPlayer->init();
     pcmFile = fopen(pcmPath, "r");
     isPlaying = true;

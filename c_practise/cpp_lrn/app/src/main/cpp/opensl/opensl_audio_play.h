@@ -5,7 +5,9 @@
 #ifndef CPP_LRN_OPENSL_AUDIO_PLAY_H
 #define CPP_LRN_OPENSL_AUDIO_PLAY_H
 #include <pthread.h>
+#include <iostream>
 #include "audio_engine.h"
+#include <unistd.h>
 #define SAMPLE_FORMAT_16 16
 
 class OpenSLAudioPlay {
@@ -33,6 +35,8 @@ public:
     // 一帧音频播放完毕后就会回调这个函数
     friend void playerCallback(SLAndroidSimpleBufferQueueItf bq, void *context) {
         OpenSLAudioPlay *player = (OpenSLAudioPlay *)context;
+//        LogD("%s callback",__FILE_NAME__);
+        usleep(25 * 1000);//停留 n 毫秒
         pthread_mutex_unlock(&player->mMutex);
     }
 };

@@ -3,11 +3,13 @@ package com.tao.cpp_lrn
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Environment
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import java.io.File
 
 class MainActivity : AppCompatActivity() {
     private val REQUEST_OK = 10001
@@ -57,8 +59,6 @@ class MainActivity : AppCompatActivity() {
         // Example of a call to a native method
         findViewById<TextView>(R.id.sample_text).text = stringFromJNI()
 
-
-
     }
 
     /**
@@ -78,19 +78,21 @@ class MainActivity : AppCompatActivity() {
         AudioPlay.testFriend()
     }
 
+
     fun bt_test_playPcm(view: View) {
-        /*val path:String  = "file:///android_asset/test.pcm"
+        //val path = Environment.getExternalStorageDirectory().absolutePath + "/111/test.pcm"
+        val path = filesDir.absolutePath + "/test.pcm"
+
+        LogUtils.d(tag,"pcm file path  = " + path)
         val file = File(path)
-        if(file.exists()) {
-            LogUtils.d(tag,"bt_test_playPcm file ok ")
-        } else {
-            LogUtils.d(tag,"bt_test_playPcm no exist")
-        }*/
-
-
-       // AudioPlay.nativePlayPcm("")
+        if (!file.exists()) {
+            Toast.makeText(this, "pcm文件不存在", Toast.LENGTH_SHORT).show()
+            return
+        } else  {
+            LogUtils.d(tag,"pcm file exist: " + file.absolutePath)
+        }
+        AudioPlay.nativePlayPcm(path)
     }
-
 
 
     fun bt_test_stopPcm(view: View) {
