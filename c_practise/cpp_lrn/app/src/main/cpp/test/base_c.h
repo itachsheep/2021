@@ -4,7 +4,7 @@
 
 #ifndef CPP_LRN_BASE_C_H
 #define CPP_LRN_BASE_C_H
-
+#include <jni.h>
 #include "my_log.h"
 
 class Box {
@@ -23,5 +23,6 @@ public:
 };
 
 void test_multi_dimensional_array();
-
+void printUser(JNIEnv *env, jobject thiz,
+               jobject user);
 #endif //CPP_LRN_BASE_C_H

@@ -77,7 +77,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun bt_test_friend(view: View) {
-        AudioPlay.testFriend()
+        //AudioPlay.testFriend()
+        AudioPlay.printUser(User("taowei","123"))
     }
 
 

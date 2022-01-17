@@ -35,6 +35,12 @@ Java_com_tao_cpp_1lrn_AudioPlay_testFriend(JNIEnv *env, jobject thiz) {
 
 }
 
+extern "C" JNIEXPORT void JNICALL
+Java_com_tao_cpp_1lrn_AudioPlay_printUser(JNIEnv *env, jobject thiz,
+        jobject user) {
+    printUser(env,thiz,user);
+}
+
 extern "C"
 JNIEXPORT void JNICALL
 Java_com_tao_cpp_1lrn_AudioPlay_nativePlayVideo(JNIEnv *env, jobject thiz, jstring video_path,
