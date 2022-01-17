@@ -53,4 +53,13 @@ void printUser(JNIEnv *env, jobject thiz,
         LogD("IsInstanceOf =  %d",res);
     }
 
+    jclass jUserClass = env->FindClass("com/tao/cpp_lrn/User");
+    jboolean isUserClass = env->IsInstanceOf(user,jUserClass);
+    LogD("isUserClass =  %d",isUserClass);
+
+    jmethodID methodId = env->GetMethodID(jUserClass,
+            "getResult","()Ljava/lang/String;");
+    jstring result = (jstring)env->CallObjectMethod(user,methodId);
+    const char *myRes = env->GetStringUTFChars(result,NULL);
+    LogD("getResult =  %s",myRes);
 }
