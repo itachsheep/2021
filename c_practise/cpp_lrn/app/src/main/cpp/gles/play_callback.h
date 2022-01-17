@@ -4,8 +4,19 @@
 
 #ifndef CPP_LRN_PLAY_CALLBACK_H
 #define CPP_LRN_PLAY_CALLBACK_H
+#include <jni.h>
 
 class PlayCallback {
-
+public:
+    PlayCallback(JavaVM *javaVm, JNIEnv *env, jobject job);
+    ~PlayCallback();
+    void onSucceed(const char *);
+    void onError();
+    void toJavaMessage(const char* message);
+private:
+    JavaVM *javaVm = 0;
+    JNIEnv *env = 0;
+    jobject instance;
+    jmethodID jmd_showMessage;
 };
 #endif //CPP_LRN_PLAY_CALLBACK_H

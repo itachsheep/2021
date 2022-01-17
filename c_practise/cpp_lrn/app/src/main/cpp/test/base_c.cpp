@@ -29,11 +29,12 @@ void test_multi_dimensional_array() {
 }
 
 /**
- * 二个参数的意义取决于该方法是静态还是实例方法(static or an instance method)。
- * 当本地方法作为一个实例方法时，第二个参数相当于对象本身，即 this.
- * 当本地方法作为一个静态方法时，指向所在类.
+ *
  * @param env
  * @param thiz
+ *  第二个参数的意义取决于该方法是静态还是实例方法(static or an instance method)。
+ * 当本地方法作为一个实例方法时，第二个参数相当于对象本身，即 this.
+ * 当本地方法作为一个静态方法时，指向所在类.
  * @param user
  */
 void printUser(JNIEnv *env, jobject thiz,
