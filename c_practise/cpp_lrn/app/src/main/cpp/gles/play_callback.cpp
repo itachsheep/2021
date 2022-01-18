@@ -3,3 +3,7 @@
 //
 
 #include "play_callback.h"
+
+PlayCallback::PlayCallback(JavaVM *javaVm, JNIEnv *env, jobject job) {
+    //TODO
+}

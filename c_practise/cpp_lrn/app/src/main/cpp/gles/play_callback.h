@@ -9,6 +9,7 @@
 class PlayCallback {
 public:
     PlayCallback(JavaVM *javaVm, JNIEnv *env, jobject job);
+
     ~PlayCallback();
     void onSucceed(const char *);
     void onError();

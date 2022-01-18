@@ -6,6 +6,7 @@
 #define CPP_LRN_GLES_CORE_H
 #include <jni.h>
 #include <pthread.h>
+#include <string>
 
 #include "play_callback.h"
 

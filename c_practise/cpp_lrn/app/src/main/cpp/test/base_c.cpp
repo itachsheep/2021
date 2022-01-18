@@ -64,3 +64,11 @@ void printUser(JNIEnv *env, jobject thiz,
     const char *myRes = env->GetStringUTFChars(result,NULL);
     LogD("getResult =  %s",myRes);
 }
+
+void test_string(char *source) {
+    int len = strlen(source);
+    LogD("%s len = %d",__FILE_NAME__,len);
+    char *dst = new char[len + 1];
+    strcpy(dst,source);
+    LogD("%s dst = %s",__FILE_NAME__,dst);
+}

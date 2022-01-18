@@ -31,7 +31,7 @@ file(GLOB src_cpp
         ${test}/*.cpp
         ${gles}/*.cpp
         native-lib.cpp
-        ${gles}/gles_core.cpp
+        ${gles}/play_callback.cpp
 )
 
 add_library( # Sets the name of the library.
