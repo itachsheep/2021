@@ -34,6 +34,19 @@ GLESPlay::~GLESPlay() {
     }
 }
 
+void GLESPlay::showMessage(JNIEnv *env, const char *message, bool success) {
+    if(this->playCallback) {
+        if(success) {
+            this->playCallback->onSucceed(message);
+        } else {
+            this->playCallback->onError(message);
+        }
+    }
+}
+
+void GLESPlay::playYUV(jobject surface) {
+    //TODO
+}
 void GLESPlay::start() {
     this->playYUV(this->surface);
 }

@@ -7,3 +7,15 @@
 PlayCallback::PlayCallback(JavaVM *javaVm, JNIEnv *env, jobject job) {
     //TODO
 }
+
+void PlayCallback::onSucceed(const char *message) {
+    //TODO;
+}
+
+void PlayCallback::onError(const char *message) {
+    //TODO;
+}
+
+PlayCallback::~PlayCallback() {
+    //TODO;
+}

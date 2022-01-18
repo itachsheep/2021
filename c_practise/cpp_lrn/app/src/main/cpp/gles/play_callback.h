@@ -11,8 +11,8 @@ public:
     PlayCallback(JavaVM *javaVm, JNIEnv *env, jobject job);
 
     ~PlayCallback();
-    void onSucceed(const char *);
-    void onError();
+    void onSucceed(const char *message);
+    void onError(const char* message);
     void toJavaMessage(const char* message);
 private:
     JavaVM *javaVm = 0;

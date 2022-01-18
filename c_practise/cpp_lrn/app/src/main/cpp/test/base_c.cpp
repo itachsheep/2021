@@ -72,3 +72,11 @@ void test_string(char *source) {
     strcpy(dst,source);
     LogD("%s dst = %s",__FILE_NAME__,dst);
 }
+
+void test_pointer() {
+    Box *box = 0;
+    LogD("%s box = %p",__FILE_NAME__,box);
+    box = nullptr;
+    LogD("%s box --> %p",__FILE_NAME__,box);
+
+}

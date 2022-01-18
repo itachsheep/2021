@@ -29,5 +29,5 @@ void printUser(JNIEnv *env, jobject thiz,
                jobject user);
 
 void test_string(char *source);
-
+void test_pointer();
 #endif //CPP_LRN_BASE_C_H
