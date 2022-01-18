@@ -30,4 +30,8 @@ void printUser(JNIEnv *env, jobject thiz,
 
 void test_string(char *source);
 void test_pointer();
+
+#define GET_STR(x) #x
+void test_define_hong();
+
 #endif //CPP_LRN_BASE_C_H

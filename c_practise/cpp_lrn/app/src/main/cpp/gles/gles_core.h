@@ -29,6 +29,7 @@ private:
     char *data_source = 0;
     jobject surface;
     bool isPlay;
+    pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 };
 
 
