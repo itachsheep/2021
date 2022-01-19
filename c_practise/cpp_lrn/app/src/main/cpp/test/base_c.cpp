@@ -14,7 +14,7 @@ void test_multi_dimensional_array() {
             {1, 2, 3},
             {4, 5, 6}
     };
-    LogD( "%s arr[1][1] = %d", arr[1][1],__FILE_NAME__);
+    LogD( "%s arr[1][1] = %d",__FILE_NAME__, arr[1][1]);
 
     int num = 10;
     int *b = &num;
@@ -24,8 +24,8 @@ void test_multi_dimensional_array() {
     /// 首先a[2] 代表是个数组，类型为 int*
     /// 所以a[0] 元素是 int * ，也就是一个int类型指针，所以，要赋值一个指针
     int *a[2] = {sr, mr};
-    LogD( "%s a[0] pointer = %d", a[0],__FILE_NAME__);
-    LogD( "%s a[0] value = %d", *a[0],__FILE_NAME__);
+//    LogD( "%s a[0] pointer = %d",__FILE_NAME__, a[0]);
+    LogD( "%s a[0] value = %d", __FILE_NAME__, *a[0]);
 }
 
 /**
@@ -46,7 +46,7 @@ void printUser(JNIEnv *env, jobject thiz,
     LogD("%s printUser a = %d",__FILE_NAME__,a);
     jclass jAudioPlayClass = env->FindClass("com/tao/cpp_lrn/AudioPlay");
     if(!jAudioPlayClass) {
-        LogE("%s jAudioPlayClass null ");
+        LogE("%s jAudioPlayClass null ",__FILE_NAME__);
     } else {
         jboolean res = env->IsInstanceOf(thiz,jAudioPlayClass);
         //#define JNI_FALSE 0
@@ -75,7 +75,7 @@ void test_string(char *source) {
     const char *src = "hello world!!";
     LogD("%s src = %s",__FILE_NAME__,src);
     LogD("%s src = %c",__FILE_NAME__,*(src + 1));
-    LogD("%s src = %s",__FILE_NAME__,&src);
+//    LogD("%s src = %s",__FILE_NAME__,src);
 }
 
 void test_pointer() {

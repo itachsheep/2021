@@ -20,7 +20,7 @@ public:
     }
 
     friend void printWith(Box box) {
-        LogD( "%s printWidth box width = %d ", box.width,__FILE_NAME__);
+        LogD( "%s printWidth box width = %d ", __FILE_NAME__,box.width);
     }
 };
 

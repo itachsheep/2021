@@ -4,6 +4,13 @@
 
 #include "egl_engine.h"
 
+EGLDisplay display;
+ANativeWindow *nativeWindow = 0;
+EGLSurface winSurface;
+EGLContext eglContext;
+int width = 640;
+int height = 272;
+
 GLint initShader(const char *source,int type) {
     //创建shader
     GLint shader = glCreateShader(type);
