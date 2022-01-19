@@ -71,6 +71,11 @@ void test_string(char *source) {
     char *dst = new char[len + 1];
     strcpy(dst,source);
     LogD("%s dst = %s",__FILE_NAME__,dst);
+
+    const char *src = "hello world!!";
+    LogD("%s src = %s",__FILE_NAME__,src);
+    LogD("%s src = %c",__FILE_NAME__,*(src + 1));
+    LogD("%s src = %s",__FILE_NAME__,&src);
 }
 
 void test_pointer() {

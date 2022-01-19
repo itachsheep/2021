@@ -28,9 +28,9 @@ Java_com_tao_cpp_1lrn_AudioPlay_testFriend(JNIEnv *env, jobject thiz) {
 
     //test_multi_dimensional_array();
     //test_start();
-    //test_string("hello");
+    test_string("hello");
     //test_pointer();
-    test_define_hong();
+    //test_define_hong();
 }
 
 

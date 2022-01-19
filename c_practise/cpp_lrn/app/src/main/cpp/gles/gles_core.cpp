@@ -3,6 +3,7 @@
 //
 
 #include "gles_core.h"
+#include "egl_engine.h"
 
 /**
  * 播放 YUV 线程
@@ -45,7 +46,29 @@ void GLESPlay::showMessage(JNIEnv *env, const char *message, bool success) {
 }
 
 void GLESPlay::playYUV(jobject surface) {
-    //TODO
+    //加锁
+    pthread_mutex_lock(&mutex);
+
+    //先判断资源是否没有释放，避免播放异常
+    release();
+    showMessage(env,"start",true);
+    //开始播放标志
+    isPlay = true;
+    initEglContext(env,surface);
+
+    GLint vsh = initShader(vertexShader,GL_VERTEX_SHADER);
+    GLint fsh = initShader(fragYUV420P,GL_FRAGMENT_SHADER);
+    //创建渲染程序
+    GLint program = glCreateProgram();
+    if(program == 0) {
+        LogE("%s glCreateProgram failed",__FILE_NAME__);
+        return;
+    }
+    //向渲染程序中加入着色器
+    glAttachShader(program,vsh);
+    glAttachShader(program,fsh);
+
+
 }
 void GLESPlay::start() {
     this->playYUV(this->surface);
