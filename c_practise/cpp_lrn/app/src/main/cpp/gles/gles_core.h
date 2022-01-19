@@ -32,5 +32,7 @@ private:
     pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 };
 
+typedef void (GLESPlay::*FuncShowMessage)(JNIEnv *env,const char *,bool );
+
 
 #endif //CPP_LRN_GLES_CORE_H

@@ -54,7 +54,8 @@ void GLESPlay::playYUV(jobject surface) {
     showMessage(env,"start",true);
     //开始播放标志
     isPlay = true;
-    initEglContext(env,surface);
+    FuncShowMessage p_func_ShowMessage = &GLESPlay::showMessage;
+    initEglContext(env,surface,this,p_func_ShowMessage);
 
     GLint vsh = initShader(vertexShader,GL_VERTEX_SHADER);
     GLint fsh = initShader(fragYUV420P,GL_FRAGMENT_SHADER);

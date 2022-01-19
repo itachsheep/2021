@@ -9,6 +9,7 @@
 #include <android/native_window_jni.h>
 #include "my_log.h"
 #include "play_callback.h"
+#include "gles_core.h"
 
 #define EGL_INIT_SUCCESS 1;
 #define EGL_INIT_FAILED 0;
@@ -54,7 +55,8 @@ static const char *fragYUV420P = GET_STR(
 );
 
 GLint initShader(const char *source,int type);
-unsigned int initEglContext(JNIEnv *env,jobject surface);
+unsigned int initEglContext(JNIEnv *env,jobject surface,
+        GLESPlay *glesPlay,FuncShowMessage showMessage);
 
 extern EGLSurface winSurface;
 extern EGLContext eglContext;

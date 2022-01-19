@@ -108,3 +108,18 @@ void test_define_hong() {
             }
     );*/
 }
+
+void test_func_pointer() {
+    FuncCal p_fun = &Box::add;
+    Box *box = new Box(11);
+    int ret = (box->*p_fun)(1,2);
+    LogD("%s test_func_pointer ret = %d",__FILE_NAME__,ret);
+
+    box->test_pointer();
+}
+
+void Box::test_pointer() {
+    FuncCal p_fun = &Box::add;
+    int ret = (this->*p_fun)(1,2);
+    LogD("%s Box test_pointer ----> ret = %d",__FILE_NAME__,ret);
+}

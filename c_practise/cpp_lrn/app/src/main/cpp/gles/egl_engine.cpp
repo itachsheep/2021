@@ -39,14 +39,18 @@ GLint initShader(const char *source,int type) {
     return shader;
 }
 
-unsigned int initEglContext(JNIEnv *env,jobject surface) {
+unsigned int initEglContext(JNIEnv *env,jobject surface,
+        GLESPlay *glesPlay,
+        FuncShowMessage funcShowMessage) {
+    (glesPlay->*funcShowMessage)(env,"initEglContext start", true);
+
     //1.获取原始窗口
     nativeWindow = ANativeWindow_fromSurface(env,surface);
     //获取Display
     display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
     if(display == EGL_NO_DISPLAY) {
         LogE("%s egl display failed",__FILE_NAME__);
-        //showMessage(env,"egl display failed", false);
+        (glesPlay->*funcShowMessage)(env,"egl display failed", false);
         return EGL_INIT_FAILED;
     }
     //2.初始化egl，后两个参数为主次版本号
