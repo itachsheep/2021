@@ -58,6 +58,7 @@
     </ScrollView>
 
     <SurfaceView
+        android:layout_marginStart="20dp"
         android:id="@+id/surface"
         android:layout_width="500dp"
         android:layout_height="500dp"

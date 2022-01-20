@@ -20,7 +20,6 @@ void playVideo(JavaVM *javaVm, JNIEnv *env, jobject thiz, jstring video_path,
 
 void onDestroy() {
     LogD("%s onDestroy", __FILE_NAME__);
-
     if(glesPlay) {
         glesPlay->release();
     }
