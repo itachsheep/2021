@@ -5,6 +5,7 @@
 #ifndef CPP_LRN_PLAY_CALLBACK_H
 #define CPP_LRN_PLAY_CALLBACK_H
 #include <jni.h>
+#include "my_log.h"
 
 class PlayCallback {
 public:

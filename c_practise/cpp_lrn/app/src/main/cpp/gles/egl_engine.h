@@ -57,7 +57,15 @@ static const char *fragYUV420P = GET_STR(
 GLint initShader(const char *source,int type);
 unsigned int initEglContext(JNIEnv *env,jobject surface,
         GLESPlay *glesPlay,FuncShowMessage showMessage);
+GLint initProgram(JNIEnv *env,GLESPlay *glesPlay,
+                  FuncShowMessage funcShowMessage);
+void initTexture(GLint program);
 
+extern EGLDisplay display;
+extern ANativeWindow *nativeWindow;
 extern EGLSurface winSurface;
 extern EGLContext eglContext;
+extern int height;
+extern int width;
+extern GLuint textures[3];
 #endif //CPP_LRN_EGL_ENGINE_H

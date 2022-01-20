@@ -56,20 +56,68 @@ void GLESPlay::playYUV(jobject surface) {
     isPlay = true;
     FuncShowMessage p_func_ShowMessage = &GLESPlay::showMessage;
     initEglContext(env,surface,this,p_func_ShowMessage);
-
-    GLint vsh = initShader(vertexShader,GL_VERTEX_SHADER);
-    GLint fsh = initShader(fragYUV420P,GL_FRAGMENT_SHADER);
-    //创建渲染程序
-    GLint program = glCreateProgram();
-    if(program == 0) {
-        LogE("%s glCreateProgram failed",__FILE_NAME__);
+    GLint program = initProgram(env,this,p_func_ShowMessage);
+    if(program == 0){
+        LogE("%s initProgram failed",__FILE_NAME__);
         return;
     }
-    //向渲染程序中加入着色器
-    glAttachShader(program,vsh);
-    glAttachShader(program,fsh);
+    //生成、绑定纹理，纹理坐标等
+    initTexture(program);
+    unsigned char *buf[3] = {0};
+    buf[0] = new unsigned char[width * height];//y
+    buf[1] = new unsigned char[width * height / 4];//u
+    buf[2] = new unsigned char[width * height / 4];//v
 
+    FILE *fp = fopen(data_source,"rb");
+    if(!fp) {
+        LogE("%s playYUV yuv file open failed",__FILE_NAME__);
+        return;
+    }
+    while (!feof(fp)) {
+        //解决异常退出,终止读取数据
+        if(!isPlay) {
+            return;
+        }
+        fread(buf[0],1,width * height,fp);
+        fread(buf[1],1,width * height / 4, fp);
+        fread(buf[2],1,width * height / 4, fp);
+        //激活第一层纹理，绑定到创建的纹理
+        //下面的width,height主要是显示尺寸？
+        glActiveTexture(GL_TEXTURE0);
+        //绑定y对应的纹理
+        glBindTexture(GL_TEXTURE_2D,textures[0]);
+        //替换纹理，比重新使用glTexImage2D性能高多
+        glTexSubImage2D(GL_TEXTURE_2D, 0,
+                        0, 0,//相对原来的纹理的offset
+                        width, height,//加载的纹理宽度、高度。最好为2的次幂
+                        GL_LUMINANCE, GL_UNSIGNED_BYTE,
+                        buf[0]);
 
+        //激活第二层纹理，绑定到创建的纹理
+        glActiveTexture(GL_TEXTURE1);
+        //绑定u对应的纹理
+        glBindTexture(GL_TEXTURE_2D,textures[1]);
+        glTexSubImage2D(GL_TEXTURE_2D,0,0,0,
+                width / 2,
+                height / 2,
+                GL_LUMINANCE,GL_UNSIGNED_BYTE,buf[1]);
+
+        //激活第三层纹理，绑定到创建的纹理
+        glActiveTexture(GL_TEXTURE2);
+        //绑定v对应的纹理
+        glBindTexture(GL_TEXTURE_2D, textures[2]);
+        glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width / 2, height / 2, GL_LUMINANCE,
+                        GL_UNSIGNED_BYTE,
+                        buf[2]);
+
+        glDrawArrays(GL_TRIANGLE_STRIP,0,4);
+        //窗口显示，交换双缓冲区
+        eglSwapBuffers(display,winSurface);
+    }
+    showMessage(env, "onComplete", true);
+    release();
+    isPlay = false;
+    pthread_mutex_unlock(&mutex);
 }
 void GLESPlay::start() {
     this->playYUV(this->surface);
@@ -80,5 +128,24 @@ void GLESPlay::prepare() {
 }
 
 void GLESPlay::release() {
-    //TODO
+    LogD("%s release ",__FILE_NAME__);
+    if (display || winSurface || eglContext) {
+        //销毁显示设备
+        eglDestroySurface(display, winSurface);
+        //销毁上下文
+        eglDestroyContext(display, eglContext);
+        //释放窗口
+        ANativeWindow_release(nativeWindow);
+        //释放线程
+        eglReleaseThread();
+        //停止
+        eglTerminate(display);
+        eglMakeCurrent(display, winSurface, EGL_NO_SURFACE, eglContext);
+        eglContext = EGL_NO_CONTEXT;
+        display = EGL_NO_SURFACE;
+        winSurface = nullptr;
+        winSurface = 0;
+        nativeWindow = 0;
+        isPlay = false;
+    }
 }
