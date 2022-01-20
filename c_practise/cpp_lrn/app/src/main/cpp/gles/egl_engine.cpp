@@ -8,8 +8,10 @@ EGLDisplay display;
 ANativeWindow *nativeWindow = 0;
 EGLSurface winSurface;
 EGLContext eglContext;
-int width = 640;
+int width = 640;//YUV文件中一帧yuv 宽和高，固定，不能改，应该需要动态读取
+//int width = 320;
 int height = 272;
+//int height = 136;
 GLuint textures[3] = {0};
 
 GLint initShader(const char *source,int type) {
@@ -173,10 +175,14 @@ void initTexture(GLint program) {
     glUniform1i(glGetUniformLocation(program,"yTexture"),0);
     glUniform1i(glGetUniformLocation(program,"uTexture"),1);
     glUniform1i(glGetUniformLocation(program,"vTexture"),2);
+
     ///纹理ID
     textures[3] = {0};
     ///创建若干个纹理对象，并且得到纹理ID
     glGenTextures(3, textures);
+    for (int i = 0; i < 3; ++i) {
+        LogD("%s initTexture textures = %d", __FILE_NAME__,textures[i]);
+    }
 
     ///绑定纹理。后面的的设置和加载全部作用于当前绑定的纹理对象
     ///GL_TEXTURE0、GL_TEXTURE1、GL_TEXTURE2 的就是纹理单元，

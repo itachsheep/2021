@@ -42,6 +42,8 @@ static const char *fragYUV420P = GET_STR(
             vec3 rgb;
             //分别取yuv各个分量的采样纹理（r表示？）
             yuv.x = texture2D(yTexture, vTextCoord).g;
+            /// texture2D 第一个参数代表图片纹理，第二个参数代表纹理坐标点，
+            /// 通过GLSL的内建函数texture2D来获取对应位置纹理的颜色RGBA值
             yuv.y = texture2D(uTexture, vTextCoord).g - 0.5;
             yuv.z = texture2D(vTexture, vTextCoord).g - 0.5;
             rgb = mat3(

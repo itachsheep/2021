@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity() {
         AudioPlay.nativeStopPcm()
     }
 
-    fun bt_test_playVideo(view: View) {
+    fun bt_test_playYUV(view: View) {
         val surfaceView: SurfaceView = findViewById(R.id.surface)
         val videoPath = filesDir.absolutePath + "/yuvtest.yuv"
         val thread = Thread {

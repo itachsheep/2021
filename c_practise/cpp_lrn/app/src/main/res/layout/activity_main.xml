@@ -51,8 +51,8 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="bt_test_playVideo"
-                android:text="playVideo"
+                android:onClick="bt_test_playYUV"
+                android:text="playYUV"
                 android:textAllCaps="false" />
         </LinearLayout>
     </ScrollView>
@@ -60,8 +60,8 @@
     <SurfaceView
         android:layout_marginStart="20dp"
         android:id="@+id/surface"
-        android:layout_width="500dp"
-        android:layout_height="500dp"
+        android:layout_width="320dp"
+        android:layout_height="136dp"
         android:layout_toRightOf="@id/scroll_menu" />
 
 </RelativeLayout>
