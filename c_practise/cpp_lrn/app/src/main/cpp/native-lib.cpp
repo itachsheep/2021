@@ -67,3 +67,18 @@ Java_com_tao_cpp_1lrn_AudioPlay_nativeOnDestroy(JNIEnv *env, jobject thiz) {
 }
 
 
+extern "C" JNIEXPORT void JNICALL
+Java_com_tao_cpp_1lrn_AudioPlay_nativeGlesInit(JNIEnv *env, jobject thiz) {
+
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_tao_cpp_1lrn_AudioPlay_nativeGlesRender(JNIEnv *env, jobject thiz) {
+
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_tao_cpp_1lrn_AudioPlay_nativeGlesResize(JNIEnv *env, jobject thiz, jint width,
+                                                 jint height) {
+
+}

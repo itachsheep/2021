@@ -54,6 +54,13 @@
                 android:onClick="bt_test_playYUV"
                 android:text="playYUV"
                 android:textAllCaps="false" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="bt_test_draw_triangle"
+                android:text="绘三角"
+                android:textAllCaps="false" />
         </LinearLayout>
     </ScrollView>
 
@@ -64,4 +71,12 @@
         android:layout_height="136dp"
         android:layout_toRightOf="@id/scroll_menu" />
 
+    <FrameLayout
+        android:layout_toRightOf="@id/scroll_menu"
+        android:layout_below="@id/surface"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        android:id="@+id/frameLayout"
+        android:layout_width="320dp"
+        android:layout_height="136dp"/>
 </RelativeLayout>

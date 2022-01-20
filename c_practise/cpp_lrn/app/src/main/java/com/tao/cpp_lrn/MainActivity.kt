@@ -1,12 +1,17 @@
 package com.tao.cpp_lrn
 
 import android.Manifest
+import android.app.ActivityManager
+import android.content.Context
+import android.content.pm.ConfigurationInfo
 import android.content.pm.PackageManager
+import android.opengl.GLSurfaceView
 import android.os.Bundle
 import android.os.Environment
 import android.view.Surface
 import android.view.SurfaceView
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -110,5 +115,30 @@ class MainActivity : AppCompatActivity() {
             AudioPlay.nativePlayVideo(videoPath, surfaceView.holder.surface)
         }
         thread.start()
+    }
+
+    fun bt_test_draw_triangle(view: View) {
+        val frameLayout = findViewById<FrameLayout>(R.id.frameLayout)
+        frameLayout.removeAllViews()
+        val surfaceView = GLSurfaceView(this)
+        if(detectOpenGLES30()) {
+            surfaceView.setEGLContextClientVersion(3)
+        } else {
+            surfaceView.setEGLContextClientVersion(2)
+        }
+        surfaceView.setRenderer(TriangleRender())
+        surfaceView.renderMode = GLSurfaceView.RENDERMODE_WHEN_DIRTY
+        val layoutParams = FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.MATCH_PARENT,
+            FrameLayout.LayoutParams.MATCH_PARENT,
+        )
+        frameLayout.addView(surfaceView,layoutParams)
+    }
+    private fun detectOpenGLES30(): Boolean {
+        val am: ActivityManager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager;
+        val info: ConfigurationInfo = am.deviceConfigurationInfo;
+
+        LogUtils.d(tag,"detectOpenGLES30 reqGlEsVersion = " + info.reqGlEsVersion.toString(16) )
+        return (info.reqGlEsVersion >= 0x30000);
     }
 }

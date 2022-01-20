@@ -18,6 +18,14 @@ object AudioPlay {
     external fun nativePlayVideo(videoPath: String, surface: Surface)
     external fun nativeOnDestroy();
 
+    /**
+     *  绘制三角形
+     */
+    external fun nativeGlesInit();
+    external fun nativeGlesRender();
+    external fun nativeGlesResize(width: Int, height: Int)
+
+
 
     /**
      * JNI 调用
