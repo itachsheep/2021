@@ -8,9 +8,9 @@
     <application
         android:name=".MyApp"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/mxiao"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/mxiao"
         android:supportsRtl="true"
         android:theme="@style/Theme.Cpp_lrn">
         <activity android:name=".MainActivity">
