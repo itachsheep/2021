@@ -19,19 +19,22 @@ set(OpenSL ${CMAKE_SOURCE_DIR}/opensl)
 set(utils ${CMAKE_SOURCE_DIR}/utils)
 set(test ${CMAKE_SOURCE_DIR}/test)
 set(gles ${CMAKE_SOURCE_DIR}/gles)
+set(triangle ${CMAKE_SOURCE_DIR}/triangle)
 include_directories(
         ${OpenSL}
         ${utils}
         ${test}
         ${gles}
+        ${triangle}
 )
 
 file(GLOB src_cpp
         ${OpenSL}/*.cpp
         ${test}/*.cpp
         ${gles}/*.cpp
+        ${triangle}/*.cpp
         native-lib.cpp
-        ${gles}/egl_engine.cpp
+        ${triangle}/draw_triangle.cpp
 )
 
 add_library( # Sets the name of the library.

@@ -56,7 +56,7 @@ static const char *fragYUV420P = GET_STR(
         }
 );
 
-GLint initShader(const char *source,int type);
+GLint loadShader(const char *source, int type);
 unsigned int initEglContext(JNIEnv *env,jobject surface,
         GLESPlay *glesPlay,FuncShowMessage showMessage);
 GLint initProgram(JNIEnv *env,GLESPlay *glesPlay,

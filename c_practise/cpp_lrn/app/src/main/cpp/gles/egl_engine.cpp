@@ -12,13 +12,14 @@ int width = 640;//YUV文件中一帧yuv 宽和高，固定，不能改，应该�
 //int width = 320;
 int height = 272;
 //int height = 136;
-GLuint textures[3] = {0};
+///纹理ID
+GLuint textures[3];
 
-GLint initShader(const char *source,int type) {
+GLint loadShader(const char *source, int type) {
     //创建shader
     GLint shader = glCreateShader(type);
     if(shader == 0) {
-        LogE("%s initShader error 1",__FILE_NAME__);
+        LogE("%s loadShader error 1",__FILE_NAME__);
         return 0;
     }
 
@@ -38,7 +39,7 @@ GLint initShader(const char *source,int type) {
         return 0;
     }
 
-    LogD("%s initShader success",__FILE_NAME__);
+    LogD("%s loadShader success",__FILE_NAME__);
     return shader;
 }
 
@@ -110,8 +111,8 @@ unsigned int initEglContext(JNIEnv *env,jobject surface,
 
 GLint initProgram(JNIEnv *env,GLESPlay *glesPlay,
                             FuncShowMessage funcShowMessage) {
-    GLint vsh = initShader(vertexShader,GL_VERTEX_SHADER);
-    GLint fsh = initShader(fragYUV420P,GL_FRAGMENT_SHADER);
+    GLint vsh = loadShader(vertexShader, GL_VERTEX_SHADER);
+    GLint fsh = loadShader(fragYUV420P, GL_FRAGMENT_SHADER);
     //创建渲染程序
     GLint program = glCreateProgram();
     if(program == 0) {
@@ -149,6 +150,7 @@ void initTexture(GLint program) {
     GLuint aPos = static_cast<GLuint>(glGetAttribLocation(program,"aPosition"));
     glEnableVertexAttribArray(aPos);
     glVertexAttribPointer(aPos,3,GL_FLOAT,GL_FALSE,0,ver);
+
     //加入纹理坐标数据
     static float fragment[] = {
             1.0f, 0.0f,
@@ -176,8 +178,6 @@ void initTexture(GLint program) {
     glUniform1i(glGetUniformLocation(program,"uTexture"),1);
     glUniform1i(glGetUniformLocation(program,"vTexture"),2);
 
-    ///纹理ID
-    textures[3] = {0};
     ///创建若干个纹理对象，并且得到纹理ID
     glGenTextures(3, textures);
     for (int i = 0; i < 3; ++i) {

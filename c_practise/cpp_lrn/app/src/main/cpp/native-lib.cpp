@@ -3,6 +3,7 @@
 #include "opensl/audio_play.h"
 #include "gles/video_play.h"
 #include "base_c.h"
+#include "triangle/draw_triangle.h"
 
 const JavaVM *globalJavaVm = nullptr;
 
@@ -12,6 +13,7 @@ int JNI_OnLoad(JavaVM *javaVm, void *pVoid) {
     return JNI_VERSION_1_6;
 }
 
+//////////////////////////////// 基础语法测试
 extern "C" JNIEXPORT void JNICALL
 Java_com_tao_cpp_1lrn_AudioPlay_printUser(JNIEnv *env, jobject thiz,
                                           jobject user) {
@@ -43,6 +45,8 @@ Java_com_tao_cpp_1lrn_MainActivity_stringFromJNI(
     return env->NewStringUTF(hello.c_str());
 }
 
+
+//////////////////////////////// 播放 pcm
 extern "C" JNIEXPORT void JNICALL
 Java_com_tao_cpp_1lrn_AudioPlay_nativePlayPcm(JNIEnv *env, jobject thiz, jstring pcm_path) {
     playPcm(env, pcm_path);
@@ -53,6 +57,7 @@ Java_com_tao_cpp_1lrn_AudioPlay_nativeStopPcm(JNIEnv *env, jobject thiz) {
     stopPcm();
 }
 
+//////////////////////////////// 播放yuv
 extern "C"
 JNIEXPORT void JNICALL
 Java_com_tao_cpp_1lrn_AudioPlay_nativePlayVideo(JNIEnv *env, jobject thiz, jstring video_path,
@@ -66,19 +71,30 @@ Java_com_tao_cpp_1lrn_AudioPlay_nativeOnDestroy(JNIEnv *env, jobject thiz) {
     onDestroy();
 }
 
+//////////////////////////////// 绘制三角
 
 extern "C" JNIEXPORT void JNICALL
 Java_com_tao_cpp_1lrn_AudioPlay_nativeGlesInit(JNIEnv *env, jobject thiz) {
-
+    glesInit();
 }
 
 extern "C" JNIEXPORT void JNICALL
 Java_com_tao_cpp_1lrn_AudioPlay_nativeGlesRender(JNIEnv *env, jobject thiz) {
-
+    glesRender();
 }
 
 extern "C" JNIEXPORT void JNICALL
 Java_com_tao_cpp_1lrn_AudioPlay_nativeGlesResize(JNIEnv *env, jobject thiz, jint width,
                                                  jint height) {
-
+    glesResize(width,height);
 }
+
+
+////////////////////////////////
+
+
+
+
+
+////////////////////////////////
+
