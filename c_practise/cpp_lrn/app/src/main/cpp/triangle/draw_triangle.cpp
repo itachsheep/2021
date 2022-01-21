@@ -12,9 +12,12 @@ GLint g_program;
 int g_width;
 int g_height;
 
+///// 第一种方式，opengles 3.0, 声明 location = 0
+///// 第二种方式，opengles 2.0, 解析 vPosition
 const char *triangleVertexShader =
         "#version 300 es                          \n"
         "layout(location = 0) in vec4 vPosition;  \n"
+//        "attribute vec4 vPosition;                \n"
         "void main()                              \n"
         "{                                        \n"
         "   gl_Position = vPosition;              \n"
@@ -72,7 +75,15 @@ void glesRender() {
     glClear(GL_COLOR_BUFFER_BIT);
     glUseProgram(g_program);
     //// Load the vertex data
-    glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,0,vVertices);
-    glEnableVertexAttribArray(0);
+    ///// 第一种方式
+//    glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,0,vVertices);
+//    glEnableVertexAttribArray(0);
+
+    //// 第二种方式
+    GLint vPos = static_cast<GLint>(glGetAttribLocation(g_program,"vPosition"));
+    LogD("glesRender vPos = %d",vPos);
+    glEnableVertexAttribArray(vPos);
+    glVertexAttribPointer(vPos,3,GL_FLOAT,GL_FALSE,0,vVertices);
+
     glDrawArrays(GL_TRIANGLES,0,3);
 }
